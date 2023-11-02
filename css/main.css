@@ -1169,7 +1169,7 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #01ff1c;
+  background: #ff61b6;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
@@ -2662,7 +2662,7 @@ ul.breadcrumb li + li:last-child {
   }
 }
 body {
-  background: url("../images/bg.png");
+  background: url("https://b85a4e6b.telegraph-image-4u5.pages.dev/file/7f9bc867f8a366e5f1dc4.png");
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-size: cover;
