@@ -34,6 +34,15 @@
       </tags>
   </entry>
   <entry>
+    <title>我的第一篇博客文章</title>
+    <url>/article/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2%E6%96%87%E7%AB%A0.html</url>
+    <content><![CDATA[<h2 id="测试用文档"><a href="#测试用文档" class="headerlink" title="测试用文档"></a>测试用文档</h2><p><img src="https://cdn.jsdelivr.net/gh/wanwuzhishi/PicPlus@main/2023/10/30/t01ec8ae78e2563c117.jpg" alt="avatar"></p>
+]]></content>
+      <tags>
+        <tag>测试</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>你好世界</title>
     <url>/article/%E4%BD%A0%E5%A5%BD%E4%B8%96%E7%95%8C.html</url>
     <content><![CDATA[<p>欢迎来到<a href="https://hexo.io/">Hexo</a>！这是你的第一个帖子。有关更多信息，请查看<a href="https://hexo.io/docs/">文档</a>。如果你在使用<a href="https://hexo.io/">Hexo</a>时遇到任何问题，你可以在<a href="https://hexo.io/docs/troubleshooting.html">故障排除</a>中找到答案，或者你可以在<a href="https://github.com/hexojs/hexo/issues">GitHub</a>上问我。</p>
@@ -51,14 +60,5 @@
 <p>更多信息: <a href="https://hexo.io/docs/one-command-deployment.html">部署</a></p>
 <h2 id="写文章"><a href="#写文章" class="headerlink" title="写文章"></a>写文章</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">---</span><br><span class="line">: Article Title                      <span class="comment">#标题</span></span><br><span class="line">titledate: 2020-08-15 18:49:36       <span class="comment">#写作时间</span></span><br><span class="line">tags:                                <span class="comment">#标签</span></span><br><span class="line">  - Tag</span><br><span class="line">categories:                          <span class="comment">#分类</span></span><br><span class="line">  - Cate</span><br><span class="line">cover: https://cover.png             <span class="comment">#封面</span></span><br><span class="line">feature: <span class="literal">true</span>                        <span class="comment">#推荐 true开 false关</span></span><br><span class="line">---</span><br></pre></td></tr></table></figure>
 ]]></content>
-  </entry>
-  <entry>
-    <title>我的第一篇博客文章</title>
-    <url>/article/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2%E6%96%87%E7%AB%A0.html</url>
-    <content><![CDATA[<h2 id="测试用文档"><a href="#测试用文档" class="headerlink" title="测试用文档"></a>测试用文档</h2><p><img src="https://cdn.jsdelivr.net/gh/wanwuzhishi/PicPlus@main/2023/10/30/t01ec8ae78e2563c117.jpg" alt="avatar"></p>
-]]></content>
-      <tags>
-        <tag>测试</tag>
-      </tags>
   </entry>
 </search>
