@@ -1,6 +1,86 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>Hexo的Next主题博客个性化配置</title>
+    <url>/article/Hexo%E7%9A%84Next%E4%B8%BB%E9%A2%98%E5%8D%9A%E5%AE%A2%E4%B8%AA%E6%80%A7%E5%8C%96%E9%85%8D%E7%BD%AE.html</url>
+    <content><![CDATA[<h1 id="一、主题安装"><a href="#一、主题安装" class="headerlink" title="一、主题安装"></a>一、主题安装</h1><p>打开站点根目录，右键打开Git Bash</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git clone https://github.com/theme-next/hexo-theme-next themes/next</span><br></pre></td></tr></table></figure>
+
+<p>打开站点根目录下的_config.yml文件blog，查找landscape ，修改为next</p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="comment">## Themes: https://hexo.io/themes/</span></span><br><span class="line">theme: next</span><br></pre></td></tr></table></figure>
+
+<h1 id="二，使用须知"><a href="#二，使用须知" class="headerlink" title="二，使用须知"></a>二，使用须知</h1><blockquote>
+<p>Hexo根目录下的配置文件_config.yml，以下称作站点配置文件Hexo根目录&#x2F;theme&#x2F;next下的配置文件_config.yml，以下称作主题配置文件</p>
+</blockquote>
+<h1 id="三、个性化配置"><a href="#三、个性化配置" class="headerlink" title="三、个性化配置"></a>三、个性化配置</h1><h2 id="（一）基础配置"><a href="#（一）基础配置" class="headerlink" title="（一）基础配置"></a>（一）基础配置</h2><h3 id="1-语言修改"><a href="#1-语言修改" class="headerlink" title="1. 语言修改"></a>1. 语言修改</h3><p>打开站点配置文件，查找language，改为zh-CN（简体中文）</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line">language: zh-CN</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p><img src="https://b85a4e6b.telegraph-image-4u5.pages.dev/file/e2a17ca79b9af6419f44d.png" alt="1" title="1"></p>
+<h3 id="2-主题切换"><a href="#2-主题切换" class="headerlink" title="2.主题切换"></a>2.主题切换</h3><p>打开主题配置文件，查找scheme，选择自己喜欢的样式，去掉#</p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Schemes</span></span><br><span class="line"><span class="comment">#scheme: Muse</span></span><br><span class="line"><span class="comment">#scheme: Mist</span></span><br><span class="line"><span class="comment">#scheme: Pisces</span></span><br><span class="line">scheme: Gemini</span><br></pre></td></tr></table></figure>
+<p>效果如下<br>muse<br><a href="http://f55fd002e1dc2a353f1f5.png/" title="muse"><img src="https://b85a4e6b.telegraph-image-4u5.pages.dev/file/f55fd002e1dc2a353f1f5.png" alt="muse" title="muse"></a></p>
+<hr>
+<p>mist<br><img src="https://b85a4e6b.telegraph-image-4u5.pages.dev/file/fb349ebcde5406ca80e14.png" alt="mist"></p>
+<hr>
+<p>pisces<br><img src="https://b85a4e6b.telegraph-image-4u5.pages.dev/file/ca8eba1ef47d86ef77bd0.png" alt="pisces"></p>
+<hr>
+<p>gemini<br><img src="https://b85a4e6b.telegraph-image-4u5.pages.dev/file/3dd7df5c09474e5956015.png" alt="gemini"></p>
+<h3 id="3-自定义样式"><a href="#3-自定义样式" class="headerlink" title="3. 自定义样式"></a>3. 自定义样式</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">custom_file_path:</span><br><span class="line">  #head: source/_data/head.swig</span><br><span class="line">  #header: source/_data/header.swig</span><br><span class="line">  #sidebar: source/_data/sidebar.swig</span><br><span class="line">  #postMeta: source/_data/post-meta.swig</span><br><span class="line">  #postBodyEnd: source/_data/post-body-end.swig</span><br><span class="line">  #footer: source/_data/footer.swig</span><br><span class="line">  #bodyEnd: source/_data/body-end.swig</span><br><span class="line">  #variable: source/_data/variables.styl</span><br><span class="line">  #mixin: source/_data/mixins.styl</span><br><span class="line">  style: source/_data/styles.styl</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-样式修改示例"><a href="#4-样式修改示例" class="headerlink" title="4. 样式修改示例"></a>4. 样式修改示例</h3><p>在source&#x2F;_data下面新建styles.styl,在styles.styl添加以下内容</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">//网站背景图片设置</span><br><span class="line">body &#123;</span><br><span class="line">    background:url(/images/background.png);</span><br><span class="line">    background-repeat: no-repeat;</span><br><span class="line">    background-attachment: fixed; //不重复</span><br><span class="line">    background-size: cover;       //填充</span><br><span class="line">    background-position: 50% 20%; //缩放设置，百分比越小则图片被放大</span><br><span class="line">&#125;</span><br><span class="line">//文章的透明度</span><br><span class="line">.content-wrap &#123;</span><br><span class="line">  opacity: 0.9;</span><br><span class="line">&#125;</span><br><span class="line">//主页标题的背景颜色</span><br><span class="line">.site-brand-container &#123;</span><br><span class="line">    background: #50616d;</span><br><span class="line">&#125;</span><br><span class="line">//主页标题的颜色和字体</span><br><span class="line">.site-meta .site-title &#123;</span><br><span class="line">    font-weight: bold;</span><br><span class="line">&#125;</span><br><span class="line">//网页顶部的进度栏</span><br><span class="line">.headband &#123;</span><br><span class="line">    background: #eea2a4;</span><br><span class="line">&#125;</span><br><span class="line">//菜单栏透明度</span><br><span class="line">.header-inner &#123;</span><br><span class="line">  background: rgba(255,255,255,0.9);</span><br><span class="line">&#125;</span><br><span class="line">//侧边栏的透明度</span><br><span class="line">.sidebar &#123;</span><br><span class="line">    opacity: 0.9;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="（二）导航区域配置"><a href="#（二）导航区域配置" class="headerlink" title="（二）导航区域配置"></a>（二）导航区域配置</h2><h3 id="1-新建标签页"><a href="#1-新建标签页" class="headerlink" title="1. 新建标签页"></a>1. 新建标签页</h3><p>打开主题配置文件，查找menu,去掉需要的导航页前的#</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">menu:</span><br><span class="line">  home: / || home                      #首页</span><br><span class="line">  archives: /archives/ || archive      #归档</span><br><span class="line">  categories: /categories/ || th       #分类</span><br><span class="line">  tags: /tags/ || tags                 #标签</span><br><span class="line">  about: /about/ || user               #关于</span><br><span class="line">  #schedule: /schedule/ || calendar    #日历</span><br><span class="line">  #sitemap: /sitemap.xml || sitemap    #站点地图，供搜索引擎爬取</span><br><span class="line">  #commonweal: /404/ || heartbeat      #腾讯公益404</span><br></pre></td></tr></table></figure>
+<p>“||”前面的是目标链接，后面的是图标名称，next使用的图标是<a href="http://www.fontawesome.com.cn/faicons/#web-application">图标库 - Font Awesome 中文网</a>上的，有想用的图标直接在fontawesome上面找图标的名称就行.<br>新添加的菜单需要翻译对应的中文，打开theme&#x2F;next&#x2F;languages&#x2F;zh-CN.yml，在menu下设置：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">menu:</span><br><span class="line">  home: 首页</span><br><span class="line">  archives: 归档</span><br><span class="line">  categories: 分类</span><br><span class="line">  tags: 标签</span><br><span class="line">  about: 关于</span><br><span class="line">  search: 搜索</span><br></pre></td></tr></table></figure>
+<p>在根目录下打开Git Bash，输入如下代码：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">hexo new page &quot;categories&quot;</span><br><span class="line">hexo new page &quot;tags&quot;</span><br><span class="line">hexo new page &quot;about&quot;</span><br></pre></td></tr></table></figure>
+<p>若想自己添加别的选项,参考上面的<br>此时在根目录的sources文件夹下会生成categories、tags、about、三个文件，每个文件中有一个index.md文件，修改内容分别如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">---</span><br><span class="line">title: 分类</span><br><span class="line">date: 2020-02-10 22:07:08</span><br><span class="line">type: &quot;categories&quot;</span><br><span class="line">comments: false</span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line">title: 标签</span><br><span class="line">date: 2020-02-10 22:07:08</span><br><span class="line">type: &quot;tags&quot;</span><br><span class="line">comments: false</span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line">title: 关于</span><br><span class="line">date: 2020-02-10 22:07:08</span><br><span class="line">type: &quot;about&quot;</span><br><span class="line">comments: false</span><br><span class="line">---</span><br></pre></td></tr></table></figure>
+<p>如果有启用评论，默认页面带有评论。需要关闭的话，添加字段comments并将值设置为false</p>
+<h3 id="2-菜单栏鼠标悬浮颜色"><a href="#2-菜单栏鼠标悬浮颜色" class="headerlink" title="2. 菜单栏鼠标悬浮颜色"></a>2. 菜单栏鼠标悬浮颜色</h3><p>打开主题配置文件，查找custom_file_path，去掉variables前面的#</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">custom_file_path:</span><br><span class="line">  variable: source/_data/variables.styl</span><br></pre></td></tr></table></figure>
+<p>在source&#x2F;_data下新建variables.swig，并添加以下内容</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">//更改菜单栏鼠标悬浮的颜色//236, 155, 173</span><br><span class="line">$menu-item-bg-color           = rgba(248, 105, 129, .4);</span><br></pre></td></tr></table></figure>
+<p>248, 105, 129, .4前三行为颜色.第四个是透明度,可以上<a href="https://www.rapidtables.org/zh-CN/web/color/RGB_Color.html">这个网站自己选择</a></p>
+<h3 id="3-标签-分类-归档的数量显示"><a href="#3-标签-分类-归档的数量显示" class="headerlink" title="3. 标签&#x2F;分类&#x2F;归档的数量显示"></a>3. 标签&#x2F;分类&#x2F;归档的数量显示</h3><p>打开主题配置文件，查找menu_settings</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">menu_settings:</span><br><span class="line">  icons: true # 是否显示图标</span><br><span class="line">  badges: true # 是否显示数量</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-星标"><a href="#4-星标" class="headerlink" title="4. 星标"></a>4. 星标</h3><p>打开<a href="https://tholman.com/github-corners/">GitHub角落</a>,复制喜欢的样式<br>打开themes&#x2F;next&#x2F;layout&#x2F;_layout.swig，在.</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;div class=&quot;headband&quot;&gt;&lt;/div&gt;</span><br></pre></td></tr></table></figure>
+<p>下添加复制的内容</p>
+<h3 id="5-留言板"><a href="#5-留言板" class="headerlink" title="5.留言板"></a>5.留言板</h3><blockquote>
+<p>留言板使用的前提是，已经设置了评论插件</p>
+</blockquote>
+<p>根目录右键打开Git Bash，输入以下指令新建page</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">hexo new page guestbook</span><br></pre></td></tr></table></figure>
+<p>打开source&#x2F;guestbook&#x2F;index.md，配置type。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">---</span><br><span class="line">title: 给我留言吧</span><br><span class="line">date: 2022-02-18 20:04:25</span><br><span class="line">type: &quot;guestbook&quot;</span><br><span class="line">---</span><br><span class="line"># 欢迎来到我的博客！</span><br><span class="line"></span><br><span class="line">&gt; 欢迎在这里留言！</span><br></pre></td></tr></table></figure>
+<p>打开主题配置文件，查找menu，添加留言板</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">menu:</span><br><span class="line">  留言: /guestbook/ || fa fa-book</span><br></pre></td></tr></table></figure>
+<h2 id="（三）侧边区域配置"><a href="#（三）侧边区域配置" class="headerlink" title="（三）侧边区域配置"></a>（三）侧边区域配置</h2><h3 id="1-头像设置"><a href="#1-头像设置" class="headerlink" title="1. 头像设置"></a>1. 头像设置</h3><p>打开主题配置文件，查找avatar</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">avatar:</span><br><span class="line">  url: /images/avatar.jpg</span><br><span class="line">  # 是否设置为圆形</span><br><span class="line">  rounded: false</span><br><span class="line">  # 是否鼠标悬浮时旋转</span><br><span class="line">  rotated: false</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-浏览进度显示"><a href="#2-浏览进度显示" class="headerlink" title="2. 浏览进度显示"></a>2. 浏览进度显示</h3><p>打开主题配置文件，查找scrollpercent，改为true</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">back2top:</span><br><span class="line">  enable: true</span><br><span class="line">  # Back to top in sidebar.</span><br><span class="line">  sidebar: false</span><br><span class="line">  # Scroll percent label in b2t button.</span><br><span class="line">  scrollpercent: true</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-本地搜索Local-Search"><a href="#3-本地搜索Local-Search" class="headerlink" title="3. 本地搜索Local Search"></a>3. 本地搜索Local Search</h3><p>打开Git Bash，cd到站点根目录，安装hexo-generator-searchdb</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">npm install hexo-generator-searchdb --save</span><br></pre></td></tr></table></figure>
+<p>打开站点配置文件，末尾添加以下内容</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 搜索功能</span><br><span class="line">search:</span><br><span class="line">  path: search.xml</span><br><span class="line">  field: post</span><br><span class="line">  format: html</span><br><span class="line">  limit: 10000</span><br></pre></td></tr></table></figure>
+<p>打开主题配置文件，查找local_search，改为true</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">local_search:</span><br><span class="line">  enable: true</span><br><span class="line">  # -1列出所有，此处设置列出3</span><br><span class="line">  top_n_per_article: 3</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>next</category>
+      </categories>
+      <tags>
+        <tag>hexo</tag>
+        <tag>next</tag>
+        <tag>美化</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Github中文化界面插件</title>
     <url>/article/Github%E4%B8%AD%E6%96%87%E5%8C%96%E7%95%8C%E9%9D%A2%E6%8F%92%E4%BB%B6.html</url>
     <content><![CDATA[<h2 id="Github中文化界面插件"><a href="#Github中文化界面插件" class="headerlink" title="Github中文化界面插件"></a><a href="https://github.com/">Github</a>中文化界面插件</h2><p>中文化 GitHub 界面的部分菜单及内容。原作者为<a href="http://www.52cik.com/">楼教主</a><br><img src="https://cdn.jsdelivr.net/gh/wanwuzhishi/PicPlus@main/2023/11/01/img2.png" alt="avatar"></p>
