@@ -2,7 +2,7 @@
   "title": "万物之时",  // 博客的主要标题，必填项
   "subTitle": "万物之时的个人博客",  // 博客的副标题或描述，必填项
   "avatarUrl": "https://tuwwzs.pages.dev/file/1729082334918_result_256x256.ico",  // 博客头像的URL，必填项
-  "GMEEK_VERSION": "v2.22",  // Gmeek系统的版本号，"last"表示使用最新版本
+  "GMEEK_VERSION": "2.22",  // Gmeek系统的版本号，"last"表示使用最新版本
   "displayTitle": "",  // 用于头像后面的标题展示，如果和title一致可不填
   "homeUrl": "",  // 博客主页地址，特别是自定义域名时需要配置
   "faviconUrl": "",  // 页面favicon的URL，如果和avatarUrl一致可不填
@@ -10,7 +10,7 @@
   "startSite": "19/10/2024",  // 用于页面底部显示网站运行天数的起始日期
   "filingNum": "",  // 用于页面底部显示备案信息
   "onePageListNum": 15,  // 首页每页展示的文章数量
-  "singlePage": ["about,link"],  // 自定义独立页面，例如关于（about）或链接（link）
+  "singlePage": ["about", "link"],  // 自定义独立页面，例如关于（about）或链接（link）
   "iconList": { 
     "music": "M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13Z"  // 定义SVG图标，16px大小，此处是音乐图标
   },
