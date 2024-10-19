@@ -1,6 +1,40 @@
 {
-    "title":"万物之时",
-    "subTitle":"万物之时的个人博客",
-    "avatarUrl":"https://tuwwzs.pages.dev/file/1729082334918_result_256x256.ico",
-    "GMEEK_VERSION":"last"
+  "title": "万物之时",  // 博客的主要标题，必填项
+  "subTitle": "万物之时的个人博客",  // 博客的副标题或描述，必填项
+  "avatarUrl": "https://tuwwzs.pages.dev/file/1729082334918_result_256x256.ico",  // 博客头像的URL，必填项
+  "GMEEK_VERSION": "last",  // Gmeek系统的版本号，"last"表示使用最新版本
+  "displayTitle": "",  // 用于头像后面的标题展示，如果和title一致可不填
+  "homeUrl": "",  // 博客主页地址，特别是自定义域名时需要配置
+  "faviconUrl": "",  // 页面favicon的URL，如果和avatarUrl一致可不填
+  "email": "3344738437@qq.com",  // 用于自动提交仓库时使用的邮箱，不填也可
+  "startSite": "19/10/2024",  // 用于页面底部显示网站运行天数的起始日期
+  "filingNum": "",  // 用于页面底部显示备案信息
+  "onePageListNum": 15,  // 首页每页展示的文章数量
+  "singlePage": ["about,link"],  // 自定义独立页面，例如关于（about）或链接（link）
+  "iconList": { 
+    "music": "M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13Z"  // 定义SVG图标，16px大小，此处是音乐图标
+  },
+  "exlink": {
+    "music": "https://blog.wwzs.fun"  // 自定义首页右上角按钮跳转外部链接
+  },
+  "commentLabelColor": "#006b75",  // 自定义显示评论数量标签的颜色
+  "yearColorList": ["#bc4c00", "#0969da", "#1f883d", "#A333D0"],  // 自定义显示不同年份标签的颜色
+  "i18n": "CN",  // 定义博客语言，支持EN/CN/RU
+  "UTC": 8,  // 定义博客使用的时区
+  "themeMode": "manual",  // 定义主题模式，默认为手动切换
+  "dayTheme": "light",  // 定义白天主题风格
+  "nightTheme": "dark_colorblind",  // 定义夜晚主题风格
+  "urlMode": "pinyin",  // 文章链接生成模式，支持拼音、issue编号或俄文转写
+  "style": "",  // 自定义文章页CSS样式
+  "script": "",  // 自定义文章页JavaScript脚本
+  "head": "",  // 自定义文章页head部分内容
+  "allHead": "",  // 自定义所有页面的head部分内容
+  "indexStyle": "",  // 自定义首页CSS样式
+  "indexScript": "",  // 自定义首页JavaScript脚本
+  "showPostSource": 1,  // 文章页显示issue链接按钮，1表示显示，0表示不显示
+  "rssSplit": "sentence",  // RSS输出截断符号，默认为第一句话
+  "bottomText": "转载请注明出处",  // 文章页面右下角显示的文本
+  "ogImage": "https://cdn.jsdelivr.net/gh/Meekdai/meekdai.github.io/logo64.jpg",  // Open Graph协议展示的图片
+  "primerCSS": "<link href='https://mirrors.sustech.edu.cn/cdnjs/ajax/libs/Primer/21.0.7/primer.css' rel='stylesheet' />",  // primer.css的CDN地址，默认使用南科大的CDN
+  "needComment": 1  // 设置是否开启评论功能，1表示开启，0表示关闭
 }
