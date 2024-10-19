@@ -1,2 +1,38 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>Blog Title</title><link>https://Meekdai.github.io/Gmeek-template</link><description>Blog description</description><copyright>Blog Title</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://github.githubassets.com/favicons/favicon.svg</url><title>avatar</title><link>https://Meekdai.github.io/Gmeek-template</link></image><lastBuildDate>Thu, 14 Mar 2024 09:17:29 +0000</lastBuildDate><managingEditor>Blog Title</managingEditor><ttl>60</ttl><webMaster>Blog Title</webMaster><item><title>请接着之后的安装步骤执行</title><link>https://Meekdai.github.io/Gmeek-template/post/qing-jie-zhao-zhi-hou-de-an-zhuang-bu-zou-zhi-xing.html</link><description>如果你点击了`READM.md`的链接后，看到了这个页面，请继续之后的安装步骤执行。</description><guid isPermaLink="true">https://Meekdai.github.io/Gmeek-template/post/qing-jie-zhao-zhi-hou-de-an-zhuang-bu-zou-zhi-xing.html</guid><pubDate>Thu, 14 Mar 2024 09:15:10 +0000</pubDate></item><item><title>这是Gmeek模板仓库</title><link>https://Meekdai.github.io/Gmeek-template/post/zhe-shi-Gmeek-mo-ban-cang-ku.html</link><description>通过这个模板创建库，可以大大减少部署Gmeek博客的配置步骤。</description><guid isPermaLink="true">https://Meekdai.github.io/Gmeek-template/post/zhe-shi-Gmeek-mo-ban-cang-ku.html</guid><pubDate>Wed, 20 Dec 2023 07:42:24 +0000</pubDate></item></channel></rss>
+<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>Blog Title</title><link>https://wanwuzhishi.github.io</link><description>Blog description</description><copyright>Blog Title</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://github.githubassets.com/favicons/favicon.svg</url><title>avatar</title><link>https://wanwuzhishi.github.io</link></image><lastBuildDate>Sat, 19 Oct 2024 05:47:52 +0000</lastBuildDate><managingEditor>Blog Title</managingEditor><ttl>60</ttl><webMaster>Blog Title</webMaster><item><title>WPS定时重放脚本框架，零成本，无需服务器，无需部署</title><link>https://wanwuzhishi.github.io/post/WPS-ding-shi-zhong-fang-jiao-ben-kuang-jia-%EF%BC%8C-ling-cheng-ben-%EF%BC%8C-wu-xu-fu-wu-qi-%EF%BC%8C-wu-xu-bu-shu.html</link><description># 项目地址[GitHub](https://github.com/imoki/sign_script)&#13;
+# 项目介绍&#13;
+一个利用金山文档进行自动签到的项目&#13;
+## 支持列表&#13;
+&#13;
+🟢: 正常 🔴: 失效 🟡: 待测 🟤: 随缘&#13;
+&#13;
+| 状态 | 终端 | 名称 | 脚本 | 检查日期 |备注 |&#13;
+| :---: | :---: | :---: | :---: | :---: |:---: |&#13;
+| 🟢️ | WEB | 百度贴吧 | tieba.js | 24-07-18 | 签到、只能签6个左右 |&#13;
+| 🟢️ | WEB | 有道云笔记 | noteyoudao.js | 23-08-08 | 签到、领取空间 |&#13;
+| 🟢️ | WEB | 什么值得买 | ql_smzdm.js | 24-06-20 | 抽奖的碎银子，仅抽奖 |&#13;
+| 🟢️ | WEB | 在线工具 | ql_toollu.js | 24-06-20 | 签到获取积分 |&#13;
+| 🟢️ | APP | 叮咚买菜-叮咚鱼塘 | ddmy_ddyt.js | 24-06-23 | 领积分、签到、喂饲料 |&#13;
+| 🟢️ | APP | AcFun | ql_acfun.js | 24-07-18 | 签到得香蕉 |&#13;
+| 🟢️ | APP | 喜马拉雅 | ql_xmly.js | 24-06-20 | 签到 |&#13;
+| 🟢️ | APP | 希沃白板 | ql_easinote.js | 24-09-07 | 签到得空间 |&#13;
+| 🟢️ | APP | 小木虫 | ql_xmc.js | 24-08-04 | 签到得金币 |&#13;
+| 🟢️ | WEB | 夸克网盘 | ql_quark.js | 24-09-07 | 签到得空间 |&#13;
+| 🟢️ | APP | 葫芦侠3楼 | huluxia.js | 24-06-20 | 板块签到 |&#13;
+| 🟢️ | WEB | 中兴社区 | ql_ztebbs.js | 24-07-18 | 签到,得经验和流星 |&#13;
+| 🟢️ | APP | 小米商城 | ql_mi.js | 24-07-18 | 签到,得米金 |&#13;
+| 🟢️ | WEB | 看雪论坛 | ql_kanxue.js | 24-06-20 | 签到,得雪币 |&#13;
+| 🟢️ | WEB | 哔哩哔哩 | ql_bilibili.js | 24-06-20 | 直播签到,得经验、辣条和银瓜子 |&#13;
+| 🟢️ | APP | vivo社区 | vivo.js | 24-06-24 | 签到得积分,抽奖 |&#13;
+| 🟢️ | wx  | WPS(打卡版) | ql_wps_daka.js | 24-09-07 | 金山文档微信小程序报名和打卡，领取权益 |&#13;
+| 🟢️ | WEB | 阿里云盘(自动更新token版)  | aliyun.js | 24-06-20 | 签到，领取奖励（已无法自动领奖励），领取备份奖励 |&#13;
+| 🟢️ | WEB | 宽带技术网 | chinadsl.js | 24-08-05 | 签到得积分、做任务、领取猫粮 |&#13;
+| 🟢️ | APP | golo汽修大师 | ql_golo.js | 24-06-20 | 签到得积分,自动更新token |&#13;
+| 🟢️ | WEB | 中兴商城 | ztemall.js | 24-09-07| 签到、做任务,得积分 |&#13;
+| 🟢️ | WEB | 万能福利吧 | wnflb.js | 24-06-12 | 签到,得积分 |&#13;
+| 🟢️ | WEB | 废文 | ql_fwxs.js | 24-08-15 | 签到 |&#13;
+| 🟢️ | wx  | 鸿星尔克 | ql_hxek.js | 24-09-07 | 签到,得积分 |&#13;
+| 🟢️ | APP | 钉钉AI | ql_ddai.js | 24-09-07 | 签到,领算粒 |&#13;
+| 🟢️ | WEB | 科研通 | ql_kyt.js | 24-09-07 | 签到,得积分 |&#13;
+## 聚合脚本（polymerization）&#13;
+文件夹“polymerization”内的所有脚本统称为聚合脚本，运行UPDATE.js即可自动生成表格及配置内容。</description><guid isPermaLink="true">https://wanwuzhishi.github.io/post/WPS-ding-shi-zhong-fang-jiao-ben-kuang-jia-%EF%BC%8C-ling-cheng-ben-%EF%BC%8C-wu-xu-fu-wu-qi-%EF%BC%8C-wu-xu-bu-shu.html</guid><pubDate>Sat, 19 Oct 2024 05:47:30 +0000</pubDate></item></channel></rss>
