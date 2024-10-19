@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html data-color-mode="light" data-dark-theme="dark_colorblind" data-light-theme="light" lang="zh-CN">
+<head>
+    <meta content="text/html; charset=utf-8" http-equiv="content-type" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link href='https://mirrors.sustech.edu.cn/cdnjs/ajax/libs/Primer/21.0.7/primer.css' rel='stylesheet' />
+    
+    <link rel="icon" href="https://tuwwzs.pages.dev/file/1729082334918_result_256x256.ico"><script>
+        let theme = localStorage.getItem("meek_theme") || "light";
+        document.documentElement.setAttribute("data-color-mode", theme);
+    </script>
+<meta name="description" content="# 项目地址https://github.com/MarSeventh/CloudFlare-ImgBed
+
+<aside>
+‼️ **本方案基于 Cloudflare Pages 和 Telegram （文件大小不超过20MB，过大图片会自动压缩）。">
+<meta property="og:title" content="基于 Cloudflare Pages 和 Telegram的免费图床搭建教程">
+<meta property="og:description" content="# 项目地址https://github.com/MarSeventh/CloudFlare-ImgBed
+
+<aside>
+‼️ **本方案基于 Cloudflare Pages 和 Telegram （文件大小不超过20MB，过大图片会自动压缩）。">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://wanwuzhishi.github.io//post/ji-yu-%20Cloudflare%20Pages%20-he-%20Telegram-de-mian-fei-tu-chuang-da-jian-jiao-cheng.html">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Meekdai/meekdai.github.io/logo64.jpg">
+<title>基于 Cloudflare Pages 和 Telegram的免费图床搭建教程</title>
+
+
+
+</head>
+<style>
+body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;padding: 45px;font-size: 16px;font-family: sans-serif;line-height: 1.25;}
+#header{display:flex;padding-bottom:8px;border-bottom: 1px solid var(--borderColor-muted, var(--color-border-muted));margin-bottom: 16px;}
+#footer {margin-top:64px; text-align: center;font-size: small;}
+
+</style>
+
+<style>
+.postTitle{margin: auto 0;font-size:40px;font-weight:bold;}
+.title-right{display:flex;margin:auto 0 0 auto;}
+.title-right .circle{padding: 14px 16px;margin-right:8px;}
+#postBody{border-bottom: 1px solid var(--color-border-default);padding-bottom:36px;}
+#postBody hr{height:2px;}
+#cmButton{height:48px;margin-top:48px;}
+#comments{margin-top:64px;}
+.g-emoji{font-size:24px;}
+@media (max-width: 600px) {
+    body {padding: 8px;}
+    .postTitle{font-size:24px;}
+}
+
+</style>
+
+
+
+
+<body>
+    <div id="header">
+<h1 class="postTitle">基于 Cloudflare Pages 和 Telegram的免费图床搭建教程</h1>
+<div class="title-right">
+    <a href="https://wanwuzhishi.github.io/" id="buttonHome" class="btn btn-invisible circle" title="首页">
+        <svg class="octicon" width="16" height="16">
+            <path id="pathHome" fill-rule="evenodd"></path>
+        </svg>
+    </a>
+    
+    <a href="https://github.com/wanwuzhishi/wanwuzhishi.github.io/issues/3" target="_blank" class="btn btn-invisible circle" title="Issue">
+        <svg class="octicon" width="16" height="16">
+            <path id="pathIssue" fill-rule="evenodd"></path>
+        </svg>
+    </a>
+    
+
+    <a class="btn btn-invisible circle" onclick="modeSwitch();" title="切换主题">
+        <svg class="octicon" width="16" height="16" >
+            <path id="themeSwitch" fill-rule="evenodd"></path>
+        </svg>
+    </a>
+
+</div>
+</div>
+    <div id="content">
+<div class="markdown-body" id="postBody"><h1>项目地址<a href="https://github.com/MarSeventh/CloudFlare-ImgBed">https://github.com/MarSeventh/CloudFlare-ImgBed</a></h1>
+
+<g-emoji class="g-emoji" alias="bangbang">‼️</g-emoji> **本方案基于 Cloudflare Pages 和 Telegram （文件大小不超过20MB，过大图片会自动压缩）。**
+
+<h1>一，介绍</h1>
+<h2><strong>1.开源</strong></h2>
+<ul>
+<li>前端开源（可自行修改、打包使用）</li>
+</ul>
+<h2><strong>2.炫酷的动效（</strong></h2>
+<ul>
+<li>流畅丝滑的过渡动画~</li>
+<li>上传文件实现呼吸灯效果</li>
+</ul>
+<h2><strong>3.人性化上传</strong></h2>
+<ul>
+<li>支持绝大多数常见<strong>图片、视频、动图</strong>等</li>
+<li>支持多种上传方式（<strong>拖拽点击、粘贴</strong>）</li>
+<li>粘贴上传支持<strong>文件</strong>和<strong>URL</strong></li>
+<li>支持批量上传（不限同时选择文件数量，但为了保证稳定性，同时处于上传状态的文件最多为10个）</li>
+<li>上传显示实时上传进度</li>
+<li><strong>上传后图片无需手动点击，可直接展示在管理页面中</strong></li>
+<li><strong>过大图片在前端进行压缩，提升上传稳定性和加载性能</strong></li>
+<li>支持自定义压缩质量，自定义开启前后端压缩功能</li>
+</ul>
+<h2><strong>4.多样化复制</strong></h2>
+<ul>
+<li>支持<strong>整体复制</strong>和<strong>单独复制</strong>（整体复制即将所有链接通过换行串联起来后复制）</li>
+<li>支持<strong>MarkDown、HTML、BBCode和原始链接</strong>四种格式复制</li>
+<li>上传完成后直观展示四种格式链接</li>
+</ul>
+<h2><strong>5.支持身份认证、防滥用</strong></h2>
+<ul>
+<li>支持Web和API<strong>上传认证</strong>（感谢[<a href="https://github.com/hl128k">hl128k</a>](<a href="https://github.com/%5Bhl128k%5D(https://github.com/hl128k))%EF%BC%89">https://github.com/[hl128k](https://github.com/hl128k))）</a></li>
+<li>支持访问域名限制（感谢<a href="https://github.com/hl128k">hl128k</a>）</li>
+<li>支持上传IP统计</li>
+</ul>
+<h2><strong>6.支持页面自定义</strong></h2>
+<ul>
+<li>页面背景支持<strong>单图</strong>、<strong>自定义多图轮播</strong>、<strong>bing随机图轮播</strong>等多种模式</li>
+<li>自定义图床名称和Logo</li>
+<li>自定义网站标题和Icon</li>
+</ul>
+<h2><strong>7.一些小功能</strong></h2>
+<ul>
+<li>支持<strong>随机图</strong>API，从图床中随机返回一张图片</li>
+</ul>
+<h2><strong>8.以及原版所有特性</strong></h2>
+<blockquote>
+<p>1.无限图片储存数量，你可以上传不限数量的图片</p>
+<p>2.无需购买服务器，托管于 Cloudflare 的网络上，当使用量不超过 Cloudflare 的免费额度时，完全免费</p>
+<p>3.无需购买域名，可以使用 Cloudflare Pages 提供的<code class="notranslate">*.pages.dev</code>的免费二级域名，同时也支持绑定自定义域名</p>
+<p>4.支持<strong>图片审查</strong> API，可根据需要开启，开启后不良图片将自动屏蔽，不再加载</p>
+<p>5.支持<strong>后台图片管理</strong>，可以对上传的图片进行在线预览，添加白名单，黑名单等操作</p>
+</blockquote>
+<h1>二，<strong>部署</strong></h1>
+<h2>1.创建Telegram机器人得到<code class="notranslate">TG_BOT_TOKEN</code></h2>
+<ol>
+<li>
+<p>向[<a href="https://t.me/BotFather" rel="nofollow">@BotFather</a>](<a href="https://t.me/BotFather)%E5%8F%91%E9%80%81%60/newbot%60%EF%BC%8C%E6%8C%89%E7%85%A7%E6%8F%90%E7%A4%BA%E8%BE%93%E5%85%A5bot%E7%9A%84%E5%A4%87%E6%B3%A8%E3%80%81%E7%94%A8%E6%88%B7%E5%90%8D%E7%AD%89%E4%BF%A1%E6%81%AF%E3%80%82%E6%88%90%E5%8A%9F%E5%88%9B%E5%BB%BA%E5%A6%82%E5%9B%BE%E6%89%80%E7%A4%BA%E7%9A%84%E7%BA%A2%E8%89%B2%E9%83%A8%E5%88%86%E4%B8%BA%60TG_BOT_TOKEN%60%E3%80%82" rel="nofollow">https://t.me/BotFather)发送`/newbot`，按照提示输入bot的备注、用户名等信息。成功创建如图所示的红色部分为`TG_BOT_TOKEN`。</a></p>
+<p>!<a href="https://tuwwzs.pages.dev/file/1729154237023_Screenshot_20241017_155651_edit_574428759597799.jpg" rel="nofollow">https://tuwwzs.pages.dev/file/1729154237023_Screenshot_20241017_155651_edit_574428759597799.jpg</a></p>
+<h2>创建Telegram频道得到**<code class="notranslate">TG_CHAT_ID</code>**</h2>
+<p>创建一个新的频道（Channel），并按下图所示将机器人加入频道</p>
+<p>!<a href="https://tuwwzs.pages.dev/file/1729154241321_Screenshot_20241017_160513_edit_574445754749303.jpg" rel="nofollow">https://tuwwzs.pages.dev/file/1729154241321_Screenshot_20241017_160513_edit_574445754749303.jpg</a></p>
+<p>!<a href="https://tuwwzs.pages.dev/file/1729154241183_Screenshot_20241017_160520_edit_574457710440653.jpg" rel="nofollow">https://tuwwzs.pages.dev/file/1729154241183_Screenshot_20241017_160520_edit_574457710440653.jpg</a></p>
+</li>
+</ol>
+<h3>选择你刚创建的频道，授予机器人管理员权限</h3>
+<p>!<a href="https://tuwwzs.pages.dev/file/1729154244368_Screenshot_20241017_160533_edit_574471031884085.jpg" rel="nofollow">https://tuwwzs.pages.dev/file/1729154244368_Screenshot_20241017_160533_edit_574471031884085.jpg</a></p>
+<h2>向[<a href="https://t.me/VersaToolsBot" rel="nofollow">@VersaToolsBot</a>](<a href="https://t.me/VersaToolsBot)**%E8%BD%AC%E5%8F%91**%E4%B8%80%E6%9D%A1%E7%AC%AC2%E6%AD%A5%E6%96%B0%E5%BB%BA%E9%A2%91%E9%81%93%E4%B8%AD%E7%9A%84%E6%B6%88%E6%81%AF%EF%BC%8C%E8%8E%B7%E5%8F%96%60TG_CHAT_ID%60%EF%BC%88%E9%A2%91%E9%81%93ID%EF%BC%89" rel="nofollow">https://t.me/VersaToolsBot)**转发**一条第2步新建频道中的消息，获取`TG_CHAT_ID`（频道ID）</a></h2>
+
+<g-emoji class="g-emoji" alias="bangbang">‼️</g-emoji> **频道ID前有个负号不要忘了!!**
+
+<p>!<a href="https://tuwwzs.pages.dev/file/1729154245823_Screenshot_20241017_161503_edit_574486968755694.jpg" rel="nofollow">https://tuwwzs.pages.dev/file/1729154245823_Screenshot_20241017_161503_edit_574486968755694.jpg</a></p>
+<h2>部署于Cloudflare</h2>
+<p>依托于CF的强大能力，只需简单几步，即可部署本项目，拥有自己的图床。</p>
+<ol>
+<li>Fork <a href="https://github.com/MarSeventh/CloudFlare-ImgBed">https://github.com/MarSeventh/CloudFlare-ImgBed</a></li>
+</ol>
+<p>!<a href="https://tuwwzs.pages.dev/file/1729153327657_Clip_2024-10-17_16-21-51.png" rel="nofollow">https://tuwwzs.pages.dev/file/1729153327657_Clip_2024-10-17_16-21-51.png</a></p>
+<ol>
+<li>打开 [<a href="https://dash.cloudflare.com/" rel="nofollow">Cloudflare Dashboard</a>](<a href="https://dash.cloudflare.com/)%EF%BC%8C%E8%BF%9B%E5%85%A5" rel="nofollow">https://dash.cloudflare.com/)，进入</a> Pages 管理页面，选择创建项目，选择<code class="notranslate">连接到 Git 提供程序</code></li>
+</ol>
+<p>!<a href="https://alist.sanyue.site/d/imgbed/202407201047300.png" rel="nofollow">https://alist.sanyue.site/d/imgbed/202407201047300.png</a></p>
+<ol>
+<li>按照页面提示输入项目名称，选择需要连接的 git 仓库，点击<code class="notranslate">部署站点</code></li>
+<li>将前面获取的<code class="notranslate">TG_BOT_TOKEN</code>和<code class="notranslate">TG_CHAT_ID</code>分别添加到环境变量中，对应<strong>环境变量名为<code class="notranslate">TG_BOT_TOKEN</code>和<code class="notranslate">TG_CHAT_ID</code></strong></li>
+<li><strong>绑定KV数据库</strong>：
+<ul>
+<li>
+<p>创建一个新的KV数据库</p>
+<p>!<a href="https://tuwwzs.pages.dev/file/1729153507708_Clip_2024-10-17_16-24-57.png" rel="nofollow">https://tuwwzs.pages.dev/file/1729153507708_Clip_2024-10-17_16-24-57.png</a></p>
+</li>
+<li>
+<p>进入项目对应<code class="notranslate">设置</code>&gt;<code class="notranslate">函数</code>&gt;<code class="notranslate">KV 命名空间绑定</code>&gt;<code class="notranslate">编辑绑定</code>&gt;<code class="notranslate">变量名称</code>，填写<code class="notranslate">img_url</code>，KV命名空间选择刚才创建好的KV数据库</p>
+</li>
+</ul>
+</li>
+<li><code class="notranslate">重试部署</code>，此时项目即可正常使用</li>
+</ol></div>
+<div style="font-size:small;margin-top:8px;float:right;">转载请注明出处</div>
+
+<button class="btn btn-block" type="button" onclick="openComments()" id="cmButton">评论</button>
+<div class="comments" id="comments"></div>
+
+</div>
+    <div id="footer"><div id="footer1">Copyright © <span id="copyrightYear"></span> <a href="https://wanwuzhishi.github.io/">万物之时</a></div>
+<div id="footer2">
+    <span id="runday"></span><span>Powered by <a href="https://meekdai.com/Gmeek.html" target="_blank">Gmeek</a></span>
+</div>
+
+<script>
+var now=new Date();
+document.getElementById("copyrightYear").innerHTML=now.getFullYear();
+
+if("19/10/2024"!=""){
+    var startSite=new Date("19/10/2024");
+    var diff=now.getTime()-startSite.getTime();
+    var diffDay=Math.floor(diff/(1000*60*60*24));
+    document.getElementById("runday").innerHTML="网站运行"+diffDay+"天"+" • ";
+}
+</script></div>
+</body>
+<script>
+var IconList={'sun': 'M8 10.5a2.5 2.5 0 100-5 2.5 2.5 0 000 5zM8 12a4 4 0 100-8 4 4 0 000 8zM8 0a.75.75 0 01.75.75v1.5a.75.75 0 01-1.5 0V.75A.75.75 0 018 0zm0 13a.75.75 0 01.75.75v1.5a.75.75 0 01-1.5 0v-1.5A.75.75 0 018 13zM2.343 2.343a.75.75 0 011.061 0l1.06 1.061a.75.75 0 01-1.06 1.06l-1.06-1.06a.75.75 0 010-1.06zm9.193 9.193a.75.75 0 011.06 0l1.061 1.06a.75.75 0 01-1.06 1.061l-1.061-1.06a.75.75 0 010-1.061zM16 8a.75.75 0 01-.75.75h-1.5a.75.75 0 010-1.5h1.5A.75.75 0 0116 8zM3 8a.75.75 0 01-.75.75H.75a.75.75 0 010-1.5h1.5A.75.75 0 013 8zm10.657-5.657a.75.75 0 010 1.061l-1.061 1.06a.75.75 0 11-1.06-1.06l1.06-1.06a.75.75 0 011.06 0zm-9.193 9.193a.75.75 0 010 1.06l-1.06 1.061a.75.75 0 11-1.061-1.06l1.06-1.061a.75.75 0 011.061 0z', 'moon': 'M9.598 1.591a.75.75 0 01.785-.175 7 7 0 11-8.967 8.967.75.75 0 01.961-.96 5.5 5.5 0 007.046-7.046.75.75 0 01.175-.786zm1.616 1.945a7 7 0 01-7.678 7.678 5.5 5.5 0 107.678-7.678z', 'sync': 'M1.705 8.005a.75.75 0 0 1 .834.656 5.5 5.5 0 0 0 9.592 2.97l-1.204-1.204a.25.25 0 0 1 .177-.427h3.646a.25.25 0 0 1 .25.25v3.646a.25.25 0 0 1-.427.177l-1.38-1.38A7.002 7.002 0 0 1 1.05 8.84a.75.75 0 0 1 .656-.834ZM8 2.5a5.487 5.487 0 0 0-4.131 1.869l1.204 1.204A.25.25 0 0 1 4.896 6H1.25A.25.25 0 0 1 1 5.75V2.104a.25.25 0 0 1 .427-.177l1.38 1.38A7.002 7.002 0 0 1 14.95 7.16a.75.75 0 0 1-1.49.178A5.5 5.5 0 0 0 8 2.5Z', 'home': 'M6.906.664a1.749 1.749 0 0 1 2.187 0l5.25 4.2c.415.332.657.835.657 1.367v7.019A1.75 1.75 0 0 1 13.25 15h-3.5a.75.75 0 0 1-.75-.75V9H7v5.25a.75.75 0 0 1-.75.75h-3.5A1.75 1.75 0 0 1 1 13.25V6.23c0-.531.242-1.034.657-1.366l5.25-4.2Zm1.25 1.171a.25.25 0 0 0-.312 0l-5.25 4.2a.25.25 0 0 0-.094.196v7.019c0 .138.112.25.25.25H5.5V8.25a.75.75 0 0 1 .75-.75h3.5a.75.75 0 0 1 .75.75v5.25h2.75a.25.25 0 0 0 .25-.25V6.23a.25.25 0 0 0-.094-.195Z', 'github': 'M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z'};
+var utterancesLoad=0;
+
+let themeSettings={
+    "dark": ["dark","moon","#00f0ff","dark-blue"],
+    "light": ["light","sun","#ff5000","github-light"],
+    "auto": ["auto","sync","","preferred-color-scheme"]
+};
+function changeTheme(mode, icon, color, utheme){
+    document.documentElement.setAttribute("data-color-mode",mode);
+    document.getElementById("themeSwitch").setAttribute("d",value=IconList[icon]);
+    document.getElementById("themeSwitch").parentNode.style.color=color;
+    if(utterancesLoad==1){utterancesTheme(utheme);}
+}
+function modeSwitch(){
+    let currentMode=document.documentElement.getAttribute('data-color-mode');
+    let newMode = currentMode === "light" ? "dark" : currentMode === "dark" ? "auto" : "light";
+    localStorage.setItem("meek_theme", newMode);
+    if(themeSettings[newMode]){
+        changeTheme(...themeSettings[newMode]);
+    }
+}
+function utterancesTheme(theme){
+    const message={type:'set-theme',theme: theme};
+    const iframe=document.getElementsByClassName('utterances-frame')[0];
+    iframe.contentWindow.postMessage(message,'https://utteranc.es');
+}
+if(themeSettings[theme]){changeTheme(...themeSettings[theme]);}
+console.log("\n %c Gmeek last https://github.com/Meekdai/Gmeek \n","padding:5px 0;background:#02d81d;color:#fff");
+</script>
+
+<script>
+document.getElementById("pathHome").setAttribute("d",IconList["home"]);
+document.getElementById("pathIssue").setAttribute("d",IconList["github"]);
+
+
+
+function openComments(){
+    cm=document.getElementById("comments");
+    cmButton=document.getElementById("cmButton");
+    cmButton.innerHTML="loading";
+    span=document.createElement("span");
+    span.setAttribute("class","AnimatedEllipsis");
+    cmButton.appendChild(span);
+
+    script=document.createElement("script");
+    script.setAttribute("src","https://utteranc.es/client.js");
+    script.setAttribute("repo","wanwuzhishi/wanwuzhishi.github.io");
+    script.setAttribute("issue-term","title");
+    
+    if(localStorage.getItem("meek_theme")=="dark"){script.setAttribute("theme","dark-blue");}
+    else if(localStorage.getItem("meek_theme")=="light") {script.setAttribute("theme","github-light");}
+    else{script.setAttribute("theme","preferred-color-scheme");}
+    
+    script.setAttribute("crossorigin","anonymous");
+    script.setAttribute("async","");
+    cm.appendChild(script);
+
+    int=self.setInterval("iFrameLoading()",200);
+}
+
+function iFrameLoading(){
+    var utterances=document.getElementsByClassName('utterances');
+    if(utterances.length==1){
+        if(utterances[0].style.height!=""){
+            utterancesLoad=1;
+            int=window.clearInterval(int);
+            document.getElementById("cmButton").style.display="none";
+            console.log("utterances Load OK");
+        }
+    }
+}
+
+
+
+</script>
+
+
+</html>
