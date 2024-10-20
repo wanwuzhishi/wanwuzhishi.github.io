@@ -1,5 +1,4 @@
 
-
 # 项目地址https://github.com/Meekdai/Gmeek
 
 # Gmeek 搭建教程
@@ -35,8 +34,10 @@ Gmeek 旨在为个人博客提供一个简洁、高效的解决方案。借助 G
     - 推荐将仓库命名为 `YOUR_GITHUB_USERNAME.github.io`，其中 `YOUR_GITHUB_USERNAME` 为你的 GitHub 用户名。
     - 示例：如果你的 GitHub 用户名为 `wanwuzhishi`，则仓库名称应为 `wanwuzhishi.github.io`。
     
-    !https://tuwwzs.pages.dev/file/1729410432618_Clip_2024-10-20_15-46-41.png
+
     
+![image](https://github.com/user-attachments/assets/3947d5a6-af19-49ef-aaa8-830465c7e5ad)
+
 3. **完成仓库创建**：
     - 点击 `Create repository`  完成仓库的创建。
 
