@@ -1,9 +1,9 @@
 # 项目地址https://github.com/MarSeventh/CloudFlare-ImgBed
 
-<aside>
+
 ‼️ **本方案基于 Cloudflare Pages 和 Telegram （文件大小不超过20MB，过大图片会自动压缩）。**
 
-</aside>
+
 
 # 一，介绍
 
@@ -35,8 +35,8 @@
 
 ## **5.支持身份认证、防滥用**
 
-- 支持Web和API**上传认证**（感谢[[hl128k](https://github.com/hl128k)](https://github.com/[hl128k](https://github.com/hl128k))）
-- 支持访问域名限制（感谢[hl128k](https://github.com/hl128k)）
+- 支持Web和API**上传认证**（
+- 支持访问域名限制
 - 支持上传IP统计
 
 ## **6.支持页面自定义**
@@ -67,31 +67,31 @@
 
 ## 1.创建Telegram机器人得到`TG_BOT_TOKEN`
 
-1. 向[[@BotFather](https://t.me/BotFather)](https://t.me/BotFather)发送`/newbot`，按照提示输入bot的备注、用户名等信息。成功创建如图所示的红色部分为`TG_BOT_TOKEN`。
+1. 向[@BotFather](https://t.me/BotFather)发送`/newbot`，按照提示输入bot的备注、用户名等信息。成功创建如图所示的红色部分为`TG_BOT_TOKEN`。
     
-    !https://tuwwzs.pages.dev/file/1729154237023_Screenshot_20241017_155651_edit_574428759597799.jpg
+    ![ ](https://tuwwzs.pages.dev/file/1729154237023_Screenshot_20241017_155651_edit_574428759597799.jpg)
     
     ## 创建Telegram频道得到**`TG_CHAT_ID`**
     
     创建一个新的频道（Channel），并按下图所示将机器人加入频道
     
-    !https://tuwwzs.pages.dev/file/1729154241321_Screenshot_20241017_160513_edit_574445754749303.jpg
+    ![ ](https://tuwwzs.pages.dev/file/1729154241321_Screenshot_20241017_160513_edit_574445754749303.jpg)
     
-    !https://tuwwzs.pages.dev/file/1729154241183_Screenshot_20241017_160520_edit_574457710440653.jpg
+    ![ ](https://tuwwzs.pages.dev/file/1729154241183_Screenshot_20241017_160520_edit_574457710440653.jpg)
     
 
 ### 选择你刚创建的频道，授予机器人管理员权限
 
-!https://tuwwzs.pages.dev/file/1729154244368_Screenshot_20241017_160533_edit_574471031884085.jpg
+![](https://tuwwzs.pages.dev/file/1729154244368_Screenshot_20241017_160533_edit_574471031884085.jpg)
 
-## 向[[@VersaToolsBot](https://t.me/VersaToolsBot)](https://t.me/VersaToolsBot)**转发**一条第2步新建频道中的消息，获取`TG_CHAT_ID`（频道ID）
+## 向[@VersaToolsBot](https://t.me/VersaToolsBot)**转发**一条第2步新建频道中的消息，获取`TG_CHAT_ID`（频道ID）
 
-<aside>
+
 ‼️ **频道ID前有个负号不要忘了!!**
 
-</aside>
 
-!https://tuwwzs.pages.dev/file/1729154245823_Screenshot_20241017_161503_edit_574486968755694.jpg
+
+![](https://tuwwzs.pages.dev/file/1729154245823_Screenshot_20241017_161503_edit_574486968755694.jpg)
 
 ## 部署于Cloudflare
 
@@ -99,11 +99,11 @@
 
 1. Fork https://github.com/MarSeventh/CloudFlare-ImgBed
 
-!https://tuwwzs.pages.dev/file/1729153327657_Clip_2024-10-17_16-21-51.png
+![](https://tuwwzs.pages.dev/file/1729153327657_Clip_2024-10-17_16-21-51.png)
 
-1. 打开 [[Cloudflare Dashboard](https://dash.cloudflare.com/)](https://dash.cloudflare.com/)，进入 Pages 管理页面，选择创建项目，选择`连接到 Git 提供程序`
+1. 打开 [Cloudflare Dashboard](https://dash.cloudflare.com/)，进入 Pages 管理页面，选择创建项目，选择`连接到 Git 提供程序`
 
-!https://alist.sanyue.site/d/imgbed/202407201047300.png
+![](https://alist.sanyue.site/d/imgbed/202407201047300.png)
 
 1. 按照页面提示输入项目名称，选择需要连接的 git 仓库，点击`部署站点`
 2. 将前面获取的`TG_BOT_TOKEN`和`TG_CHAT_ID`分别添加到环境变量中，对应**环境变量名为`TG_BOT_TOKEN`和`TG_CHAT_ID`**
@@ -111,7 +111,7 @@
     - 创建一个新的KV数据库
         
         
-        !https://tuwwzs.pages.dev/file/1729153507708_Clip_2024-10-17_16-24-57.png
+        ![](https://tuwwzs.pages.dev/file/1729153507708_Clip_2024-10-17_16-24-57.png)
         
     - 进入项目对应`设置`>`函数`>`KV 命名空间绑定`>`编辑绑定`>`变量名称`，填写`img_url`，KV命名空间选择刚才创建好的KV数据库
 4. `重试部署`，此时项目即可正常使用
