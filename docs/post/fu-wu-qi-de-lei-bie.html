@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html data-color-mode="light" data-dark-theme="dark_colorblind" data-light-theme="light" lang="zh-CN">
+<head>
+    <meta content="text/html; charset=utf-8" http-equiv="content-type" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link href='https://mirrors.sustech.edu.cn/cdnjs/ajax/libs/Primer/21.0.7/primer.css' rel='stylesheet' />
+    <script src='https://blog.meekdai.com/Gmeek/plugins/GmeekVercount.js'></script>
+    <link rel="icon" href="https://tuwwzs.pages.dev/file/1729082334918_result_256x256.ico"><script>
+        let theme = localStorage.getItem("meek_theme") || "light";
+        document.documentElement.setAttribute("data-color-mode", theme);
+    </script>
+<meta name="description" content="# 服务器类别概述
+
+## 前言简介
+
+
+在数字化和互联网快速发展的今天，服务器作为支撑网站、应用程序及各种在线服务的基础架构，扮演着至关重要的角色。">
+<meta property="og:title" content="服务器的类别">
+<meta property="og:description" content="# 服务器类别概述
+
+## 前言简介
+
+
+在数字化和互联网快速发展的今天，服务器作为支撑网站、应用程序及各种在线服务的基础架构，扮演着至关重要的角色。">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://wanwuzhishi.github.io//post/fu-wu-qi-de-lei-bie.html">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Meekdai/meekdai.github.io/logo64.jpg">
+<title>服务器的类别</title>
+
+
+
+</head>
+<style>
+body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;padding: 45px;font-size: 16px;font-family: sans-serif;line-height: 1.25;}
+#header{display:flex;padding-bottom:8px;border-bottom: 1px solid var(--borderColor-muted, var(--color-border-muted));margin-bottom: 16px;}
+#footer {margin-top:64px; text-align: center;font-size: small;}
+
+</style>
+
+<style>
+.postTitle{margin: auto 0;font-size:40px;font-weight:bold;}
+.title-right{display:flex;margin:auto 0 0 auto;}
+.title-right .circle{padding: 14px 16px;margin-right:8px;}
+#postBody{border-bottom: 1px solid var(--color-border-default);padding-bottom:36px;}
+#postBody hr{height:2px;}
+#cmButton{height:48px;margin-top:48px;}
+#comments{margin-top:64px;}
+.g-emoji{font-size:24px;}
+@media (max-width: 600px) {
+    body {padding: 8px;}
+    .postTitle{font-size:24px;}
+}
+
+</style>
+
+
+
+
+<body>
+    <div id="header">
+<h1 class="postTitle">服务器的类别</h1>
+<div class="title-right">
+    <a href="https://wanwuzhishi.github.io/" id="buttonHome" class="btn btn-invisible circle" title="首页">
+        <svg class="octicon" width="16" height="16">
+            <path id="pathHome" fill-rule="evenodd"></path>
+        </svg>
+    </a>
+    
+    <a href="https://github.com/wanwuzhishi/wanwuzhishi.github.io/issues/8" target="_blank" class="btn btn-invisible circle" title="Issue">
+        <svg class="octicon" width="16" height="16">
+            <path id="pathIssue" fill-rule="evenodd"></path>
+        </svg>
+    </a>
+    
+
+    <a class="btn btn-invisible circle" onclick="modeSwitch();" title="切换主题">
+        <svg class="octicon" width="16" height="16" >
+            <path id="themeSwitch" fill-rule="evenodd"></path>
+        </svg>
+    </a>
+
+</div>
+</div>
+    <div id="content">
+<div class="markdown-body" id="postBody"><h1>服务器类别概述</h1>
+<h2>前言简介</h2>
+<p>在数字化和互联网快速发展的今天，服务器作为支撑网站、应用程序及各种在线服务的基础架构，扮演着至关重要的角色。无论是个人博客、中小企业还是大型企业，选择合适的服务器类型对于确保业务稳定运行和服务质量至关重要。</p>
+<p>本教程旨在为读者提供一个全面的指南，帮助您理解当前市场上不同类型的服务器及其特点。通过了解独立服务器、虚拟服务器（VPS）、基于NAT的虚拟服务器（NAT-VPS）、云服务器、托管服务器以及共享主机等各类服务器的特点，您可以根据自身业务需求、预算和技术能力做出明智的选择。</p>
+<p>我们将逐一探讨每种服务器的优点与缺点，涵盖从成本效益到安全性，再到可扩展性   和管理便捷性等多个方面。无论您是刚开始接触服务器概念的新手，还是寻求升级现有基础设施的经验丰富的IT专业人士，这篇教程都将为您提供宝贵的信息，助力您找到最适合您的解决方案。现在，让我们深入探索这些服务器种类，以便更好地服务于您的项目或业务目标。<br>
+。</p>
+<h2>(1) 独立服务器</h2>
+<p>独立服务器（又称母鸡、独服）是服务商提供的一整台物理服务器，所有资源专属于您，不会与他人共享。</p>
+<p><strong>优点：</strong></p>
+<ul>
+<li>性能强大，资源充足。</li>
+</ul>
+<p><strong>缺点：</strong></p>
+<ul>
+<li>成本较高，通常价格在300元以上，高性能的可能会达到四位数。</li>
+</ul>
+<h2>(2) 虚拟服务器 (VPS)</h2>
+<p>虚拟服务器（VPS、小鸡）利用虚拟化技术，将一台物理服务器的资源分割成多个虚拟服务器，提供给用户使用。价格相对独立服务器更低，配置灵活。</p>
+<p><strong>优点：</strong></p>
+<ul>
+<li>资源灵活分配，可按需选择配置。</li>
+</ul>
+<p><strong>缺点：</strong></p>
+<ul>
+<li>宿主物理服务器故障时，所有虚拟机会受到影响（虽然这种情况较少）。</li>
+<li>部分服务商可能存在超售现象，或遇到恶意用户影响性能。</li>
+</ul>
+<h2>(3) 基于 NAT 的虚拟服务器 (NAT-VPS)</h2>
+<p>NAT-VPS是在虚拟服务器基础上，通过共享IP提供外网访问能力。</p>
+<p><strong>优点：</strong></p>
+<ul>
+<li>成本更低，几乎没有IP费用。</li>
+</ul>
+<p><strong>缺点：</strong></p>
+<ul>
+<li>若邻居使用VPN等工具，可能导致IP被封锁。</li>
+<li>被封锁后，同一IP下的所有服务器将无法连接。</li>
+<li>只能使用固定端口访问，限制了建站功能。</li>
+</ul>
+<h2>(4) 云服务器</h2>
+<p>云服务器（云主机）基于云计算技术，提供虚拟化计算资源，通常由大型云服务提供商（如阿里云、腾讯云、AWS等）提供。</p>
+<p><strong>优点：</strong></p>
+<ul>
+<li>弹性伸缩：可快速调整计算能力。</li>
+<li>高可用性：数据和服务可在多个位置复制。</li>
+<li>按需付费：根据使用量计费，更灵活。</li>
+<li>易于管理：提供简化的管理界面。</li>
+</ul>
+<p><strong>缺点：</strong></p>
+<ul>
+<li>数据隐私问题：敏感数据存储在第三方。</li>
+<li>网络依赖：网络故障可能影响服务可用性。</li>
+<li>长期使用成本：按需付费虽看似经济，但长期使用总成本可能高于物理服务器。</li>
+</ul>
+<h2>(5) 托管服务器</h2>
+<p>托管服务器是客户购买自己的硬件并放置在服务商数据中心，由服务商提供基础设施支持。</p>
+<p><strong>优点：</strong></p>
+<ul>
+<li>完全控制：客户可自由选择硬件和软件。</li>
+<li>稳定性与安全性：专业数据中心提供更优环境。</li>
+</ul>
+<p><strong>缺点：</strong></p>
+<ul>
+<li>初始投资较高：需购买硬件设备。</li>
+<li>维护责任：客户需自行处理系统级维护。</li>
+<li>升级复杂：硬件固定后，升级过程相对复杂。</li>
+</ul>
+<h2>(6) 共享主机</h2>
+<p>共享主机是最基础的网站托管形式，适合小型网站和个人博客。在此模式下，多个用户共享同一台物理服务器的资源。</p>
+<p><strong>优点：</strong></p>
+<ul>
+<li>成本低：适合预算有限的小型项目。</li>
+<li>易于使用：通常配备简单控制面板，便于管理。</li>
+</ul>
+<p><strong>缺点：</strong></p>
+<ul>
+<li>资源受限：共享资源，可能影响性能。</li>
+<li>性能波动：其他用户活动可能影响网站表现。</li>
+<li>安全风险：若某用户受攻击，可能影响其他用户。</li>
+</ul>
+<p>总结来说，每种服务器类型都有其适用场景和优缺点，选择时应根据自身需求和预算做出决策。</p></div>
+<div style="font-size:small;margin-top:8px;float:right;">转载请注明出处</div>
+
+<button class="btn btn-block" type="button" onclick="openComments()" id="cmButton">评论</button>
+<div class="comments" id="comments"></div>
+
+</div>
+    <div id="footer"><div id="footer1">Copyright © <span id="copyrightYear"></span> <a href="https://wanwuzhishi.github.io/">万物之时</a></div>
+<div id="footer2">
+    <span id="runday"></span><span>Powered by <a href="https://meekdai.com/Gmeek.html" target="_blank">Gmeek</a></span>
+</div>
+
+<script>
+var now=new Date();
+document.getElementById("copyrightYear").innerHTML=now.getFullYear();
+
+if("10/19/2024"!=""){
+    var startSite=new Date("10/19/2024");
+    var diff=now.getTime()-startSite.getTime();
+    var diffDay=Math.floor(diff/(1000*60*60*24));
+    document.getElementById("runday").innerHTML="网站运行"+diffDay+"天"+" • ";
+}
+</script></div>
+</body>
+<script>
+var IconList={'sun': 'M8 10.5a2.5 2.5 0 100-5 2.5 2.5 0 000 5zM8 12a4 4 0 100-8 4 4 0 000 8zM8 0a.75.75 0 01.75.75v1.5a.75.75 0 01-1.5 0V.75A.75.75 0 018 0zm0 13a.75.75 0 01.75.75v1.5a.75.75 0 01-1.5 0v-1.5A.75.75 0 018 13zM2.343 2.343a.75.75 0 011.061 0l1.06 1.061a.75.75 0 01-1.06 1.06l-1.06-1.06a.75.75 0 010-1.06zm9.193 9.193a.75.75 0 011.06 0l1.061 1.06a.75.75 0 01-1.06 1.061l-1.061-1.06a.75.75 0 010-1.061zM16 8a.75.75 0 01-.75.75h-1.5a.75.75 0 010-1.5h1.5A.75.75 0 0116 8zM3 8a.75.75 0 01-.75.75H.75a.75.75 0 010-1.5h1.5A.75.75 0 013 8zm10.657-5.657a.75.75 0 010 1.061l-1.061 1.06a.75.75 0 11-1.06-1.06l1.06-1.06a.75.75 0 011.06 0zm-9.193 9.193a.75.75 0 010 1.06l-1.06 1.061a.75.75 0 11-1.061-1.06l1.06-1.061a.75.75 0 011.061 0z', 'moon': 'M9.598 1.591a.75.75 0 01.785-.175 7 7 0 11-8.967 8.967.75.75 0 01.961-.96 5.5 5.5 0 007.046-7.046.75.75 0 01.175-.786zm1.616 1.945a7 7 0 01-7.678 7.678 5.5 5.5 0 107.678-7.678z', 'sync': 'M1.705 8.005a.75.75 0 0 1 .834.656 5.5 5.5 0 0 0 9.592 2.97l-1.204-1.204a.25.25 0 0 1 .177-.427h3.646a.25.25 0 0 1 .25.25v3.646a.25.25 0 0 1-.427.177l-1.38-1.38A7.002 7.002 0 0 1 1.05 8.84a.75.75 0 0 1 .656-.834ZM8 2.5a5.487 5.487 0 0 0-4.131 1.869l1.204 1.204A.25.25 0 0 1 4.896 6H1.25A.25.25 0 0 1 1 5.75V2.104a.25.25 0 0 1 .427-.177l1.38 1.38A7.002 7.002 0 0 1 14.95 7.16a.75.75 0 0 1-1.49.178A5.5 5.5 0 0 0 8 2.5Z', 'home': 'M6.906.664a1.749 1.749 0 0 1 2.187 0l5.25 4.2c.415.332.657.835.657 1.367v7.019A1.75 1.75 0 0 1 13.25 15h-3.5a.75.75 0 0 1-.75-.75V9H7v5.25a.75.75 0 0 1-.75.75h-3.5A1.75 1.75 0 0 1 1 13.25V6.23c0-.531.242-1.034.657-1.366l5.25-4.2Zm1.25 1.171a.25.25 0 0 0-.312 0l-5.25 4.2a.25.25 0 0 0-.094.196v7.019c0 .138.112.25.25.25H5.5V8.25a.75.75 0 0 1 .75-.75h3.5a.75.75 0 0 1 .75.75v5.25h2.75a.25.25 0 0 0 .25-.25V6.23a.25.25 0 0 0-.094-.195Z', 'github': 'M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z'};
+var utterancesLoad=0;
+
+let themeSettings={
+    "dark": ["dark","moon","#00f0ff","dark-blue"],
+    "light": ["light","sun","#ff5000","github-light"],
+    "auto": ["auto","sync","","preferred-color-scheme"]
+};
+function changeTheme(mode, icon, color, utheme){
+    document.documentElement.setAttribute("data-color-mode",mode);
+    document.getElementById("themeSwitch").setAttribute("d",value=IconList[icon]);
+    document.getElementById("themeSwitch").parentNode.style.color=color;
+    if(utterancesLoad==1){utterancesTheme(utheme);}
+}
+function modeSwitch(){
+    let currentMode=document.documentElement.getAttribute('data-color-mode');
+    let newMode = currentMode === "light" ? "dark" : currentMode === "dark" ? "auto" : "light";
+    localStorage.setItem("meek_theme", newMode);
+    if(themeSettings[newMode]){
+        changeTheme(...themeSettings[newMode]);
+    }
+}
+function utterancesTheme(theme){
+    const message={type:'set-theme',theme: theme};
+    const iframe=document.getElementsByClassName('utterances-frame')[0];
+    iframe.contentWindow.postMessage(message,'https://utteranc.es');
+}
+if(themeSettings[theme]){changeTheme(...themeSettings[theme]);}
+console.log("\n %c Gmeek last https://github.com/Meekdai/Gmeek \n","padding:5px 0;background:#02d81d;color:#fff");
+</script>
+
+<script>
+document.getElementById("pathHome").setAttribute("d",IconList["home"]);
+document.getElementById("pathIssue").setAttribute("d",IconList["github"]);
+
+
+
+function openComments(){
+    cm=document.getElementById("comments");
+    cmButton=document.getElementById("cmButton");
+    cmButton.innerHTML="loading";
+    span=document.createElement("span");
+    span.setAttribute("class","AnimatedEllipsis");
+    cmButton.appendChild(span);
+
+    script=document.createElement("script");
+    script.setAttribute("src","https://utteranc.es/client.js");
+    script.setAttribute("repo","wanwuzhishi/wanwuzhishi.github.io");
+    script.setAttribute("issue-term","title");
+    
+    if(localStorage.getItem("meek_theme")=="dark"){script.setAttribute("theme","dark-blue");}
+    else if(localStorage.getItem("meek_theme")=="light") {script.setAttribute("theme","github-light");}
+    else{script.setAttribute("theme","preferred-color-scheme");}
+    
+    script.setAttribute("crossorigin","anonymous");
+    script.setAttribute("async","");
+    cm.appendChild(script);
+
+    int=self.setInterval("iFrameLoading()",200);
+}
+
+function iFrameLoading(){
+    var utterances=document.getElementsByClassName('utterances');
+    if(utterances.length==1){
+        if(utterances[0].style.height!=""){
+            utterancesLoad=1;
+            int=window.clearInterval(int);
+            document.getElementById("cmButton").style.display="none";
+            console.log("utterances Load OK");
+        }
+    }
+}
+
+
+
+</script>
+<script src='https://blog.meekdai.com/Gmeek/plugins/GmeekTOC.js'></script><script src='https://blog.meekdai.com/Gmeek/plugins/articletoc.js'></script><script src='https://blog.meekdai.com/Gmeek/plugins/lightbox.js'></script>
+
+</html>
