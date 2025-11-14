@@ -11,15 +11,15 @@ Gmeek 旨在为个人博客提供一个简洁、高效的解决方案。借助 G
 
 ## 特点
 
-- **与 GitHub 同源的 UI 界面**：采用 GitHub 原生 CSS（[[primer.style](https://primer.style/css)](https://primer.style/css)），界面风格与 GitHub 无缝衔接。
+- **与 GitHub 同源的 UI 界面**：采用 GitHub 原生 CSS[primer.style](https://primer.style/css)，界面风格与 GitHub 无缝衔接。
 - **自动化部署**：在 Issues 中完成博客写作后，自动触发 GitHub Actions 执行部署任务。
-- **评论系统**：集成 [[utteranc.es](https://utteranc.es/)](https://utteranc.es/) 作为评论系统，轻量且易于使用。
+- **评论系统**：集成 [utteranc.es](https://utteranc.es/)作为评论系统，轻量且易于使用。
 - **可自定义主题**：使用 Jinja2 对 HTML 进行渲染，支持通过模板自定义 UI 主题。
 - **无需本地部署**：所有操作均在 GitHub 上完成，简化部署流程。
 
 # 示例
 
-- 官方 [[Demo页面](http://meekdai.github.io/)](http://meekdai.github.io/)
+- 官方 [Demo页面](http://meekdai.github.io/)
 - 我建立的https://wanwuzhishi.github.io/
 
 ## 快速上手
@@ -96,5 +96,6 @@ Gmeek 旨在为个人博客提供一个简洁、高效的解决方案。借助 G
     - 提交后，项目维护者会协助查看构建流程，帮助定位和解决问题。
 
 ## 总结
+
 
 Gmeek 为个人博客的创建和管理提供了一个简洁、快捷且高效的解决方案。通过利用 GitHub 的强大功能，用户无需担心复杂的部署流程，只需专注于内容创作即可。如果你正在寻找一个轻量级且易于维护的博客框架，Gmeek 无疑是一个值得尝试的选择。
