@@ -156,6 +156,7 @@
     var key = String(name).toLowerCase();
     return LANG_LABELS[key] || key.toUpperCase();
   }
+  // 从 highlight 容器的高亮类名里取出语言标识（形如 highlight-js language-js）
   function codeLangOf(el) {
     var parts = String(el.className || '').split(/\s+/);
     for (var i = 0; i < parts.length; i++) {
@@ -166,6 +167,26 @@
     return '';
   }
 
+  // 给代码容器挂一个「复制」按钮：按钮文案与状态在 1.6 秒后复原
+  function attachCopy(container, codeEl) {
+    if (container.querySelector('.code-copy')) return;
+    var btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'code-copy';
+    btn.textContent = '复制';
+    btn.addEventListener('click', function () {
+      copyText((codeEl || container).innerText).then(function () {
+        btn.textContent = '已复制';
+        btn.classList.add('is-done');
+        setTimeout(function () {
+          btn.textContent = '复制';
+          btn.classList.remove('is-done');
+        }, 1600);
+      });
+    });
+    container.appendChild(btn);
+  }
+
   $$('figure.highlight').forEach(function (fig) {
     var lang = codeLangOf(fig);
     if (lang) {
@@ -174,45 +195,13 @@
       tag.textContent = langLabel(lang);
       fig.appendChild(tag);
     }
-    if (fig.querySelector('.code-copy')) return;
-    var btn = document.createElement('button');
-    btn.type = 'button';
-    btn.className = 'code-copy';
-    btn.textContent = '复制';
-    btn.addEventListener('click', function () {
-      var code = fig.querySelector('.code pre code') || fig.querySelector('code');
-      copyText((code || fig).innerText).then(function () {
-        btn.textContent = '已复制';
-        btn.classList.add('is-done');
-        setTimeout(function () {
-          btn.textContent = '复制';
-          btn.classList.remove('is-done');
-        }, 1600);
-      });
-    });
-    fig.appendChild(btn);
+    attachCopy(fig, fig.querySelector('.code pre code') || fig.querySelector('code'));
   });
 
-  // 兜底：非 highlight 结构的代码块
+  // 兜底：没走 highlight 渲染的代码块（如文章里手写的 <pre>）
   $$('.post-content pre').forEach(function (pre) {
     if (pre.closest('figure.highlight')) return;
-    if (pre.querySelector('.code-copy')) return;
-    var btn = document.createElement('button');
-    btn.type = 'button';
-    btn.className = 'code-copy';
-    btn.textContent = '复制';
-    btn.addEventListener('click', function () {
-      var code = pre.querySelector('code');
-      copyText((code || pre).innerText).then(function () {
-        btn.textContent = '已复制';
-        btn.classList.add('is-done');
-        setTimeout(function () {
-          btn.textContent = '复制';
-          btn.classList.remove('is-done');
-        }, 1600);
-      });
-    });
-    pre.appendChild(btn);
+    attachCopy(pre, pre.querySelector('code'));
   });
 
   /* ---------- 音乐播放器 ---------- */

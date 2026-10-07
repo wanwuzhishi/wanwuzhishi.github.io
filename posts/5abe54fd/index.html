@@ -307,25 +307,25 @@
     
       <a class="tag-chip" href="/tags/%E6%BC%94%E7%A4%BA/">演示</a>
     
+      <a class="tag-chip" href="/tags/%E5%B7%A5%E5%85%B7/">工具</a>
+    
       <a class="tag-chip" href="/tags/SEO/">SEO</a>
     
       <a class="tag-chip" href="/tags/%E6%8A%98%E8%85%BE%E8%AE%B0%E5%BD%95/">折腾记录</a>
-    
-      <a class="tag-chip" href="/tags/%E5%B7%A5%E5%85%B7/">工具</a>
     
       <a class="tag-chip" href="/tags/%E5%8D%95%E6%9C%BA%E6%B8%B8%E6%88%8F/">单机游戏</a>
     
       <a class="tag-chip" href="/tags/%E6%95%B4%E5%90%88%E7%89%88/">整合版</a>
     
-      <a class="tag-chip" href="/tags/%E5%89%8D%E7%AB%AF/">前端</a>
+      <a class="tag-chip" href="/tags/%E6%B1%89%E5%8C%96/">汉化</a>
     
-      <a class="tag-chip" href="/tags/%E4%B8%BB%E9%A2%98/">主题</a>
+      <a class="tag-chip" href="/tags/%E8%A1%A5%E4%B8%81/">补丁</a>
+    
+      <a class="tag-chip" href="/tags/MOD/">MOD</a>
+    
+      <a class="tag-chip" href="/tags/%E7%8E%A9%E6%B3%95%E6%89%A9%E5%B1%95/">玩法扩展</a>
     
       <a class="tag-chip" href="/tags/%E7%94%B5%E5%BD%B1/">电影</a>
-    
-      <a class="tag-chip" href="/tags/4K/">4K</a>
-    
-      <a class="tag-chip" href="/tags/%E6%B1%89%E5%8C%96/">汉化</a>
     
   </div>
 </section>
@@ -338,7 +338,7 @@
     <article class="post-single ">
       <header class="post-header">
         <div class="post-chips">
-          <span class="chip"><svg class="icon" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m3 17 6-6 4 4 8-8"/><path d="M21 7v6h-6"/></svg> 781 字</span>
+          <span class="chip"><svg class="icon" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m3 17 6-6 4 4 8-8"/><path d="M21 7v6h-6"/></svg> 915 字</span>
           <span class="chip"><svg class="icon" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> 3 分钟</span>
           
         </div>
@@ -496,13 +496,20 @@
 <p>要加新网盘，直接补一行；名称要和 <code>links[].name</code> <strong>完全一致</strong>（包括空格）。<br>没匹配到的网盘会使用主题主色。</p>
 <h2 id="资源卡片显示哪些字段"><a href="#资源卡片显示哪些字段" class="headerlink" title="资源卡片显示哪些字段"></a>资源卡片显示哪些字段</h2><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">resource:</span></span><br><span class="line">  <span class="attr">show_fields:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">version</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">platform</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">size</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">language</span></span><br></pre></td></tr></table></figure>
 
-<p>卡片上最多显示 3 个字段（避免卡片高度参差）。详情页的表格不受这个限制，<br>配置里出现的字段都会展示。</p>
+<ul>
+<li>可用字段只有这四个，顺序即卡片上的展示顺序。</li>
+<li>字段的中文名（版本 &#x2F; 平台 &#x2F; 大小 &#x2F; 语言）由主题内置映射，<br>想改名要改 <code>scripts/helper.js</code> 里的 <code>RESOURCE_FIELD_LABELS</code>。</li>
+<li>卡片上<strong>最多显示 3 个</strong>（写死的，避免卡片高度参差），多余的折叠掉；<br>详情页不受此限制，配置的字段 + 「更新日期」都会展示。</li>
+<li>字段值留空时自动跳过，四个都没写则显示一个「资源 &#x2F; 查看详情」的占位。</li>
+</ul>
+<blockquote>
+<p>字段映射与过滤逻辑统一在 <code>helper.js</code> 的 <code>echo_resource_fields</code> helper 里，<br>三处模板（资源卡片、详情页摘要、普通卡片）共用同一份实现。</p>
+</blockquote>
 <h2 id="版权提示与密码显示"><a href="#版权提示与密码显示" class="headerlink" title="版权提示与密码显示"></a>版权提示与密码显示</h2><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">resource:</span></span><br><span class="line">  <span class="attr">show_password:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">notice:</span> <span class="string">&#x27;资源仅供学习交流，请在下载后 24 小时内删除。&#x27;</span></span><br></pre></td></tr></table></figure>
 
 <ul>
-<li><code>show_password: false</code> 可以全局隐藏提取码（如果你用其它方式发放）。</li>
-<li><code>notice</code> 显示在下载区块下方，留空则不显示。</li>
-<li><code>cover_ratio</code> 控制封面比例，默认 16:9。</li>
+<li><code>show_password: false</code> 可以全局隐藏提取码（如果你用其它方式发放），<br>隐藏时显示为 <code>••••</code>，但复制按钮仍然可用。</li>
+<li><code>notice</code> 显示在下载区块上方，留空则不显示。</li>
 </ul>
 <h2 id="资源详情页的结构"><a href="#资源详情页的结构" class="headerlink" title="资源详情页的结构"></a>资源详情页的结构</h2><p>一篇资源帖从上到下依次是：</p>
 <ol>
@@ -725,7 +732,7 @@
       <li>
         <span class="stat-label"><svg class="icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m3 17 6-6 4 4 8-8"/><path d="M21 7v6h-6"/></svg> 总字数</span>
         <span class="stat-value is-accent">
-          18,331
+          19,162
         </span>
       </li>
     
