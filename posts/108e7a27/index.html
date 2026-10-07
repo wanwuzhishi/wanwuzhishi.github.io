@@ -53,8 +53,18 @@
     --main-wide: 1240px;
     /* 头部 / 页脚 / 横幅与三栏对齐 */
     --max-width: 1440px;
-    --accent: #5b8cff;
     --radius: 14px;
+    --accent: #5b8cff;
+    --accent-rgb: 91, 140, 255;
+    --secondary: #89acff;
+    --secondary-rgb: 136.92000000000002, 172.2, 255;
+    --accent-soft: rgba(91, 140, 255, 0.12);
+    --accent-soft-strong: rgba(91, 140, 255, 0.16);
+    --accent-strong: #476dc7;
+    --accent-text: #4062b3;
+    --accent-glow: rgba(91, 140, 255, 0.3);
+    --accent-glow-strong: rgba(91, 140, 255, 0.38);
+    --brand-gradient: linear-gradient(135deg, #5b8cff, #89acff);
   }
   /* 宽屏自适应（≥1680px）：
      1. 布局上限随视口放宽（94vw，封顶 2040px），先吃掉最外侧的空白；
@@ -71,7 +81,9 @@
     }
   }
 </style>
-<link rel="icon" href="/images/favicon.svg" type="image/svg+xml">
+
+<link rel="icon" href="/favicon.png" type="image/png">
+<link rel="apple-touch-icon" href="/favicon.png">
 
 <script>
   (function () {
@@ -105,10 +117,9 @@
   <div class="header-inner">
     <a class="brand" href="/" aria-label="万物之时 首页">
       <span class="brand-mark" aria-hidden="true">
-        <svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor"
-             stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M6 4h12M6 12h9M6 20h12M6 4v16"/>
-        </svg>
+        
+        <img src="/favicon.png" alt="" width="34" height="34">
+        
       </span>
       <span class="brand-text">
         <strong>万物之时</strong>
@@ -173,7 +184,7 @@
     
 <section class="rail-card profile-card">
   <div class="profile-avatar-wrap">
-    <img class="profile-avatar" src="/images/avatar.svg"
+    <img class="profile-avatar" src="/images/avatar.jpg"
          alt="Echo" loading="lazy"
          onerror="this.onerror=null;this.src='/images/avatar.svg'">
   </div>
@@ -306,8 +317,8 @@
     <article class="post-single ">
       <header class="post-header">
         <div class="post-chips">
-          <span class="chip"><svg class="icon" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m3 17 6-6 4 4 8-8"/><path d="M21 7v6h-6"/></svg> 670 字</span>
-          <span class="chip"><svg class="icon" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> 2 分钟</span>
+          <span class="chip"><svg class="icon" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m3 17 6-6 4 4 8-8"/><path d="M21 7v6h-6"/></svg> 935 字</span>
+          <span class="chip"><svg class="icon" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> 3 分钟</span>
           
         </div>
 
@@ -352,7 +363,7 @@
     <span class="toc-inline-hint">点击展开 / 收起</span>
   </summary>
   <nav class="toc-body toc-inline-body" aria-label="文章目录">
-    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%8B%E8%BD%BD%E5%AE%89%E8%A3%85"><span class="toc-text">下载安装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%87%E6%A1%A3%E7%9B%AE%E5%BD%95"><span class="toc-text">文档目录</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E5%88%86%E9%92%9F%E4%B8%8A%E6%89%8B"><span class="toc-text">三分钟上手</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A0%B8%E5%BF%83%E7%89%B9%E7%82%B9"><span class="toc-text">核心特点</span></a></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%8B%E8%BD%BD%E5%AE%89%E8%A3%85"><span class="toc-text">下载安装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%87%E6%A1%A3%E7%9B%AE%E5%BD%95"><span class="toc-text">文档目录</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E5%88%86%E9%92%9F%E4%B8%8A%E6%89%8B"><span class="toc-text">三分钟上手</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A0%B8%E5%BF%83%E7%89%B9%E7%82%B9"><span class="toc-text">核心特点</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%86%99%E4%BD%9C%E5%A2%9E%E5%BC%BA"><span class="toc-text">写作增强</span></a></li></ol>
   </nav>
 </details>
 
@@ -420,6 +431,14 @@
 <li><strong>部署不假成功</strong>：自动识别 git 推送失败并明确报错，部署前自动生成最新内容</li>
 <li><strong>玻璃拟态界面</strong>：深空霓虹（暗）&#x2F; 冰白清新（亮）双主题，支持跟随系统</li>
 </ul>
+<h2 id="写作增强"><a href="#写作增强" class="headerlink" title="写作增强"></a>写作增强</h2><p>除了常规的 Markdown 编辑，有几个专为中文博客设计的能力：</p>
+<ul>
+<li><strong>自定义参数（三种类型）</strong>：键值式（文本）、开关式（勾选框，写 YAML 布尔）、<strong>结构化</strong>（YAML 编辑框，支持嵌套对象与对象数组）。写游戏资源卡、多网盘链接这类复杂 front-matter 时，可以<strong>一键套用内置模板</strong>，改值即可 —— 详见<a href="/posts/9022c20b/">写作功能</a></li>
+<li><strong>自定义插入片段</strong>：把常写的版权声明、更新时间做成工具栏按钮，点一下插入光标处，支持 <code>&#123;&#123;date&#125;&#125;</code> 自动替换为当天日期</li>
+<li><strong>自定义文集</strong>：把站点里任意文件夹变成独立的文章管理入口（如把 <code>source/_dynamics</code> 做成「说说」）—— 详见<a href="/posts/59d25f9e/">页面与文集</a></li>
+<li><strong>站点图标</strong>：站点页点头像或拖入图片即可设置，写入站点 <code>source/favicon.*</code>，你的网站也会用上</li>
+<li><strong>路径可点击</strong>：文章 &#x2F; 页面 &#x2F; 文集的文件路径与目录都能点，直接在资源管理器打开并选中</li>
+</ul>
 
       </div>
 
@@ -456,17 +475,17 @@
 </section>
 
       
-<nav class="post-nav" aria-label="上下篇">
+<nav class="post-nav " aria-label="上下篇">
   
-    <a class="post-nav-item post-nav-prev" href="/posts/61fdb372/">
+    <a class="post-nav-item post-nav-prev" href="/posts/7f78826f/">
       <span class="post-nav-label"><svg class="icon" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 6 6 6-6 6"/></svg> 上一篇</span>
-      <strong>HexoDeck 快速开始</strong>
+      <strong>Echo 主题使用指南（六）：侧栏组件、页脚与常见问题</strong>
     </a>
   
   
-    <a class="post-nav-item post-nav-next" href="/posts/71a1b152/">
+    <a class="post-nav-item post-nav-next" href="/posts/61fdb372/">
       <span class="post-nav-label">下一篇 <svg class="icon" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 6 6 6-6 6"/></svg></span>
-      <strong>演示：MOD 汉化补丁 v3.1.4 完整汉化</strong>
+      <strong>HexoDeck 快速开始</strong>
     </a>
   
 </nav>
@@ -557,7 +576,7 @@
       <li>
         <span class="stat-label"><svg class="icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m3 17 6-6 4 4 8-8"/><path d="M21 7v6h-6"/></svg> 总字数</span>
         <span class="stat-value is-accent">
-          14,975
+          16,722
         </span>
       </li>
     
@@ -587,7 +606,7 @@
     <h3 class="rail-title"><svg class="icon" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></svg> 目录</h3>
   </div>
   <nav class="toc-body" aria-label="文章目录">
-    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%8B%E8%BD%BD%E5%AE%89%E8%A3%85"><span class="toc-text">下载安装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%87%E6%A1%A3%E7%9B%AE%E5%BD%95"><span class="toc-text">文档目录</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E5%88%86%E9%92%9F%E4%B8%8A%E6%89%8B"><span class="toc-text">三分钟上手</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A0%B8%E5%BF%83%E7%89%B9%E7%82%B9"><span class="toc-text">核心特点</span></a></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%8B%E8%BD%BD%E5%AE%89%E8%A3%85"><span class="toc-text">下载安装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%87%E6%A1%A3%E7%9B%AE%E5%BD%95"><span class="toc-text">文档目录</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E5%88%86%E9%92%9F%E4%B8%8A%E6%89%8B"><span class="toc-text">三分钟上手</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A0%B8%E5%BF%83%E7%89%B9%E7%82%B9"><span class="toc-text">核心特点</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%86%99%E4%BD%9C%E5%A2%9E%E5%BC%BA"><span class="toc-text">写作增强</span></a></li></ol>
   </nav>
 </section>
 

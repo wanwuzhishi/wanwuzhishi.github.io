@@ -48,8 +48,18 @@
     --main-wide: 1240px;
     /* 头部 / 页脚 / 横幅与三栏对齐 */
     --max-width: 1440px;
-    --accent: #5b8cff;
     --radius: 14px;
+    --accent: #5b8cff;
+    --accent-rgb: 91, 140, 255;
+    --secondary: #89acff;
+    --secondary-rgb: 136.92000000000002, 172.2, 255;
+    --accent-soft: rgba(91, 140, 255, 0.12);
+    --accent-soft-strong: rgba(91, 140, 255, 0.16);
+    --accent-strong: #476dc7;
+    --accent-text: #4062b3;
+    --accent-glow: rgba(91, 140, 255, 0.3);
+    --accent-glow-strong: rgba(91, 140, 255, 0.38);
+    --brand-gradient: linear-gradient(135deg, #5b8cff, #89acff);
   }
   /* 宽屏自适应（≥1680px）：
      1. 布局上限随视口放宽（94vw，封顶 2040px），先吃掉最外侧的空白；
@@ -66,7 +76,9 @@
     }
   }
 </style>
-<link rel="icon" href="/images/favicon.svg" type="image/svg+xml">
+
+<link rel="icon" href="/favicon.png" type="image/png">
+<link rel="apple-touch-icon" href="/favicon.png">
 
 <script>
   (function () {
@@ -100,10 +112,9 @@
   <div class="header-inner">
     <a class="brand" href="/" aria-label="万物之时 首页">
       <span class="brand-mark" aria-hidden="true">
-        <svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor"
-             stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M6 4h12M6 12h9M6 20h12M6 4v16"/>
-        </svg>
+        
+        <img src="/favicon.png" alt="" width="34" height="34">
+        
       </span>
       <span class="brand-text">
         <strong>万物之时</strong>
@@ -178,7 +189,7 @@
     
 <section class="rail-card profile-card">
   <div class="profile-avatar-wrap">
-    <img class="profile-avatar" src="/images/avatar.svg"
+    <img class="profile-avatar" src="/images/avatar.jpg"
          alt="Echo" loading="lazy"
          onerror="this.onerror=null;this.src='/images/avatar.svg'">
   </div>
@@ -443,7 +454,7 @@
       <li>
         <span class="stat-label"><svg class="icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m3 17 6-6 4 4 8-8"/><path d="M21 7v6h-6"/></svg> 总字数</span>
         <span class="stat-value is-accent">
-          14,975
+          16,722
         </span>
       </li>
     

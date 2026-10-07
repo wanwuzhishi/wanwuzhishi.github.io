@@ -48,8 +48,18 @@
     --main-wide: 1240px;
     /* 头部 / 页脚 / 横幅与三栏对齐 */
     --max-width: 1440px;
-    --accent: #5b8cff;
     --radius: 14px;
+    --accent: #5b8cff;
+    --accent-rgb: 91, 140, 255;
+    --secondary: #89acff;
+    --secondary-rgb: 136.92000000000002, 172.2, 255;
+    --accent-soft: rgba(91, 140, 255, 0.12);
+    --accent-soft-strong: rgba(91, 140, 255, 0.16);
+    --accent-strong: #476dc7;
+    --accent-text: #4062b3;
+    --accent-glow: rgba(91, 140, 255, 0.3);
+    --accent-glow-strong: rgba(91, 140, 255, 0.38);
+    --brand-gradient: linear-gradient(135deg, #5b8cff, #89acff);
   }
   /* 宽屏自适应（≥1680px）：
      1. 布局上限随视口放宽（94vw，封顶 2040px），先吃掉最外侧的空白；
@@ -66,7 +76,9 @@
     }
   }
 </style>
-<link rel="icon" href="/images/favicon.svg" type="image/svg+xml">
+
+<link rel="icon" href="/favicon.png" type="image/png">
+<link rel="apple-touch-icon" href="/favicon.png">
 
 <script>
   (function () {
@@ -100,10 +112,9 @@
   <div class="header-inner">
     <a class="brand" href="/" aria-label="万物之时 首页">
       <span class="brand-mark" aria-hidden="true">
-        <svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor"
-             stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M6 4h12M6 12h9M6 20h12M6 4v16"/>
-        </svg>
+        
+        <img src="/favicon.png" alt="" width="34" height="34">
+        
       </span>
       <span class="brand-text">
         <strong>万物之时</strong>
@@ -178,7 +189,7 @@
     
 <section class="rail-card profile-card">
   <div class="profile-avatar-wrap">
-    <img class="profile-avatar" src="/images/avatar.svg"
+    <img class="profile-avatar" src="/images/avatar.jpg"
          alt="Echo" loading="lazy"
          onerror="this.onerror=null;this.src='/images/avatar.svg'">
   </div>
@@ -369,9 +380,9 @@
       
         
 <article class="post-card  ">
-  <a class="card-cover" href="/posts/269b4e19/" aria-hidden="true" tabindex="-1">
+  <a class="card-cover" href="/posts/108e7a27/" aria-hidden="true" tabindex="-1">
     
-      <span class="cover-fallback" data-title="HexoDeck 常见问题">
+      <span class="cover-fallback" data-title="HexoDeck 使用指南">
         <svg class="icon" viewBox="0 0 24 24" width="34" height="34" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 3 9 5-9 5-9-5z"/><path d="m3 13 9 5 9-5"/></svg>
       </span>
     
@@ -380,7 +391,7 @@
 
   <div class="card-body">
     <div class="card-meta">
-      <time datetime="2026-10-05T19:06:00.000Z">2026-10-06</time>
+      <time datetime="2026-10-05T19:00:00.000Z">2026-10-06</time>
       
         <span class="meta-sep">·</span>
         
@@ -390,215 +401,11 @@
     </div>
 
     <h2 class="card-title">
-      <a href="/posts/269b4e19/">HexoDeck 常见问题</a>
+      <a href="/posts/108e7a27/">HexoDeck 使用指南</a>
     </h2>
 
     <p class="card-excerpt">
-      汇总使用中的常见疑问与已知限制。 返回 使用指南总览 安装与启动 Q：需要先安装 Node.js 吗？ 日常使用 不需要 。应用内嵌了 Hexo 引擎，写作、预览、生成、部署都能跑。 只有两个场景需要本机 Node.js…
-    </p>
-
-    
-
-    <div class="card-footer">
-      
-        <span class="card-tags">
-          
-            <a class="card-tag" href="/tags/Hexo/">#Hexo</a>
-          
-            <a class="card-tag" href="/tags/HexoDeck/">#HexoDeck</a>
-          
-            <a class="card-tag" href="/tags/%E6%96%87%E6%A1%A3/">#文档</a>
-          
-        </span>
-      
-      <span class="card-stats">
-        <span><svg class="icon" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>4 min</span>
-      </span>
-    </div>
-  </div>
-</article>
-      
-        
-<article class="post-card  ">
-  <a class="card-cover" href="/posts/72b2b36f/" aria-hidden="true" tabindex="-1">
-    
-      <span class="cover-fallback" data-title="HexoDeck 发布与部署">
-        <svg class="icon" viewBox="0 0 24 24" width="34" height="34" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 3 9 5-9 5-9-5z"/><path d="m3 13 9 5 9-5"/></svg>
-      </span>
-    
-    
-  </a>
-
-  <div class="card-body">
-    <div class="card-meta">
-      <time datetime="2026-10-05T19:05:00.000Z">2026-10-06</time>
-      
-        <span class="meta-sep">·</span>
-        
-          <a href="/categories/HexoDeck/">HexoDeck</a>
-        
-      
-    </div>
-
-    <h2 class="card-title">
-      <a href="/posts/72b2b36f/">HexoDeck 发布与部署</a>
-    </h2>
-
-    <p class="card-excerpt">
-      本篇介绍本地预览、构建与部署上线。 返回 使用指南总览 本地预览 「 预览 」页提供整屏的本地预览： 用 iframe 显示主题渲染后的真实博客页面 （不是简化的 Markdown 预览） 站点文件一有变化，预览 自动刷…
-    </p>
-
-    
-
-    <div class="card-footer">
-      
-        <span class="card-tags">
-          
-            <a class="card-tag" href="/tags/Hexo/">#Hexo</a>
-          
-            <a class="card-tag" href="/tags/HexoDeck/">#HexoDeck</a>
-          
-            <a class="card-tag" href="/tags/%E6%96%87%E6%A1%A3/">#文档</a>
-          
-        </span>
-      
-      <span class="card-stats">
-        <span><svg class="icon" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>4 min</span>
-      </span>
-    </div>
-  </div>
-</article>
-      
-        
-<article class="post-card  ">
-  <a class="card-cover" href="/posts/32270f59/" aria-hidden="true" tabindex="-1">
-    
-      <span class="cover-fallback" data-title="HexoDeck 主题与站点配置">
-        <svg class="icon" viewBox="0 0 24 24" width="34" height="34" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 3 9 5-9 5-9-5z"/><path d="m3 13 9 5 9-5"/></svg>
-      </span>
-    
-    
-  </a>
-
-  <div class="card-body">
-    <div class="card-meta">
-      <time datetime="2026-10-05T19:04:00.000Z">2026-10-06</time>
-      
-        <span class="meta-sep">·</span>
-        
-          <a href="/categories/HexoDeck/">HexoDeck</a>
-        
-      
-    </div>
-
-    <h2 class="card-title">
-      <a href="/posts/32270f59/">HexoDeck 主题与站点配置</a>
-    </h2>
-
-    <p class="card-excerpt">
-      本篇介绍站点配置、主题管理与插件。 返回 使用指南总览 基础配置 「 设置 → 基础配置 」以表单形式管理 _config.yml 的常用项： 站点标题、副标题、描述、作者、语言、时区、网站 URL、根路径、永久链接格式…
-    </p>
-
-    
-
-    <div class="card-footer">
-      
-        <span class="card-tags">
-          
-            <a class="card-tag" href="/tags/Hexo/">#Hexo</a>
-          
-            <a class="card-tag" href="/tags/HexoDeck/">#HexoDeck</a>
-          
-            <a class="card-tag" href="/tags/%E6%96%87%E6%A1%A3/">#文档</a>
-          
-        </span>
-      
-      <span class="card-stats">
-        <span><svg class="icon" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>4 min</span>
-      </span>
-    </div>
-  </div>
-</article>
-      
-        
-<article class="post-card  ">
-  <a class="card-cover" href="/posts/59d25f9e/" aria-hidden="true" tabindex="-1">
-    
-      <span class="cover-fallback" data-title="HexoDeck 页面与文集">
-        <svg class="icon" viewBox="0 0 24 24" width="34" height="34" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 3 9 5-9 5-9-5z"/><path d="m3 13 9 5 9-5"/></svg>
-      </span>
-    
-    
-  </a>
-
-  <div class="card-body">
-    <div class="card-meta">
-      <time datetime="2026-10-05T19:03:00.000Z">2026-10-06</time>
-      
-        <span class="meta-sep">·</span>
-        
-          <a href="/categories/HexoDeck/">HexoDeck</a>
-        
-      
-    </div>
-
-    <h2 class="card-title">
-      <a href="/posts/59d25f9e/">HexoDeck 页面与文集</a>
-    </h2>
-
-    <p class="card-excerpt">
-      本篇介绍两类内容管理：Hexo 的 独立页面 ，以及 HexoDeck 特有的 自定义文集 。 返回 使用指南总览 页面 「 页面 」页管理 Hexo 的独立页面 —— 比如「关于」「友链」「留言板」这类不属于文章列表的…
-    </p>
-
-    
-
-    <div class="card-footer">
-      
-        <span class="card-tags">
-          
-            <a class="card-tag" href="/tags/Hexo/">#Hexo</a>
-          
-            <a class="card-tag" href="/tags/HexoDeck/">#HexoDeck</a>
-          
-            <a class="card-tag" href="/tags/%E6%96%87%E6%A1%A3/">#文档</a>
-          
-        </span>
-      
-      <span class="card-stats">
-        <span><svg class="icon" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>4 min</span>
-      </span>
-    </div>
-  </div>
-</article>
-      
-        
-<article class="post-card  ">
-  <a class="card-cover" href="/posts/9022c20b/" aria-hidden="true" tabindex="-1">
-    
-      <span class="cover-fallback" data-title="HexoDeck 写作功能">
-        <svg class="icon" viewBox="0 0 24 24" width="34" height="34" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 3 9 5-9 5-9-5z"/><path d="m3 13 9 5 9-5"/></svg>
-      </span>
-    
-    
-  </a>
-
-  <div class="card-body">
-    <div class="card-meta">
-      <time datetime="2026-10-05T19:02:00.000Z">2026-10-06</time>
-      
-        <span class="meta-sep">·</span>
-        
-          <a href="/categories/HexoDeck/">HexoDeck</a>
-        
-      
-    </div>
-
-    <h2 class="card-title">
-      <a href="/posts/9022c20b/">HexoDeck 写作功能</a>
-    </h2>
-
-    <p class="card-excerpt">
-      本篇介绍文章与草稿的管理，以及编辑器的全部能力。 返回 使用指南总览 文章与草稿 「 文章 」页管理两类内容： 类型 存放位置 说明 正式文章 source/_posts/ 会被生成到博客里 草稿 source/_dra…
+      HexoDeck 是一个 Hexo 博客的桌面管理工具，把写作、预览、发布、配置整个流程搬进图形界面 —— 不用碰命令行。 它不会要求你改变现有的站点结构：直接使用你已有的 Hexo 目录，站点里的配置、主题、插件、文章…
     </p>
 
     
@@ -675,9 +482,9 @@
       
         
 <article class="post-card  ">
-  <a class="card-cover" href="/posts/108e7a27/" aria-hidden="true" tabindex="-1">
+  <a class="card-cover" href="/posts/9022c20b/" aria-hidden="true" tabindex="-1">
     
-      <span class="cover-fallback" data-title="HexoDeck 使用指南">
+      <span class="cover-fallback" data-title="HexoDeck 写作功能">
         <svg class="icon" viewBox="0 0 24 24" width="34" height="34" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 3 9 5-9 5-9-5z"/><path d="m3 13 9 5 9-5"/></svg>
       </span>
     
@@ -686,7 +493,7 @@
 
   <div class="card-body">
     <div class="card-meta">
-      <time datetime="2026-10-05T19:00:00.000Z">2026-10-06</time>
+      <time datetime="2026-10-05T19:02:00.000Z">2026-10-06</time>
       
         <span class="meta-sep">·</span>
         
@@ -696,11 +503,11 @@
     </div>
 
     <h2 class="card-title">
-      <a href="/posts/108e7a27/">HexoDeck 使用指南</a>
+      <a href="/posts/9022c20b/">HexoDeck 写作功能</a>
     </h2>
 
     <p class="card-excerpt">
-      HexoDeck 是一个 Hexo 博客的桌面管理工具，把写作、预览、发布、配置整个流程搬进图形界面 —— 不用碰命令行。 它不会要求你改变现有的站点结构：直接使用你已有的 Hexo 目录，站点里的配置、主题、插件、文章…
+      本篇介绍文章与草稿的管理，以及编辑器的全部能力。 返回 使用指南总览 文章与草稿 「 文章 」页管理两类内容： 类型 存放位置 说明 正式文章 source/_posts/ 会被生成到博客里 草稿 source/_dra…
     </p>
 
     
@@ -718,7 +525,211 @@
         </span>
       
       <span class="card-stats">
-        <span><svg class="icon" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>2 min</span>
+        <span><svg class="icon" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>5 min</span>
+      </span>
+    </div>
+  </div>
+</article>
+      
+        
+<article class="post-card  ">
+  <a class="card-cover" href="/posts/59d25f9e/" aria-hidden="true" tabindex="-1">
+    
+      <span class="cover-fallback" data-title="HexoDeck 页面与文集">
+        <svg class="icon" viewBox="0 0 24 24" width="34" height="34" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 3 9 5-9 5-9-5z"/><path d="m3 13 9 5 9-5"/></svg>
+      </span>
+    
+    
+  </a>
+
+  <div class="card-body">
+    <div class="card-meta">
+      <time datetime="2026-10-05T19:03:00.000Z">2026-10-06</time>
+      
+        <span class="meta-sep">·</span>
+        
+          <a href="/categories/HexoDeck/">HexoDeck</a>
+        
+      
+    </div>
+
+    <h2 class="card-title">
+      <a href="/posts/59d25f9e/">HexoDeck 页面与文集</a>
+    </h2>
+
+    <p class="card-excerpt">
+      本篇介绍两类内容管理：Hexo 的 独立页面 ，以及 HexoDeck 特有的 自定义文集 。 返回 使用指南总览 页面 「 页面 」页管理 Hexo 的独立页面 —— 比如「关于」「友链」「留言板」这类不属于文章列表的…
+    </p>
+
+    
+
+    <div class="card-footer">
+      
+        <span class="card-tags">
+          
+            <a class="card-tag" href="/tags/Hexo/">#Hexo</a>
+          
+            <a class="card-tag" href="/tags/HexoDeck/">#HexoDeck</a>
+          
+            <a class="card-tag" href="/tags/%E6%96%87%E6%A1%A3/">#文档</a>
+          
+        </span>
+      
+      <span class="card-stats">
+        <span><svg class="icon" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>4 min</span>
+      </span>
+    </div>
+  </div>
+</article>
+      
+        
+<article class="post-card  ">
+  <a class="card-cover" href="/posts/32270f59/" aria-hidden="true" tabindex="-1">
+    
+      <span class="cover-fallback" data-title="HexoDeck 主题与站点配置">
+        <svg class="icon" viewBox="0 0 24 24" width="34" height="34" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 3 9 5-9 5-9-5z"/><path d="m3 13 9 5 9-5"/></svg>
+      </span>
+    
+    
+  </a>
+
+  <div class="card-body">
+    <div class="card-meta">
+      <time datetime="2026-10-05T19:04:00.000Z">2026-10-06</time>
+      
+        <span class="meta-sep">·</span>
+        
+          <a href="/categories/HexoDeck/">HexoDeck</a>
+        
+      
+    </div>
+
+    <h2 class="card-title">
+      <a href="/posts/32270f59/">HexoDeck 主题与站点配置</a>
+    </h2>
+
+    <p class="card-excerpt">
+      本篇介绍站点配置、主题管理与插件。 返回 使用指南总览 基础配置 「 设置 → 基础配置 」以表单形式管理 _config.yml 的常用项： 站点标题、副标题、描述、作者、语言、时区、网站 URL、根路径、永久链接格式…
+    </p>
+
+    
+
+    <div class="card-footer">
+      
+        <span class="card-tags">
+          
+            <a class="card-tag" href="/tags/Hexo/">#Hexo</a>
+          
+            <a class="card-tag" href="/tags/HexoDeck/">#HexoDeck</a>
+          
+            <a class="card-tag" href="/tags/%E6%96%87%E6%A1%A3/">#文档</a>
+          
+        </span>
+      
+      <span class="card-stats">
+        <span><svg class="icon" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>4 min</span>
+      </span>
+    </div>
+  </div>
+</article>
+      
+        
+<article class="post-card  ">
+  <a class="card-cover" href="/posts/72b2b36f/" aria-hidden="true" tabindex="-1">
+    
+      <span class="cover-fallback" data-title="HexoDeck 发布与部署">
+        <svg class="icon" viewBox="0 0 24 24" width="34" height="34" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 3 9 5-9 5-9-5z"/><path d="m3 13 9 5 9-5"/></svg>
+      </span>
+    
+    
+  </a>
+
+  <div class="card-body">
+    <div class="card-meta">
+      <time datetime="2026-10-05T19:05:00.000Z">2026-10-06</time>
+      
+        <span class="meta-sep">·</span>
+        
+          <a href="/categories/HexoDeck/">HexoDeck</a>
+        
+      
+    </div>
+
+    <h2 class="card-title">
+      <a href="/posts/72b2b36f/">HexoDeck 发布与部署</a>
+    </h2>
+
+    <p class="card-excerpt">
+      本篇介绍本地预览、构建与部署上线。 返回 使用指南总览 本地预览 「 预览 」页提供整屏的本地预览： 用 iframe 显示主题渲染后的真实博客页面 （不是简化的 Markdown 预览） 站点文件一有变化，预览 自动刷…
+    </p>
+
+    
+
+    <div class="card-footer">
+      
+        <span class="card-tags">
+          
+            <a class="card-tag" href="/tags/Hexo/">#Hexo</a>
+          
+            <a class="card-tag" href="/tags/HexoDeck/">#HexoDeck</a>
+          
+            <a class="card-tag" href="/tags/%E6%96%87%E6%A1%A3/">#文档</a>
+          
+        </span>
+      
+      <span class="card-stats">
+        <span><svg class="icon" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>4 min</span>
+      </span>
+    </div>
+  </div>
+</article>
+      
+        
+<article class="post-card  ">
+  <a class="card-cover" href="/posts/269b4e19/" aria-hidden="true" tabindex="-1">
+    
+      <span class="cover-fallback" data-title="HexoDeck 常见问题">
+        <svg class="icon" viewBox="0 0 24 24" width="34" height="34" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 3 9 5-9 5-9-5z"/><path d="m3 13 9 5 9-5"/></svg>
+      </span>
+    
+    
+  </a>
+
+  <div class="card-body">
+    <div class="card-meta">
+      <time datetime="2026-10-05T19:06:00.000Z">2026-10-06</time>
+      
+        <span class="meta-sep">·</span>
+        
+          <a href="/categories/HexoDeck/">HexoDeck</a>
+        
+      
+    </div>
+
+    <h2 class="card-title">
+      <a href="/posts/269b4e19/">HexoDeck 常见问题</a>
+    </h2>
+
+    <p class="card-excerpt">
+      汇总使用中的常见疑问与已知限制。 返回 使用指南总览 安装与启动 Q：需要先安装 Node.js 吗？ 日常使用 不需要 。应用内嵌了 Hexo 引擎，写作、预览、生成、部署都能跑。 只有两个场景需要本机 Node.js…
+    </p>
+
+    
+
+    <div class="card-footer">
+      
+        <span class="card-tags">
+          
+            <a class="card-tag" href="/tags/Hexo/">#Hexo</a>
+          
+            <a class="card-tag" href="/tags/HexoDeck/">#HexoDeck</a>
+          
+            <a class="card-tag" href="/tags/%E6%96%87%E6%A1%A3/">#文档</a>
+          
+        </span>
+      
+      <span class="card-stats">
+        <span><svg class="icon" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>4 min</span>
       </span>
     </div>
   </div>
@@ -767,7 +778,7 @@
       <li>
         <span class="stat-label"><svg class="icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m3 17 6-6 4 4 8-8"/><path d="M21 7v6h-6"/></svg> 总字数</span>
         <span class="stat-value is-accent">
-          14,975
+          16,722
         </span>
       </li>
     

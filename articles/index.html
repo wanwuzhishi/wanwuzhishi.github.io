@@ -48,8 +48,18 @@
     --main-wide: 1240px;
     /* 头部 / 页脚 / 横幅与三栏对齐 */
     --max-width: 1440px;
-    --accent: #5b8cff;
     --radius: 14px;
+    --accent: #5b8cff;
+    --accent-rgb: 91, 140, 255;
+    --secondary: #89acff;
+    --secondary-rgb: 136.92000000000002, 172.2, 255;
+    --accent-soft: rgba(91, 140, 255, 0.12);
+    --accent-soft-strong: rgba(91, 140, 255, 0.16);
+    --accent-strong: #476dc7;
+    --accent-text: #4062b3;
+    --accent-glow: rgba(91, 140, 255, 0.3);
+    --accent-glow-strong: rgba(91, 140, 255, 0.38);
+    --brand-gradient: linear-gradient(135deg, #5b8cff, #89acff);
   }
   /* 宽屏自适应（≥1680px）：
      1. 布局上限随视口放宽（94vw，封顶 2040px），先吃掉最外侧的空白；
@@ -66,7 +76,9 @@
     }
   }
 </style>
-<link rel="icon" href="/images/favicon.svg" type="image/svg+xml">
+
+<link rel="icon" href="/favicon.png" type="image/png">
+<link rel="apple-touch-icon" href="/favicon.png">
 
 <script>
   (function () {
@@ -100,10 +112,9 @@
   <div class="header-inner">
     <a class="brand" href="/" aria-label="万物之时 首页">
       <span class="brand-mark" aria-hidden="true">
-        <svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor"
-             stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M6 4h12M6 12h9M6 20h12M6 4v16"/>
-        </svg>
+        
+        <img src="/favicon.png" alt="" width="34" height="34">
+        
       </span>
       <span class="brand-text">
         <strong>万物之时</strong>
@@ -181,7 +192,7 @@
     
 <section class="rail-card profile-card">
   <div class="profile-avatar-wrap">
-    <img class="profile-avatar" src="/images/avatar.svg"
+    <img class="profile-avatar" src="/images/avatar.jpg"
          alt="Echo" loading="lazy"
          onerror="this.onerror=null;this.src='/images/avatar.svg'">
   </div>
@@ -341,16 +352,16 @@
         
           
 <article class="post-card  ">
-  <a class="card-cover" href="/posts/7f78826f/" aria-hidden="true" tabindex="-1">
+  <a class="card-cover" href="/posts/8eb881c5/" aria-hidden="true" tabindex="-1">
     
-      <img src="/images/covers/hexo-theme.svg" alt="Echo 主题使用指南（六）：侧栏组件、页脚与常见问题" loading="lazy">
+      <img src="/images/covers/hexo-theme.svg" alt="Echo 主题使用指南（一）：认识主题与目录结构" loading="lazy">
     
     
   </a>
 
   <div class="card-body">
     <div class="card-meta">
-      <time datetime="2026-10-06T03:30:00.000Z">2026-10-06</time>
+      <time datetime="2026-10-06T01:00:00.000Z">2026-10-06</time>
       
         <span class="meta-sep">·</span>
         
@@ -360,11 +371,11 @@
     </div>
 
     <h2 class="card-title">
-      <a href="/posts/7f78826f/">Echo 主题使用指南（六）：侧栏组件、页脚与常见问题</a>
+      <a href="/posts/8eb881c5/">Echo 主题使用指南（一）：认识主题与目录结构</a>
     </h2>
 
     <p class="card-excerpt">
-      左栏组件 个人名片 social[].name 决定图标，可用： github / bilibili / telegram / mail / rss / link 。 avatar 加载失败时会自动回退到主题自带的占位头…
+      这是一套为「资源分享 + 技术博客」混合站点设计的 Hexo 主题。和常见主题最大的区别是： 它把 文章 和 网盘资源 当成两种一等公民，而不是让资源去硬凑文章的排版。 这套主题解决什么问题 现成的 Hexo 主题大多假…
     </p>
 
     
@@ -372,164 +383,17 @@
     <div class="card-footer">
       
         <span class="card-tags">
+          
+            <a class="card-tag" href="/tags/Hexo/">#Hexo</a>
           
             <a class="card-tag" href="/tags/Echo-%E4%B8%BB%E9%A2%98/">#Echo 主题</a>
           
             <a class="card-tag" href="/tags/%E6%95%99%E7%A8%8B/">#教程</a>
           
-            <a class="card-tag" href="/tags/%E4%BE%A7%E6%A0%8F/">#侧栏</a>
-          
         </span>
       
       <span class="card-stats">
-        <span><svg class="icon" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>4 min</span>
-      </span>
-    </div>
-  </div>
-</article>
-        
-          
-<article class="post-card  ">
-  <a class="card-cover" href="/posts/bb3f690/" aria-hidden="true" tabindex="-1">
-    
-      <img src="/images/covers/hexo-theme.svg" alt="Echo 主题使用指南（五）：写作、代码块与文章页" loading="lazy">
-    
-    
-  </a>
-
-  <div class="card-body">
-    <div class="card-meta">
-      <time datetime="2026-10-06T03:00:00.000Z">2026-10-06</time>
-      
-        <span class="meta-sep">·</span>
-        
-          <a href="/categories/%E4%B8%BB%E9%A2%98%E6%8C%87%E5%8D%97/">主题指南</a>
-        
-      
-    </div>
-
-    <h2 class="card-title">
-      <a href="/posts/bb3f690/">Echo 主题使用指南（五）：写作、代码块与文章页</a>
-    </h2>
-
-    <p class="card-excerpt">
-      新建一篇文章 文件会生成在 source/_posts/ 下，然后按下面的格式补 front-matter。 front-matter 全字段 字段 作用 title 标题，显示在卡片、详情页和浏览器标签 date 发布…
-    </p>
-
-    
-
-    <div class="card-footer">
-      
-        <span class="card-tags">
-          
-            <a class="card-tag" href="/tags/Echo-%E4%B8%BB%E9%A2%98/">#Echo 主题</a>
-          
-            <a class="card-tag" href="/tags/%E6%95%99%E7%A8%8B/">#教程</a>
-          
-            <a class="card-tag" href="/tags/Markdown/">#Markdown</a>
-          
-        </span>
-      
-      <span class="card-stats">
-        <span><svg class="icon" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>3 min</span>
-      </span>
-    </div>
-  </div>
-</article>
-        
-          
-<article class="post-card  ">
-  <a class="card-cover" href="/posts/5abe54fd/" aria-hidden="true" tabindex="-1">
-    
-      <img src="/images/covers/hexo-theme.svg" alt="Echo 主题使用指南（四）：资源帖与网盘链接" loading="lazy">
-    
-    
-  </a>
-
-  <div class="card-body">
-    <div class="card-meta">
-      <time datetime="2026-10-06T02:30:00.000Z">2026-10-06</time>
-      
-        <span class="meta-sep">·</span>
-        
-          <a href="/categories/%E4%B8%BB%E9%A2%98%E6%8C%87%E5%8D%97/">主题指南</a>
-        
-      
-    </div>
-
-    <h2 class="card-title">
-      <a href="/posts/5abe54fd/">Echo 主题使用指南（四）：资源帖与网盘链接</a>
-    </h2>
-
-    <p class="card-excerpt">
-      最小的资源帖 只要在 front-matter 里加 resource 字段，普通文章就变成资源帖： type 的取值由站点 _config.yml 里 resources.types 的 key 决定， 常见的有 mo…
-    </p>
-
-    
-
-    <div class="card-footer">
-      
-        <span class="card-tags">
-          
-            <a class="card-tag" href="/tags/Echo-%E4%B8%BB%E9%A2%98/">#Echo 主题</a>
-          
-            <a class="card-tag" href="/tags/%E8%B5%84%E6%BA%90%E5%BA%93/">#资源库</a>
-          
-            <a class="card-tag" href="/tags/%E7%BD%91%E7%9B%98/">#网盘</a>
-          
-        </span>
-      
-      <span class="card-stats">
-        <span><svg class="icon" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>3 min</span>
-      </span>
-    </div>
-  </div>
-</article>
-        
-          
-<article class="post-card  ">
-  <a class="card-cover" href="/posts/42ffd733/" aria-hidden="true" tabindex="-1">
-    
-      <img src="/images/covers/hexo-theme.svg" alt="Echo 主题使用指南（三）：三栏布局、宽度与首页大图" loading="lazy">
-    
-    
-  </a>
-
-  <div class="card-body">
-    <div class="card-meta">
-      <time datetime="2026-10-06T02:00:00.000Z">2026-10-06</time>
-      
-        <span class="meta-sep">·</span>
-        
-          <a href="/categories/%E4%B8%BB%E9%A2%98%E6%8C%87%E5%8D%97/">主题指南</a>
-        
-      
-    </div>
-
-    <h2 class="card-title">
-      <a href="/posts/42ffd733/">Echo 主题使用指南（三）：三栏布局、宽度与首页大图</a>
-    </h2>
-
-    <p class="card-excerpt">
-      三栏布局是怎么组成的 页面主体是「左栏 / 正文 / 右栏」的弹性布局： 用 flex 而不是 grid ，好处是 任意一栏隐藏时，正文会自动补位 ， 不需要为每种组合单独写一套布局规则。 宽度相关的四个参数 都在主题…
-    </p>
-
-    
-
-    <div class="card-footer">
-      
-        <span class="card-tags">
-          
-            <a class="card-tag" href="/tags/Echo-%E4%B8%BB%E9%A2%98/">#Echo 主题</a>
-          
-            <a class="card-tag" href="/tags/%E6%95%99%E7%A8%8B/">#教程</a>
-          
-            <a class="card-tag" href="/tags/%E5%B8%83%E5%B1%80/">#布局</a>
-          
-        </span>
-      
-      <span class="card-stats">
-        <span><svg class="icon" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>3 min</span>
+        <span><svg class="icon" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>2 min</span>
       </span>
     </div>
   </div>
@@ -586,16 +450,16 @@
         
           
 <article class="post-card  ">
-  <a class="card-cover" href="/posts/8eb881c5/" aria-hidden="true" tabindex="-1">
+  <a class="card-cover" href="/posts/42ffd733/" aria-hidden="true" tabindex="-1">
     
-      <img src="/images/covers/hexo-theme.svg" alt="Echo 主题使用指南（一）：认识主题与目录结构" loading="lazy">
+      <img src="/images/covers/hexo-theme.svg" alt="Echo 主题使用指南（三）：三栏布局、宽度与首页大图" loading="lazy">
     
     
   </a>
 
   <div class="card-body">
     <div class="card-meta">
-      <time datetime="2026-10-06T01:00:00.000Z">2026-10-06</time>
+      <time datetime="2026-10-06T02:00:00.000Z">2026-10-06</time>
       
         <span class="meta-sep">·</span>
         
@@ -605,11 +469,11 @@
     </div>
 
     <h2 class="card-title">
-      <a href="/posts/8eb881c5/">Echo 主题使用指南（一）：认识主题与目录结构</a>
+      <a href="/posts/42ffd733/">Echo 主题使用指南（三）：三栏布局、宽度与首页大图</a>
     </h2>
 
     <p class="card-excerpt">
-      这是一套为「资源分享 + 技术博客」混合站点设计的 Hexo 主题。和常见主题最大的区别是： 它把 文章 和 网盘资源 当成两种一等公民，而不是让资源去硬凑文章的排版。 这套主题解决什么问题 现成的 Hexo 主题大多假…
+      三栏布局是怎么组成的 页面主体是「左栏 / 正文 / 右栏」的弹性布局： 用 flex 而不是 grid ，好处是 任意一栏隐藏时，正文会自动补位 ， 不需要为每种组合单独写一套布局规则。 宽度相关的四个参数 都在主题…
     </p>
 
     
@@ -617,114 +481,12 @@
     <div class="card-footer">
       
         <span class="card-tags">
-          
-            <a class="card-tag" href="/tags/Hexo/">#Hexo</a>
           
             <a class="card-tag" href="/tags/Echo-%E4%B8%BB%E9%A2%98/">#Echo 主题</a>
           
             <a class="card-tag" href="/tags/%E6%95%99%E7%A8%8B/">#教程</a>
           
-        </span>
-      
-      <span class="card-stats">
-        <span><svg class="icon" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>2 min</span>
-      </span>
-    </div>
-  </div>
-</article>
-        
-          
-<article class="post-card  ">
-  <a class="card-cover" href="/posts/686a239/" aria-hidden="true" tabindex="-1">
-    
-      <span class="cover-fallback" data-title="Hexo 文章链接优化：告别超长的中文编码 URL">
-        <svg class="icon" viewBox="0 0 24 24" width="34" height="34" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 3 9 5-9 5-9-5z"/><path d="m3 13 9 5 9-5"/></svg>
-      </span>
-    
-    
-  </a>
-
-  <div class="card-body">
-    <div class="card-meta">
-      <time datetime="2026-10-05T19:30:00.000Z">2026-10-06</time>
-      
-        <span class="meta-sep">·</span>
-        
-          <a href="/categories/%E5%BB%BA%E7%AB%99%E7%AC%94%E8%AE%B0/">建站笔记</a>
-        
-      
-    </div>
-
-    <h2 class="card-title">
-      <a href="/posts/686a239/">Hexo 文章链接优化：告别超长的中文编码 URL</a>
-    </h2>
-
-    <p class="card-excerpt">
-      用 Hexo 写中文博客，早晚会遇到这个问题：文章的 URL 是一长串 %E7%BB%99... 。 这篇记录我如何把链接从「超长乱码」改成「简短固定」的完整过程，包含原理、三种方案对比和踩坑细节。 问题：中文标题进 U…
-    </p>
-
-    
-
-    <div class="card-footer">
-      
-        <span class="card-tags">
-          
-            <a class="card-tag" href="/tags/Hexo/">#Hexo</a>
-          
-            <a class="card-tag" href="/tags/SEO/">#SEO</a>
-          
-            <a class="card-tag" href="/tags/%E6%8A%98%E8%85%BE%E8%AE%B0%E5%BD%95/">#折腾记录</a>
-          
-        </span>
-      
-      <span class="card-stats">
-        <span><svg class="icon" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>5 min</span>
-      </span>
-    </div>
-  </div>
-</article>
-        
-          
-<article class="post-card  ">
-  <a class="card-cover" href="/posts/461fc5c1/" aria-hidden="true" tabindex="-1">
-    
-      <span class="cover-fallback" data-title="HexoDeck —— 给 Hexo 找个顺手的桌面客户端">
-        <svg class="icon" viewBox="0 0 24 24" width="34" height="34" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 3 9 5-9 5-9-5z"/><path d="m3 13 9 5 9-5"/></svg>
-      </span>
-    
-    
-  </a>
-
-  <div class="card-body">
-    <div class="card-meta">
-      <time datetime="2026-10-05T19:10:00.000Z">2026-10-06</time>
-      
-        <span class="meta-sep">·</span>
-        
-          <a href="/categories/%E6%8A%98%E8%85%BE%E8%AE%B0%E5%BD%95/">折腾记录</a>
-        
-      
-    </div>
-
-    <h2 class="card-title">
-      <a href="/posts/461fc5c1/">HexoDeck —— 给 Hexo 找个顺手的桌面客户端</a>
-    </h2>
-
-    <p class="card-excerpt">
-      写 Hexo 博客久了，总在重复同一套动作：打开编辑器写 Markdown → 切到终端 hexo generate → 再 hexo deploy → 回到浏览器刷新看效果。中间任何一步出错，都要在终端日志里翻半天。…
-    </p>
-
-    
-
-    <div class="card-footer">
-      
-        <span class="card-tags">
-          
-            <a class="card-tag" href="/tags/Hexo/">#Hexo</a>
-          
-            <a class="card-tag" href="/tags/HexoDeck/">#HexoDeck</a>
-          
-            <a class="card-tag" href="/tags/%E5%B7%A5%E5%85%B7/">#工具</a>
+            <a class="card-tag" href="/tags/%E5%B8%83%E5%B1%80/">#布局</a>
           
         </span>
       
@@ -737,9 +499,156 @@
         
           
 <article class="post-card  ">
-  <a class="card-cover" href="/posts/269b4e19/" aria-hidden="true" tabindex="-1">
+  <a class="card-cover" href="/posts/5abe54fd/" aria-hidden="true" tabindex="-1">
     
-      <span class="cover-fallback" data-title="HexoDeck 常见问题">
+      <img src="/images/covers/hexo-theme.svg" alt="Echo 主题使用指南（四）：资源帖与网盘链接" loading="lazy">
+    
+    
+  </a>
+
+  <div class="card-body">
+    <div class="card-meta">
+      <time datetime="2026-10-06T02:30:00.000Z">2026-10-06</time>
+      
+        <span class="meta-sep">·</span>
+        
+          <a href="/categories/%E4%B8%BB%E9%A2%98%E6%8C%87%E5%8D%97/">主题指南</a>
+        
+      
+    </div>
+
+    <h2 class="card-title">
+      <a href="/posts/5abe54fd/">Echo 主题使用指南（四）：资源帖与网盘链接</a>
+    </h2>
+
+    <p class="card-excerpt">
+      最小的资源帖 只要在 front-matter 里加 resource 字段，普通文章就变成资源帖： type 的取值由站点 _config.yml 里 resources.types 的 key 决定， 常见的有 mo…
+    </p>
+
+    
+
+    <div class="card-footer">
+      
+        <span class="card-tags">
+          
+            <a class="card-tag" href="/tags/Echo-%E4%B8%BB%E9%A2%98/">#Echo 主题</a>
+          
+            <a class="card-tag" href="/tags/%E8%B5%84%E6%BA%90%E5%BA%93/">#资源库</a>
+          
+            <a class="card-tag" href="/tags/%E7%BD%91%E7%9B%98/">#网盘</a>
+          
+        </span>
+      
+      <span class="card-stats">
+        <span><svg class="icon" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>3 min</span>
+      </span>
+    </div>
+  </div>
+</article>
+        
+          
+<article class="post-card  ">
+  <a class="card-cover" href="/posts/bb3f690/" aria-hidden="true" tabindex="-1">
+    
+      <img src="/images/covers/hexo-theme.svg" alt="Echo 主题使用指南（五）：写作、代码块与文章页" loading="lazy">
+    
+    
+  </a>
+
+  <div class="card-body">
+    <div class="card-meta">
+      <time datetime="2026-10-06T03:00:00.000Z">2026-10-06</time>
+      
+        <span class="meta-sep">·</span>
+        
+          <a href="/categories/%E4%B8%BB%E9%A2%98%E6%8C%87%E5%8D%97/">主题指南</a>
+        
+      
+    </div>
+
+    <h2 class="card-title">
+      <a href="/posts/bb3f690/">Echo 主题使用指南（五）：写作、代码块与文章页</a>
+    </h2>
+
+    <p class="card-excerpt">
+      新建一篇文章 文件会生成在 source/_posts/ 下，然后按下面的格式补 front-matter。 front-matter 全字段 字段 作用 title 标题，显示在卡片、详情页和浏览器标签 date 发布…
+    </p>
+
+    
+
+    <div class="card-footer">
+      
+        <span class="card-tags">
+          
+            <a class="card-tag" href="/tags/Echo-%E4%B8%BB%E9%A2%98/">#Echo 主题</a>
+          
+            <a class="card-tag" href="/tags/%E6%95%99%E7%A8%8B/">#教程</a>
+          
+            <a class="card-tag" href="/tags/Markdown/">#Markdown</a>
+          
+        </span>
+      
+      <span class="card-stats">
+        <span><svg class="icon" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>4 min</span>
+      </span>
+    </div>
+  </div>
+</article>
+        
+          
+<article class="post-card  ">
+  <a class="card-cover" href="/posts/7f78826f/" aria-hidden="true" tabindex="-1">
+    
+      <img src="/images/covers/hexo-theme.svg" alt="Echo 主题使用指南（六）：侧栏组件、页脚与常见问题" loading="lazy">
+    
+    
+  </a>
+
+  <div class="card-body">
+    <div class="card-meta">
+      <time datetime="2026-10-06T03:30:00.000Z">2026-10-06</time>
+      
+        <span class="meta-sep">·</span>
+        
+          <a href="/categories/%E4%B8%BB%E9%A2%98%E6%8C%87%E5%8D%97/">主题指南</a>
+        
+      
+    </div>
+
+    <h2 class="card-title">
+      <a href="/posts/7f78826f/">Echo 主题使用指南（六）：侧栏组件、页脚与常见问题</a>
+    </h2>
+
+    <p class="card-excerpt">
+      左栏组件 个人名片 social[].name 决定图标，可用： github / bilibili / telegram / mail / rss / link 。 avatar 加载失败时会自动回退到主题自带的占位头…
+    </p>
+
+    
+
+    <div class="card-footer">
+      
+        <span class="card-tags">
+          
+            <a class="card-tag" href="/tags/Echo-%E4%B8%BB%E9%A2%98/">#Echo 主题</a>
+          
+            <a class="card-tag" href="/tags/%E6%95%99%E7%A8%8B/">#教程</a>
+          
+            <a class="card-tag" href="/tags/%E4%BE%A7%E6%A0%8F/">#侧栏</a>
+          
+        </span>
+      
+      <span class="card-stats">
+        <span><svg class="icon" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>4 min</span>
+      </span>
+    </div>
+  </div>
+</article>
+        
+          
+<article class="post-card  ">
+  <a class="card-cover" href="/posts/108e7a27/" aria-hidden="true" tabindex="-1">
+    
+      <span class="cover-fallback" data-title="HexoDeck 使用指南">
         <svg class="icon" viewBox="0 0 24 24" width="34" height="34" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 3 9 5-9 5-9-5z"/><path d="m3 13 9 5 9-5"/></svg>
       </span>
     
@@ -748,7 +657,7 @@
 
   <div class="card-body">
     <div class="card-meta">
-      <time datetime="2026-10-05T19:06:00.000Z">2026-10-06</time>
+      <time datetime="2026-10-05T19:00:00.000Z">2026-10-06</time>
       
         <span class="meta-sep">·</span>
         
@@ -758,11 +667,11 @@
     </div>
 
     <h2 class="card-title">
-      <a href="/posts/269b4e19/">HexoDeck 常见问题</a>
+      <a href="/posts/108e7a27/">HexoDeck 使用指南</a>
     </h2>
 
     <p class="card-excerpt">
-      汇总使用中的常见疑问与已知限制。 返回 使用指南总览 安装与启动 Q：需要先安装 Node.js 吗？ 日常使用 不需要 。应用内嵌了 Hexo 引擎，写作、预览、生成、部署都能跑。 只有两个场景需要本机 Node.js…
+      HexoDeck 是一个 Hexo 博客的桌面管理工具，把写作、预览、发布、配置整个流程搬进图形界面 —— 不用碰命令行。 它不会要求你改变现有的站点结构：直接使用你已有的 Hexo 目录，站点里的配置、主题、插件、文章…
     </p>
 
     
@@ -780,7 +689,7 @@
         </span>
       
       <span class="card-stats">
-        <span><svg class="icon" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>4 min</span>
+        <span><svg class="icon" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>3 min</span>
       </span>
     </div>
   </div>
@@ -788,9 +697,9 @@
         
           
 <article class="post-card  ">
-  <a class="card-cover" href="/posts/72b2b36f/" aria-hidden="true" tabindex="-1">
+  <a class="card-cover" href="/posts/61fdb372/" aria-hidden="true" tabindex="-1">
     
-      <span class="cover-fallback" data-title="HexoDeck 发布与部署">
+      <span class="cover-fallback" data-title="HexoDeck 快速开始">
         <svg class="icon" viewBox="0 0 24 24" width="34" height="34" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 3 9 5-9 5-9-5z"/><path d="m3 13 9 5 9-5"/></svg>
       </span>
     
@@ -799,7 +708,7 @@
 
   <div class="card-body">
     <div class="card-meta">
-      <time datetime="2026-10-05T19:05:00.000Z">2026-10-06</time>
+      <time datetime="2026-10-05T19:01:00.000Z">2026-10-06</time>
       
         <span class="meta-sep">·</span>
         
@@ -809,11 +718,113 @@
     </div>
 
     <h2 class="card-title">
-      <a href="/posts/72b2b36f/">HexoDeck 发布与部署</a>
+      <a href="/posts/61fdb372/">HexoDeck 快速开始</a>
     </h2>
 
     <p class="card-excerpt">
-      本篇介绍本地预览、构建与部署上线。 返回 使用指南总览 本地预览 「 预览 」页提供整屏的本地预览： 用 iframe 显示主题渲染后的真实博客页面 （不是简化的 Markdown 预览） 站点文件一有变化，预览 自动刷…
+      本篇带你完成从零到发布第一篇博客的完整流程。 返回 使用指南总览 一、添加站点 首次启动 HexoDeck，会看到欢迎页。点击「 添加站点 」，在文件选择器里选中你的 Hexo 博客根目录 —— 也就是 包含 _conf…
+    </p>
+
+    
+
+    <div class="card-footer">
+      
+        <span class="card-tags">
+          
+            <a class="card-tag" href="/tags/Hexo/">#Hexo</a>
+          
+            <a class="card-tag" href="/tags/HexoDeck/">#HexoDeck</a>
+          
+            <a class="card-tag" href="/tags/%E6%96%87%E6%A1%A3/">#文档</a>
+          
+        </span>
+      
+      <span class="card-stats">
+        <span><svg class="icon" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>3 min</span>
+      </span>
+    </div>
+  </div>
+</article>
+        
+          
+<article class="post-card  ">
+  <a class="card-cover" href="/posts/9022c20b/" aria-hidden="true" tabindex="-1">
+    
+      <span class="cover-fallback" data-title="HexoDeck 写作功能">
+        <svg class="icon" viewBox="0 0 24 24" width="34" height="34" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 3 9 5-9 5-9-5z"/><path d="m3 13 9 5 9-5"/></svg>
+      </span>
+    
+    
+  </a>
+
+  <div class="card-body">
+    <div class="card-meta">
+      <time datetime="2026-10-05T19:02:00.000Z">2026-10-06</time>
+      
+        <span class="meta-sep">·</span>
+        
+          <a href="/categories/HexoDeck/">HexoDeck</a>
+        
+      
+    </div>
+
+    <h2 class="card-title">
+      <a href="/posts/9022c20b/">HexoDeck 写作功能</a>
+    </h2>
+
+    <p class="card-excerpt">
+      本篇介绍文章与草稿的管理，以及编辑器的全部能力。 返回 使用指南总览 文章与草稿 「 文章 」页管理两类内容： 类型 存放位置 说明 正式文章 source/_posts/ 会被生成到博客里 草稿 source/_dra…
+    </p>
+
+    
+
+    <div class="card-footer">
+      
+        <span class="card-tags">
+          
+            <a class="card-tag" href="/tags/Hexo/">#Hexo</a>
+          
+            <a class="card-tag" href="/tags/HexoDeck/">#HexoDeck</a>
+          
+            <a class="card-tag" href="/tags/%E6%96%87%E6%A1%A3/">#文档</a>
+          
+        </span>
+      
+      <span class="card-stats">
+        <span><svg class="icon" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>5 min</span>
+      </span>
+    </div>
+  </div>
+</article>
+        
+          
+<article class="post-card  ">
+  <a class="card-cover" href="/posts/59d25f9e/" aria-hidden="true" tabindex="-1">
+    
+      <span class="cover-fallback" data-title="HexoDeck 页面与文集">
+        <svg class="icon" viewBox="0 0 24 24" width="34" height="34" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 3 9 5-9 5-9-5z"/><path d="m3 13 9 5 9-5"/></svg>
+      </span>
+    
+    
+  </a>
+
+  <div class="card-body">
+    <div class="card-meta">
+      <time datetime="2026-10-05T19:03:00.000Z">2026-10-06</time>
+      
+        <span class="meta-sep">·</span>
+        
+          <a href="/categories/HexoDeck/">HexoDeck</a>
+        
+      
+    </div>
+
+    <h2 class="card-title">
+      <a href="/posts/59d25f9e/">HexoDeck 页面与文集</a>
+    </h2>
+
+    <p class="card-excerpt">
+      本篇介绍两类内容管理：Hexo 的 独立页面 ，以及 HexoDeck 特有的 自定义文集 。 返回 使用指南总览 页面 「 页面 」页管理 Hexo 的独立页面 —— 比如「关于」「友链」「留言板」这类不属于文章列表的…
     </p>
 
     
@@ -890,9 +901,9 @@
         
           
 <article class="post-card  ">
-  <a class="card-cover" href="/posts/59d25f9e/" aria-hidden="true" tabindex="-1">
+  <a class="card-cover" href="/posts/72b2b36f/" aria-hidden="true" tabindex="-1">
     
-      <span class="cover-fallback" data-title="HexoDeck 页面与文集">
+      <span class="cover-fallback" data-title="HexoDeck 发布与部署">
         <svg class="icon" viewBox="0 0 24 24" width="34" height="34" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 3 9 5-9 5-9-5z"/><path d="m3 13 9 5 9-5"/></svg>
       </span>
     
@@ -901,7 +912,7 @@
 
   <div class="card-body">
     <div class="card-meta">
-      <time datetime="2026-10-05T19:03:00.000Z">2026-10-06</time>
+      <time datetime="2026-10-05T19:05:00.000Z">2026-10-06</time>
       
         <span class="meta-sep">·</span>
         
@@ -911,11 +922,11 @@
     </div>
 
     <h2 class="card-title">
-      <a href="/posts/59d25f9e/">HexoDeck 页面与文集</a>
+      <a href="/posts/72b2b36f/">HexoDeck 发布与部署</a>
     </h2>
 
     <p class="card-excerpt">
-      本篇介绍两类内容管理：Hexo 的 独立页面 ，以及 HexoDeck 特有的 自定义文集 。 返回 使用指南总览 页面 「 页面 」页管理 Hexo 的独立页面 —— 比如「关于」「友链」「留言板」这类不属于文章列表的…
+      本篇介绍本地预览、构建与部署上线。 返回 使用指南总览 本地预览 「 预览 」页提供整屏的本地预览： 用 iframe 显示主题渲染后的真实博客页面 （不是简化的 Markdown 预览） 站点文件一有变化，预览 自动刷…
     </p>
 
     
@@ -1009,7 +1020,7 @@
       <li>
         <span class="stat-label"><svg class="icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m3 17 6-6 4 4 8-8"/><path d="M21 7v6h-6"/></svg> 总字数</span>
         <span class="stat-value is-accent">
-          14,975
+          16,722
         </span>
       </li>
     

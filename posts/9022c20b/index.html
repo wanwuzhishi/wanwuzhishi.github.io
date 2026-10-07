@@ -53,8 +53,18 @@
     --main-wide: 1240px;
     /* 头部 / 页脚 / 横幅与三栏对齐 */
     --max-width: 1440px;
-    --accent: #5b8cff;
     --radius: 14px;
+    --accent: #5b8cff;
+    --accent-rgb: 91, 140, 255;
+    --secondary: #89acff;
+    --secondary-rgb: 136.92000000000002, 172.2, 255;
+    --accent-soft: rgba(91, 140, 255, 0.12);
+    --accent-soft-strong: rgba(91, 140, 255, 0.16);
+    --accent-strong: #476dc7;
+    --accent-text: #4062b3;
+    --accent-glow: rgba(91, 140, 255, 0.3);
+    --accent-glow-strong: rgba(91, 140, 255, 0.38);
+    --brand-gradient: linear-gradient(135deg, #5b8cff, #89acff);
   }
   /* 宽屏自适应（≥1680px）：
      1. 布局上限随视口放宽（94vw，封顶 2040px），先吃掉最外侧的空白；
@@ -71,7 +81,9 @@
     }
   }
 </style>
-<link rel="icon" href="/images/favicon.svg" type="image/svg+xml">
+
+<link rel="icon" href="/favicon.png" type="image/png">
+<link rel="apple-touch-icon" href="/favicon.png">
 
 <script>
   (function () {
@@ -105,10 +117,9 @@
   <div class="header-inner">
     <a class="brand" href="/" aria-label="万物之时 首页">
       <span class="brand-mark" aria-hidden="true">
-        <svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor"
-             stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M6 4h12M6 12h9M6 20h12M6 4v16"/>
-        </svg>
+        
+        <img src="/favicon.png" alt="" width="34" height="34">
+        
       </span>
       <span class="brand-text">
         <strong>万物之时</strong>
@@ -173,7 +184,7 @@
     
 <section class="rail-card profile-card">
   <div class="profile-avatar-wrap">
-    <img class="profile-avatar" src="/images/avatar.svg"
+    <img class="profile-avatar" src="/images/avatar.jpg"
          alt="Echo" loading="lazy"
          onerror="this.onerror=null;this.src='/images/avatar.svg'">
   </div>
@@ -306,8 +317,8 @@
     <article class="post-single ">
       <header class="post-header">
         <div class="post-chips">
-          <span class="chip"><svg class="icon" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m3 17 6-6 4 4 8-8"/><path d="M21 7v6h-6"/></svg> 861 字</span>
-          <span class="chip"><svg class="icon" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> 3 分钟</span>
+          <span class="chip"><svg class="icon" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m3 17 6-6 4 4 8-8"/><path d="M21 7v6h-6"/></svg> 1498 字</span>
+          <span class="chip"><svg class="icon" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> 5 分钟</span>
           
         </div>
 
@@ -352,7 +363,7 @@
     <span class="toc-inline-hint">点击展开 / 收起</span>
   </summary>
   <nav class="toc-body toc-inline-body" aria-label="文章目录">
-    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%87%E7%AB%A0%E4%B8%8E%E8%8D%89%E7%A8%BF"><span class="toc-text">文章与草稿</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BC%96%E8%BE%91%E5%99%A8%E5%B7%A5%E5%85%B7%E6%A0%8F"><span class="toc-text">编辑器工具栏</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%BE%E7%89%87%E5%A4%84%E7%90%86"><span class="toc-text">图片处理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%87%AA%E5%8A%A8%E4%BF%9D%E5%AD%98%E4%B8%8E%E5%88%86%E6%A0%8F%E9%A2%84%E8%A7%88"><span class="toc-text">自动保存与分栏预览</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%A8%E6%96%87%E6%90%9C%E7%B4%A2"><span class="toc-text">全文搜索</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%87%E7%AB%A0%E5%8F%82%E6%95%B0"><span class="toc-text">文章参数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%B6%E4%BB%96%E5%85%83%E6%95%B0%E6%8D%AE"><span class="toc-text">其他元数据</span></a></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%87%E7%AB%A0%E4%B8%8E%E8%8D%89%E7%A8%BF"><span class="toc-text">文章与草稿</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BC%96%E8%BE%91%E5%99%A8%E5%B7%A5%E5%85%B7%E6%A0%8F"><span class="toc-text">编辑器工具栏</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E6%8F%92%E5%85%A5%E7%89%87%E6%AE%B5"><span class="toc-text">自定义插入片段</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%BE%E7%89%87%E5%A4%84%E7%90%86"><span class="toc-text">图片处理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%87%AA%E5%8A%A8%E4%BF%9D%E5%AD%98%E4%B8%8E%E5%88%86%E6%A0%8F%E9%A2%84%E8%A7%88"><span class="toc-text">自动保存与分栏预览</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%A8%E6%96%87%E6%90%9C%E7%B4%A2"><span class="toc-text">全文搜索</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%87%E7%AB%A0%E5%8F%82%E6%95%B0"><span class="toc-text">文章参数</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%93%E6%9E%84%E5%8C%96%E5%8F%82%E6%95%B0%EF%BC%9A%E5%86%99%E8%B5%84%E6%BA%90%E5%8D%A1%E8%BF%99%E7%B1%BB%E5%A4%8D%E6%9D%82%E5%AD%97%E6%AE%B5"><span class="toc-text">结构化参数：写资源卡这类复杂字段</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%B6%E4%BB%96%E5%85%83%E6%95%B0%E6%8D%AE"><span class="toc-text">其他元数据</span></a></li></ol>
   </nav>
 </details>
 
@@ -386,8 +397,16 @@
 <p><strong>删除</strong>：删除的文章会移入<strong>系统回收站</strong>，可以恢复；误删了去回收站找回来即可。</p>
 <h2 id="编辑器工具栏"><a href="#编辑器工具栏" class="headerlink" title="编辑器工具栏"></a>编辑器工具栏</h2><p>编辑器顶部有两行格式化工具栏：</p>
 <p><strong>第一行</strong>：标题（H1–H4）、加粗、斜体、代码块、引用、有序列表、无序列表、任务列表</p>
-<p><strong>第二行</strong>：链接、图片、表格、分割线、清除格式、撤销、重做</p>
+<p><strong>第二行</strong>：链接、图片、表格、分割线、清除格式、撤销、重做、<strong>＋</strong>（自定义片段）</p>
 <p>选中文本后点对应按钮即可套用格式。所有按钮都有中文悬停提示。</p>
+<h3 id="自定义插入片段"><a href="#自定义插入片段" class="headerlink" title="自定义插入片段"></a>自定义插入片段</h3><p>写文章时常要重复输入同样的内容 —— 版权声明、更新时间、标准结尾。第二行末尾的「<strong>＋</strong>」可以把这些做成<strong>一键插入的按钮</strong>：</p>
+<ol>
+<li>点「＋」打开「自定义插入片段」</li>
+<li>填<strong>按钮名称</strong>（限 6 字，如「版权」「更新」）与<strong>要插入的内容</strong></li>
+<li>添加后工具栏立刻出现该按钮，写文章时点一下即插入光标处</li>
+</ol>
+<p>内容支持 <code>&#123;&#123;date&#125;&#125;</code> 占位符，插入时自动替换为<strong>当天日期</strong> —— 适合做「本文更新于 2026-01-01」这类模板。</p>
+<p>片段的编辑与删除都在同一个弹窗里完成。它是<strong>全局共用</strong>的（不像文集和参数定义按站点隔离），因为版权声明这类内容换站点时通常也要用。</p>
 <h2 id="图片处理"><a href="#图片处理" class="headerlink" title="图片处理"></a>图片处理</h2><p>三种方式都能插图，都会<strong>自动保存到站点 <code>source/images/</code></strong> 并插入正确的 Markdown 链接：</p>
 <ol>
 <li><strong>直接粘贴</strong> —— 截图后 <code>Ctrl+V</code> 即插入</li>
@@ -408,7 +427,7 @@
 </ul>
 <h2 id="文章参数"><a href="#文章参数" class="headerlink" title="文章参数"></a>文章参数</h2><p>编辑器右侧的「<strong>文章参数</strong>」侧栏（默认收起，点顶部按钮展开）包含：</p>
 <p><strong>分类与标签</strong> —— 输入后回车即可新建，支持多级分类。</p>
-<p><strong>自定义参数</strong> —— 给文章加任意 front-matter 字段。参数有两种类型：</p>
+<p><strong>自定义参数</strong> —— 给文章加任意 front-matter 字段。参数有三种类型：</p>
 <table>
 <thead>
 <tr>
@@ -427,10 +446,54 @@
 <td>可勾选的方框</td>
 <td>勾选&#x2F;取消写入你指定的值</td>
 </tr>
+<tr>
+<td><strong>结构化</strong></td>
+<td>YAML 编辑框（语法高亮）</td>
+<td>支持嵌套对象与对象数组</td>
+</tr>
 </tbody></table>
 <p>添加参数时可以选择类型、填中文显示名与英文键名。开关式还能自定义选中&#x2F;取消时写入的值（默认 <code>true</code> &#x2F; <code>false</code>）。</p>
 <blockquote>
 <p><strong>关于开关式参数</strong>：写入的 <code>true</code> &#x2F; <code>false</code> 是 <strong>YAML 布尔值</strong>而不是字符串。这点很重要 —— 字符串 <code>&#39;false&#39;</code> 在主题模板里会被当成真值，导致开关失效。</p>
+</blockquote>
+<h3 id="结构化参数：写资源卡这类复杂字段"><a href="#结构化参数：写资源卡这类复杂字段" class="headerlink" title="结构化参数：写资源卡这类复杂字段"></a>结构化参数：写资源卡这类复杂字段</h3><p>游戏资源、网盘分享类文章常有这样的 front-matter —— 一个 <code>resource</code> 键，里面既有标量字段，又有多条下载链接：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">resource:</span></span><br><span class="line">  <span class="attr">enable:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">type:</span> <span class="string">mod</span></span><br><span class="line">  <span class="attr">version:</span> <span class="string">v3.1.4</span></span><br><span class="line">  <span class="attr">platform:</span> <span class="string">Windows</span></span><br><span class="line">  <span class="attr">size:</span> <span class="number">1.8</span> <span class="string">GB</span></span><br><span class="line">  <span class="attr">language:</span> <span class="string">简体中文</span></span><br><span class="line">  <span class="attr">links:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">蓝奏云</span></span><br><span class="line">      <span class="attr">url:</span> <span class="string">https://example.com</span></span><br><span class="line">      <span class="attr">password:</span> <span class="string">echo</span></span><br><span class="line">      <span class="attr">note:</span> <span class="string">不限速</span></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">百度网盘</span></span><br><span class="line">      <span class="attr">url:</span> <span class="string">https://example.com</span></span><br><span class="line">      <span class="attr">password:</span> <span class="string">&quot;1234&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>这种嵌套结构用普通文本输入框写不了（会被压成字符串而丢失数据），所以「结构化」类型提供一个<strong>带语法高亮的 YAML 编辑框</strong>，直接写或粘贴即可。</p>
+<p><strong>模板一键套用</strong>：点参数卡片上的「<strong>模板</strong>」按钮，内置 5 个骨架可选 ——</p>
+<table>
+<thead>
+<tr>
+<th>模板</th>
+<th>内容</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>游戏资源卡</td>
+<td>资源信息 + 多网盘链接（含版本、平台、大小）</td>
+</tr>
+<tr>
+<td>多网盘链接</td>
+<td>只有下载链接列表</td>
+</tr>
+<tr>
+<td>更新日志</td>
+<td>多版本更新记录（版本号 &#x2F; 日期 &#x2F; 变更项）</td>
+</tr>
+<tr>
+<td>视频嵌入</td>
+<td>视频地址 &#x2F; 封面 &#x2F; 作者</td>
+</tr>
+<tr>
+<td>图片画廊</td>
+<td>多张图 + 说明文字</td>
+</tr>
+</tbody></table>
+<p>点一下即填入，改值就行。也可以把当前填好的内容<strong>存为自己的模板</strong>，下次直接套用。</p>
+<p><strong>自动识别</strong>：打开已有文章时，只要某个字段的值是嵌套对象或对象数组，就会自动按结构化类型处理 —— 不用手动改类型，也不会被写坏。</p>
+<p><strong>语法校验</strong>：YAML 写错时输入框标红、暂停自动保存并在状态栏提示，不会把坏数据写进文件。</p>
+<blockquote>
+<p><strong>小提示</strong>：提取码、验证码这类值建议<strong>加引号</strong>（<code>password: &quot;1234&quot;</code>）。YAML 规范里裸写的 <code>1234</code> 会被解析成数字，加引号才是字符串 —— 否则某些主题模板做字符串比较时会出错。</p>
 </blockquote>
 <p><strong>参数定义按站点记忆</strong>：在 A 站配置的参数不会跑到 B 站；同一站点里，新文章会自动带上本站在用的参数名，你只需要逐篇填值。</p>
 <h2 id="其他元数据"><a href="#其他元数据" class="headerlink" title="其他元数据"></a>其他元数据</h2><p>侧栏底部还有「其他元数据」区域，只读展示 front-matter 里的其余字段（比如主题注入的 <code>layout</code>、<code>comments</code>），避免误改这些由主题或插件控制的键。</p>
@@ -472,17 +535,17 @@
 </section>
 
       
-<nav class="post-nav" aria-label="上下篇">
+<nav class="post-nav " aria-label="上下篇">
   
-    <a class="post-nav-item post-nav-prev" href="/posts/59d25f9e/">
+    <a class="post-nav-item post-nav-prev" href="/posts/61fdb372/">
       <span class="post-nav-label"><svg class="icon" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 6 6 6-6 6"/></svg> 上一篇</span>
-      <strong>HexoDeck 页面与文集</strong>
+      <strong>HexoDeck 快速开始</strong>
     </a>
   
   
-    <a class="post-nav-item post-nav-next" href="/posts/61fdb372/">
+    <a class="post-nav-item post-nav-next" href="/posts/59d25f9e/">
       <span class="post-nav-label">下一篇 <svg class="icon" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 6 6 6-6 6"/></svg></span>
-      <strong>HexoDeck 快速开始</strong>
+      <strong>HexoDeck 页面与文集</strong>
     </a>
   
 </nav>
@@ -573,7 +636,7 @@
       <li>
         <span class="stat-label"><svg class="icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m3 17 6-6 4 4 8-8"/><path d="M21 7v6h-6"/></svg> 总字数</span>
         <span class="stat-value is-accent">
-          14,975
+          16,722
         </span>
       </li>
     
@@ -603,7 +666,7 @@
     <h3 class="rail-title"><svg class="icon" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></svg> 目录</h3>
   </div>
   <nav class="toc-body" aria-label="文章目录">
-    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%87%E7%AB%A0%E4%B8%8E%E8%8D%89%E7%A8%BF"><span class="toc-text">文章与草稿</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BC%96%E8%BE%91%E5%99%A8%E5%B7%A5%E5%85%B7%E6%A0%8F"><span class="toc-text">编辑器工具栏</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%BE%E7%89%87%E5%A4%84%E7%90%86"><span class="toc-text">图片处理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%87%AA%E5%8A%A8%E4%BF%9D%E5%AD%98%E4%B8%8E%E5%88%86%E6%A0%8F%E9%A2%84%E8%A7%88"><span class="toc-text">自动保存与分栏预览</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%A8%E6%96%87%E6%90%9C%E7%B4%A2"><span class="toc-text">全文搜索</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%87%E7%AB%A0%E5%8F%82%E6%95%B0"><span class="toc-text">文章参数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%B6%E4%BB%96%E5%85%83%E6%95%B0%E6%8D%AE"><span class="toc-text">其他元数据</span></a></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%87%E7%AB%A0%E4%B8%8E%E8%8D%89%E7%A8%BF"><span class="toc-text">文章与草稿</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BC%96%E8%BE%91%E5%99%A8%E5%B7%A5%E5%85%B7%E6%A0%8F"><span class="toc-text">编辑器工具栏</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E6%8F%92%E5%85%A5%E7%89%87%E6%AE%B5"><span class="toc-text">自定义插入片段</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%BE%E7%89%87%E5%A4%84%E7%90%86"><span class="toc-text">图片处理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%87%AA%E5%8A%A8%E4%BF%9D%E5%AD%98%E4%B8%8E%E5%88%86%E6%A0%8F%E9%A2%84%E8%A7%88"><span class="toc-text">自动保存与分栏预览</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%A8%E6%96%87%E6%90%9C%E7%B4%A2"><span class="toc-text">全文搜索</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%87%E7%AB%A0%E5%8F%82%E6%95%B0"><span class="toc-text">文章参数</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%93%E6%9E%84%E5%8C%96%E5%8F%82%E6%95%B0%EF%BC%9A%E5%86%99%E8%B5%84%E6%BA%90%E5%8D%A1%E8%BF%99%E7%B1%BB%E5%A4%8D%E6%9D%82%E5%AD%97%E6%AE%B5"><span class="toc-text">结构化参数：写资源卡这类复杂字段</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%B6%E4%BB%96%E5%85%83%E6%95%B0%E6%8D%AE"><span class="toc-text">其他元数据</span></a></li></ol>
   </nav>
 </section>
 

@@ -53,8 +53,18 @@
     --main-wide: 1240px;
     /* 头部 / 页脚 / 横幅与三栏对齐 */
     --max-width: 1440px;
-    --accent: #5b8cff;
     --radius: 14px;
+    --accent: #5b8cff;
+    --accent-rgb: 91, 140, 255;
+    --secondary: #89acff;
+    --secondary-rgb: 136.92000000000002, 172.2, 255;
+    --accent-soft: rgba(91, 140, 255, 0.12);
+    --accent-soft-strong: rgba(91, 140, 255, 0.16);
+    --accent-strong: #476dc7;
+    --accent-text: #4062b3;
+    --accent-glow: rgba(91, 140, 255, 0.3);
+    --accent-glow-strong: rgba(91, 140, 255, 0.38);
+    --brand-gradient: linear-gradient(135deg, #5b8cff, #89acff);
   }
   /* 宽屏自适应（≥1680px）：
      1. 布局上限随视口放宽（94vw，封顶 2040px），先吃掉最外侧的空白；
@@ -71,7 +81,9 @@
     }
   }
 </style>
-<link rel="icon" href="/images/favicon.svg" type="image/svg+xml">
+
+<link rel="icon" href="/favicon.png" type="image/png">
+<link rel="apple-touch-icon" href="/favicon.png">
 
 <script>
   (function () {
@@ -105,10 +117,9 @@
   <div class="header-inner">
     <a class="brand" href="/" aria-label="万物之时 首页">
       <span class="brand-mark" aria-hidden="true">
-        <svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor"
-             stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M6 4h12M6 12h9M6 20h12M6 4v16"/>
-        </svg>
+        
+        <img src="/favicon.png" alt="" width="34" height="34">
+        
       </span>
       <span class="brand-text">
         <strong>万物之时</strong>
@@ -173,7 +184,7 @@
     
 <section class="rail-card profile-card">
   <div class="profile-avatar-wrap">
-    <img class="profile-avatar" src="/images/avatar.svg"
+    <img class="profile-avatar" src="/images/avatar.jpg"
          alt="Echo" loading="lazy"
          onerror="this.onerror=null;this.src='/images/avatar.svg'">
   </div>
@@ -306,7 +317,7 @@
     <article class="post-single ">
       <header class="post-header">
         <div class="post-chips">
-          <span class="chip"><svg class="icon" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m3 17 6-6 4 4 8-8"/><path d="M21 7v6h-6"/></svg> 1122 字</span>
+          <span class="chip"><svg class="icon" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m3 17 6-6 4 4 8-8"/><path d="M21 7v6h-6"/></svg> 1264 字</span>
           <span class="chip"><svg class="icon" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> 4 分钟</span>
           
         </div>
@@ -420,6 +431,12 @@
 <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">comments:</span> <span class="literal">false</span>      <span class="comment"># ✅ 布尔，主题能正确识别</span></span><br><span class="line"><span class="attr">comments:</span> <span class="string">&#x27;false&#x27;</span>    <span class="comment"># ❌ 字符串，在模板里是真值</span></span><br></pre></td></tr></table></figure>
 
 <p>HexoDeck 的开关式参数会写<strong>布尔值</strong>，所以用开关式添加的参数不会有这个问题。如果你手动在 YAML 里写，注意别加引号。</p>
+<p><strong>Q：结构化参数能写多复杂？提取码为什么变成了数字？</strong></p>
+<p>结构化参数支持<strong>任意深度的嵌套对象与对象数组</strong> —— 键值对、列表、列表里再套对象都可以，层数不受限制。</p>
+<p>要注意的是 YAML 的<strong>类型推断</strong>：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">password:</span> <span class="number">1234</span>        <span class="comment"># ❌ 被解析成数字</span></span><br><span class="line"><span class="attr">password:</span> <span class="string">&quot;1234&quot;</span>      <span class="comment"># ✅ 字符串</span></span><br><span class="line"><span class="attr">code:</span> <span class="number">001234</span>          <span class="comment"># ❌ 前导零丢失，变成 1234</span></span><br><span class="line"><span class="attr">code:</span> <span class="string">&quot;001234&quot;</span>        <span class="comment"># ✅ 保留前导零</span></span><br></pre></td></tr></table></figure>
+
+<p>提取码、验证码、卡号这类「号码」都建议<strong>加引号</strong>。HexoDeck 会保留你写的引号，但如果你手写时漏了，YAML 规范层面它就已经是数字了 —— 某些主题模板做字符串比较时会因此出错。</p>
 <p><strong>Q：字数统计是怎么算的？</strong></p>
 <p>中文按<strong>字</strong>计，英文按<strong>单词</strong>计（汉字&#x2F;假名&#x2F;谚文逐字算，拉丁字母连成词算一个）。全应用统一这个口径：编辑器状态栏、文章列表、统计页都一致。</p>
 <h2 id="预览与部署"><a href="#预览与部署" class="headerlink" title="预览与部署"></a>预览与部署</h2><p><strong>Q：预览显示不出来？</strong></p>
@@ -488,17 +505,17 @@
 </section>
 
       
-<nav class="post-nav" aria-label="上下篇">
+<nav class="post-nav " aria-label="上下篇">
   
-    <a class="post-nav-item post-nav-prev" href="/posts/461fc5c1/">
+    <a class="post-nav-item post-nav-prev" href="/posts/72b2b36f/">
       <span class="post-nav-label"><svg class="icon" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 6 6 6-6 6"/></svg> 上一篇</span>
-      <strong>HexoDeck —— 给 Hexo 找个顺手的桌面客户端</strong>
+      <strong>HexoDeck 发布与部署</strong>
     </a>
   
   
-    <a class="post-nav-item post-nav-next" href="/posts/72b2b36f/">
+    <a class="post-nav-item post-nav-next" href="/posts/461fc5c1/">
       <span class="post-nav-label">下一篇 <svg class="icon" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 6 6 6-6 6"/></svg></span>
-      <strong>HexoDeck 发布与部署</strong>
+      <strong>HexoDeck —— 给 Hexo 找个顺手的桌面客户端</strong>
     </a>
   
 </nav>
@@ -589,7 +606,7 @@
       <li>
         <span class="stat-label"><svg class="icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m3 17 6-6 4 4 8-8"/><path d="M21 7v6h-6"/></svg> 总字数</span>
         <span class="stat-value is-accent">
-          14,975
+          16,722
         </span>
       </li>
     

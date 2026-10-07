@@ -55,8 +55,18 @@
     --main-wide: 1240px;
     /* 头部 / 页脚 / 横幅与三栏对齐 */
     --max-width: 1440px;
-    --accent: #5b8cff;
     --radius: 14px;
+    --accent: #5b8cff;
+    --accent-rgb: 91, 140, 255;
+    --secondary: #89acff;
+    --secondary-rgb: 136.92000000000002, 172.2, 255;
+    --accent-soft: rgba(91, 140, 255, 0.12);
+    --accent-soft-strong: rgba(91, 140, 255, 0.16);
+    --accent-strong: #476dc7;
+    --accent-text: #4062b3;
+    --accent-glow: rgba(91, 140, 255, 0.3);
+    --accent-glow-strong: rgba(91, 140, 255, 0.38);
+    --brand-gradient: linear-gradient(135deg, #5b8cff, #89acff);
   }
   /* 宽屏自适应（≥1680px）：
      1. 布局上限随视口放宽（94vw，封顶 2040px），先吃掉最外侧的空白；
@@ -73,7 +83,9 @@
     }
   }
 </style>
-<link rel="icon" href="/images/favicon.svg" type="image/svg+xml">
+
+<link rel="icon" href="/favicon.png" type="image/png">
+<link rel="apple-touch-icon" href="/favicon.png">
 
 <script>
   (function () {
@@ -107,10 +119,9 @@
   <div class="header-inner">
     <a class="brand" href="/" aria-label="万物之时 首页">
       <span class="brand-mark" aria-hidden="true">
-        <svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor"
-             stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M6 4h12M6 12h9M6 20h12M6 4v16"/>
-        </svg>
+        
+        <img src="/favicon.png" alt="" width="34" height="34">
+        
       </span>
       <span class="brand-text">
         <strong>万物之时</strong>
@@ -175,7 +186,7 @@
     
 <section class="rail-card profile-card">
   <div class="profile-avatar-wrap">
-    <img class="profile-avatar" src="/images/avatar.svg"
+    <img class="profile-avatar" src="/images/avatar.jpg"
          alt="Echo" loading="lazy"
          onerror="this.onerror=null;this.src='/images/avatar.svg'">
   </div>
@@ -308,8 +319,8 @@
     <article class="post-single ">
       <header class="post-header">
         <div class="post-chips">
-          <span class="chip"><svg class="icon" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m3 17 6-6 4 4 8-8"/><path d="M21 7v6h-6"/></svg> 815 字</span>
-          <span class="chip"><svg class="icon" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> 3 分钟</span>
+          <span class="chip"><svg class="icon" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m3 17 6-6 4 4 8-8"/><path d="M21 7v6h-6"/></svg> 1145 字</span>
+          <span class="chip"><svg class="icon" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> 4 分钟</span>
           
         </div>
 
@@ -360,7 +371,7 @@
     <span class="toc-inline-hint">点击展开 / 收起</span>
   </summary>
   <nav class="toc-body toc-inline-body" aria-label="文章目录">
-    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E6%A0%8F%E5%B8%83%E5%B1%80%E6%98%AF%E6%80%8E%E4%B9%88%E7%BB%84%E6%88%90%E7%9A%84"><span class="toc-text">三栏布局是怎么组成的</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%BD%E5%BA%A6%E7%9B%B8%E5%85%B3%E7%9A%84%E5%9B%9B%E4%B8%AA%E5%8F%82%E6%95%B0"><span class="toc-text">宽度相关的四个参数</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%83%B3%E7%BB%99%E6%AD%A3%E6%96%87%E6%9B%B4%E5%A4%A7%E7%A9%BA%E9%97%B4"><span class="toc-text">想给正文更大空间</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8D%95%E7%8B%AC%E8%AE%BE%E7%BD%AE%E5%B7%A6%E5%8F%B3%E6%A0%8F%E5%AE%BD%E5%BA%A6"><span class="toc-text">单独设置左右栏宽度</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%93%8D%E5%BA%94%E5%BC%8F%E6%94%B6%E6%A0%8F%E9%A1%BA%E5%BA%8F"><span class="toc-text">响应式收栏顺序</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BE%A7%E6%A0%8F%E7%BB%84%E4%BB%B6%E5%BC%80%E5%85%B3"><span class="toc-text">侧栏组件开关</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B7%B1%E8%89%B2%E6%A8%A1%E5%BC%8F"><span class="toc-text">深色模式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%AA%E6%94%B9%E4%B8%BB%E8%89%B2"><span class="toc-text">只改主色</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A6%96%E9%A1%B5%E9%A1%B6%E9%83%A8%E5%A4%A7%E5%9B%BE%EF%BC%88Hero%EF%BC%89"><span class="toc-text">首页顶部大图（Hero）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8D%A2%E4%B8%80%E5%BC%A0%E8%87%AA%E5%B7%B1%E7%9A%84%E5%9B%BE"><span class="toc-text">换一张自己的图</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AF%BC%E8%88%AA%E7%9A%84%E5%9B%BA%E5%AE%9A%E8%A1%8C%E4%B8%BA"><span class="toc-text">导航的固定行为</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%86%85%E9%A1%B5%E6%A8%AA%E5%B9%85"><span class="toc-text">内页横幅</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%8B%E4%B8%80%E7%AF%87"><span class="toc-text">下一篇</span></a></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E6%A0%8F%E5%B8%83%E5%B1%80%E6%98%AF%E6%80%8E%E4%B9%88%E7%BB%84%E6%88%90%E7%9A%84"><span class="toc-text">三栏布局是怎么组成的</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%BD%E5%BA%A6%E7%9B%B8%E5%85%B3%E7%9A%84%E5%9B%9B%E4%B8%AA%E5%8F%82%E6%95%B0"><span class="toc-text">宽度相关的四个参数</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%83%B3%E7%BB%99%E6%AD%A3%E6%96%87%E6%9B%B4%E5%A4%A7%E7%A9%BA%E9%97%B4"><span class="toc-text">想给正文更大空间</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8D%95%E7%8B%AC%E8%AE%BE%E7%BD%AE%E5%B7%A6%E5%8F%B3%E6%A0%8F%E5%AE%BD%E5%BA%A6"><span class="toc-text">单独设置左右栏宽度</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%93%8D%E5%BA%94%E5%BC%8F%E6%94%B6%E6%A0%8F%E9%A1%BA%E5%BA%8F"><span class="toc-text">响应式收栏顺序</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BE%A7%E6%A0%8F%E7%BB%84%E4%BB%B6%E5%BC%80%E5%85%B3"><span class="toc-text">侧栏组件开关</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BE%A7%E6%A0%8F%E5%88%86%E7%B1%BB%E6%8C%89%E9%A1%B5%E9%9D%A2%E8%87%AA%E5%8A%A8%E8%BF%87%E6%BB%A4"><span class="toc-text">侧栏分类按页面自动过滤</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B7%B1%E8%89%B2%E6%A8%A1%E5%BC%8F"><span class="toc-text">深色模式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%94%B9%E4%B8%BB%E9%A2%98%E9%85%8D%E8%89%B2"><span class="toc-text">改主题配色</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A6%96%E9%A1%B5%E9%A1%B6%E9%83%A8%E5%A4%A7%E5%9B%BE%EF%BC%88Hero%EF%BC%89"><span class="toc-text">首页顶部大图（Hero）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8D%A2%E4%B8%80%E5%BC%A0%E8%87%AA%E5%B7%B1%E7%9A%84%E5%9B%BE"><span class="toc-text">换一张自己的图</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AF%BC%E8%88%AA%E7%9A%84%E5%9B%BA%E5%AE%9A%E8%A1%8C%E4%B8%BA"><span class="toc-text">导航的固定行为</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%86%85%E9%A1%B5%E6%A8%AA%E5%B9%85"><span class="toc-text">内页横幅</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%8B%E4%B8%80%E7%AF%87"><span class="toc-text">下一篇</span></a></li></ol>
   </nav>
 </details>
 
@@ -421,14 +432,80 @@
 <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">rail:</span></span><br><span class="line">  <span class="attr">enable:</span> <span class="literal">true</span>      <span class="comment"># 总开关，false 则左右栏都不渲染</span></span><br><span class="line">  <span class="attr">left:</span></span><br><span class="line">    <span class="attr">enable:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">right:</span></span><br><span class="line">    <span class="attr">enable:</span> <span class="literal">true</span></span><br><span class="line"></span><br><span class="line"><span class="attr">profile:</span></span><br><span class="line">  <span class="attr">enable:</span> <span class="literal">true</span>      <span class="comment"># 个人名片</span></span><br><span class="line"><span class="attr">music:</span></span><br><span class="line">  <span class="attr">enable:</span> <span class="literal">false</span>     <span class="comment"># 音乐播放器</span></span><br><span class="line"><span class="attr">category:</span></span><br><span class="line">  <span class="attr">enable:</span> <span class="literal">true</span>      <span class="comment"># 分类</span></span><br><span class="line"><span class="attr">tags:</span></span><br><span class="line">  <span class="attr">enable:</span> <span class="literal">true</span>      <span class="comment"># 标签</span></span><br><span class="line"><span class="attr">stats:</span></span><br><span class="line">  <span class="attr">enable:</span> <span class="literal">true</span>      <span class="comment"># 站点统计</span></span><br><span class="line"><span class="attr">calendar:</span></span><br><span class="line">  <span class="attr">enable:</span> <span class="literal">true</span>      <span class="comment"># 日历</span></span><br><span class="line"><span class="attr">siteinfo:</span></span><br><span class="line">  <span class="attr">enable:</span> <span class="literal">true</span>      <span class="comment"># 站点信息</span></span><br></pre></td></tr></table></figure>
 
 <p>关掉组件后，同一栏里剩下的组件会自动上移，不会留下空白。</p>
+<h3 id="侧栏分类按页面自动过滤"><a href="#侧栏分类按页面自动过滤" class="headerlink" title="侧栏分类按页面自动过滤"></a>侧栏分类按页面自动过滤</h3><p>侧栏的「分类」组件会<strong>根据当前页面自动切换分类范围</strong>，不用手动配置：</p>
+<table>
+<thead>
+<tr>
+<th>所在页面</th>
+<th>显示的分类</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>首页</td>
+<td>全部分类（文章 + 资源）</td>
+</tr>
+<tr>
+<td>文章页、文章总页、文章分类页</td>
+<td>仅文章分类</td>
+</tr>
+<tr>
+<td>资源库总页、资源类型页</td>
+<td>仅资源分类</td>
+</tr>
+</tbody></table>
+<p>这样在资源库里不会再看到一堆跟资源无关的文章分类，侧栏始终和当前内容相关。</p>
 <h2 id="深色模式"><a href="#深色模式" class="headerlink" title="深色模式"></a>深色模式</h2><p>配色模式三选一：</p>
 <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># auto 跟随系统 / dark 强制深色 / light 强制浅色</span></span><br><span class="line"><span class="attr">color_scheme:</span> <span class="string">auto</span></span><br></pre></td></tr></table></figure>
 
 <p>选 <code>auto</code> 时，导航栏右侧会出现一个太阳&#x2F;月亮按钮，访客可以手动切换，<br>选择会记在 <code>localStorage</code> 里，下次访问保持。</p>
-<h3 id="只改主色"><a href="#只改主色" class="headerlink" title="只改主色"></a>只改主色</h3><p>整个站点的按钮、角标、链接高亮、进度条都绑定同一个变量：</p>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">accent:</span> <span class="string">&#x27;#5b8cff&#x27;</span></span><br></pre></td></tr></table></figure>
+<h3 id="改主题配色"><a href="#改主题配色" class="headerlink" title="改主题配色"></a>改主题配色</h3><p>配色统一写在 <code>themes/echo/_config.yml</code> 的 <code>colors</code> 段里。<br><strong>只填你真正想改的项，其余全部由 <code>accent</code> 自动派生</strong>：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">colors:</span></span><br><span class="line">  <span class="attr">accent:</span> <span class="string">&#x27;#5b8cff&#x27;</span></span><br><span class="line">  <span class="comment"># secondary: &#x27;#8f6bff&#x27;</span></span><br></pre></td></tr></table></figure>
 
-<p>改这一个值就够了，不需要去 CSS 里逐个替换。</p>
+<p>改 <code>accent</code> 一个值，下面这些会一起变：</p>
+<table>
+<thead>
+<tr>
+<th>派生变量</th>
+<th>用途</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>--accent</code></td>
+<td>按钮、选中态、链接、角标、进度条</td>
+</tr>
+<tr>
+<td><code>--accent-soft</code></td>
+<td>主色浅底（选中项背景、资源角标底色）</td>
+</tr>
+<tr>
+<td><code>--accent-strong</code></td>
+<td>深色模式正文里的主色，保证对比度</td>
+</tr>
+<tr>
+<td><code>--accent-text</code></td>
+<td>暗色模式的行内代码色</td>
+</tr>
+<tr>
+<td><code>--accent-glow</code></td>
+<td>主色发光阴影（卡片、按钮的彩色投影）</td>
+</tr>
+<tr>
+<td><code>--secondary</code></td>
+<td>渐变辅色，留空则由 <code>accent</code> 自动提亮</td>
+</tr>
+<tr>
+<td><code>--brand-gradient</code></td>
+<td>导航栏品牌方块的渐变</td>
+</tr>
+</tbody></table>
+<p>也就是说，<strong>不需要去 CSS 里逐个替换颜色</strong>。</p>
+<p>想更精细地微调，就显式覆盖对应变量（值写任意合法 CSS 颜色）：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">colors:</span></span><br><span class="line">  <span class="attr">accent:</span> <span class="string">&#x27;#e0454f&#x27;</span></span><br><span class="line">  <span class="attr">secondary:</span> <span class="string">&#x27;#ff8a5c&#x27;</span>          <span class="comment"># 渐变第二色</span></span><br><span class="line">  <span class="attr">accent-glow:</span> <span class="string">&#x27;rgba(224, 69, 79, .35)&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p><code>colors</code> 里出现过的任何键都会输出成同名 CSS 变量，<br>所以自定义变量（如 <code>warn: &#39;#f59e0b&#39;</code>）也能在这里配。</p>
+<blockquote>
+<p>兼容性：老写法 <code>accent: &#39;#5b8cff&#39;</code> 仍然有效，等价于 <code>colors.accent</code>。</p>
+</blockquote>
 <h2 id="首页顶部大图（Hero）"><a href="#首页顶部大图（Hero）" class="headerlink" title="首页顶部大图（Hero）"></a>首页顶部大图（Hero）</h2><p>首页顶部是一块整幅大图，导航透明悬浮在图上：</p>
 <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">hero:</span></span><br><span class="line">  <span class="attr">enable:</span> <span class="literal">true</span></span><br><span class="line">  <span class="comment"># 背景图：相对 source 的路径，或完整 URL</span></span><br><span class="line">  <span class="attr">image:</span> <span class="string">/images/hero.svg</span></span><br><span class="line">  <span class="comment"># 高度，可写 520px / 60vh</span></span><br><span class="line">  <span class="attr">height:</span> <span class="string">520px</span></span><br><span class="line">  <span class="comment"># 暗色遮罩，越大文字越清晰</span></span><br><span class="line">  <span class="attr">overlay:</span> <span class="number">0.42</span></span><br><span class="line">  <span class="attr">title:</span> <span class="string">&#x27;&#x27;</span></span><br><span class="line">  <span class="attr">subtitle:</span> <span class="string">&#x27;&#x27;</span></span><br><span class="line">  <span class="attr">buttons:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">text:</span> <span class="string">进入资源库</span></span><br><span class="line">      <span class="attr">url:</span> <span class="string">/resources/</span></span><br><span class="line">      <span class="attr">icon:</span> <span class="string">layers</span></span><br><span class="line">      <span class="attr">primary:</span> <span class="literal">true</span></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">text:</span> <span class="string">浏览归档</span></span><br><span class="line">      <span class="attr">url:</span> <span class="string">/archives/</span></span><br><span class="line">      <span class="attr">icon:</span> <span class="string">archive</span></span><br><span class="line">      <span class="attr">primary:</span> <span class="literal">false</span></span><br></pre></td></tr></table></figure>
 
@@ -488,17 +565,17 @@
 </section>
 
       
-<nav class="post-nav" aria-label="上下篇">
+<nav class="post-nav " aria-label="上下篇">
   
-    <a class="post-nav-item post-nav-prev" href="/posts/5abe54fd/">
+    <a class="post-nav-item post-nav-prev" href="/posts/9237dc72/">
       <span class="post-nav-label"><svg class="icon" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 6 6 6-6 6"/></svg> 上一篇</span>
-      <strong>Echo 主题使用指南（四）：资源帖与网盘链接</strong>
+      <strong>Echo 主题使用指南（二）：安装、启用与站点配置</strong>
     </a>
   
   
-    <a class="post-nav-item post-nav-next" href="/posts/9237dc72/">
+    <a class="post-nav-item post-nav-next" href="/posts/5abe54fd/">
       <span class="post-nav-label">下一篇 <svg class="icon" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 6 6 6-6 6"/></svg></span>
-      <strong>Echo 主题使用指南（二）：安装、启用与站点配置</strong>
+      <strong>Echo 主题使用指南（四）：资源帖与网盘链接</strong>
     </a>
   
 </nav>
@@ -589,7 +666,7 @@
       <li>
         <span class="stat-label"><svg class="icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m3 17 6-6 4 4 8-8"/><path d="M21 7v6h-6"/></svg> 总字数</span>
         <span class="stat-value is-accent">
-          14,975
+          16,722
         </span>
       </li>
     
@@ -619,7 +696,7 @@
     <h3 class="rail-title"><svg class="icon" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></svg> 目录</h3>
   </div>
   <nav class="toc-body" aria-label="文章目录">
-    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E6%A0%8F%E5%B8%83%E5%B1%80%E6%98%AF%E6%80%8E%E4%B9%88%E7%BB%84%E6%88%90%E7%9A%84"><span class="toc-text">三栏布局是怎么组成的</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%BD%E5%BA%A6%E7%9B%B8%E5%85%B3%E7%9A%84%E5%9B%9B%E4%B8%AA%E5%8F%82%E6%95%B0"><span class="toc-text">宽度相关的四个参数</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%83%B3%E7%BB%99%E6%AD%A3%E6%96%87%E6%9B%B4%E5%A4%A7%E7%A9%BA%E9%97%B4"><span class="toc-text">想给正文更大空间</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8D%95%E7%8B%AC%E8%AE%BE%E7%BD%AE%E5%B7%A6%E5%8F%B3%E6%A0%8F%E5%AE%BD%E5%BA%A6"><span class="toc-text">单独设置左右栏宽度</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%93%8D%E5%BA%94%E5%BC%8F%E6%94%B6%E6%A0%8F%E9%A1%BA%E5%BA%8F"><span class="toc-text">响应式收栏顺序</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BE%A7%E6%A0%8F%E7%BB%84%E4%BB%B6%E5%BC%80%E5%85%B3"><span class="toc-text">侧栏组件开关</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B7%B1%E8%89%B2%E6%A8%A1%E5%BC%8F"><span class="toc-text">深色模式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%AA%E6%94%B9%E4%B8%BB%E8%89%B2"><span class="toc-text">只改主色</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A6%96%E9%A1%B5%E9%A1%B6%E9%83%A8%E5%A4%A7%E5%9B%BE%EF%BC%88Hero%EF%BC%89"><span class="toc-text">首页顶部大图（Hero）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8D%A2%E4%B8%80%E5%BC%A0%E8%87%AA%E5%B7%B1%E7%9A%84%E5%9B%BE"><span class="toc-text">换一张自己的图</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AF%BC%E8%88%AA%E7%9A%84%E5%9B%BA%E5%AE%9A%E8%A1%8C%E4%B8%BA"><span class="toc-text">导航的固定行为</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%86%85%E9%A1%B5%E6%A8%AA%E5%B9%85"><span class="toc-text">内页横幅</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%8B%E4%B8%80%E7%AF%87"><span class="toc-text">下一篇</span></a></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E6%A0%8F%E5%B8%83%E5%B1%80%E6%98%AF%E6%80%8E%E4%B9%88%E7%BB%84%E6%88%90%E7%9A%84"><span class="toc-text">三栏布局是怎么组成的</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%BD%E5%BA%A6%E7%9B%B8%E5%85%B3%E7%9A%84%E5%9B%9B%E4%B8%AA%E5%8F%82%E6%95%B0"><span class="toc-text">宽度相关的四个参数</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%83%B3%E7%BB%99%E6%AD%A3%E6%96%87%E6%9B%B4%E5%A4%A7%E7%A9%BA%E9%97%B4"><span class="toc-text">想给正文更大空间</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8D%95%E7%8B%AC%E8%AE%BE%E7%BD%AE%E5%B7%A6%E5%8F%B3%E6%A0%8F%E5%AE%BD%E5%BA%A6"><span class="toc-text">单独设置左右栏宽度</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%93%8D%E5%BA%94%E5%BC%8F%E6%94%B6%E6%A0%8F%E9%A1%BA%E5%BA%8F"><span class="toc-text">响应式收栏顺序</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BE%A7%E6%A0%8F%E7%BB%84%E4%BB%B6%E5%BC%80%E5%85%B3"><span class="toc-text">侧栏组件开关</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BE%A7%E6%A0%8F%E5%88%86%E7%B1%BB%E6%8C%89%E9%A1%B5%E9%9D%A2%E8%87%AA%E5%8A%A8%E8%BF%87%E6%BB%A4"><span class="toc-text">侧栏分类按页面自动过滤</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B7%B1%E8%89%B2%E6%A8%A1%E5%BC%8F"><span class="toc-text">深色模式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%94%B9%E4%B8%BB%E9%A2%98%E9%85%8D%E8%89%B2"><span class="toc-text">改主题配色</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A6%96%E9%A1%B5%E9%A1%B6%E9%83%A8%E5%A4%A7%E5%9B%BE%EF%BC%88Hero%EF%BC%89"><span class="toc-text">首页顶部大图（Hero）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8D%A2%E4%B8%80%E5%BC%A0%E8%87%AA%E5%B7%B1%E7%9A%84%E5%9B%BE"><span class="toc-text">换一张自己的图</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AF%BC%E8%88%AA%E7%9A%84%E5%9B%BA%E5%AE%9A%E8%A1%8C%E4%B8%BA"><span class="toc-text">导航的固定行为</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%86%85%E9%A1%B5%E6%A8%AA%E5%B9%85"><span class="toc-text">内页横幅</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%8B%E4%B8%80%E7%AF%87"><span class="toc-text">下一篇</span></a></li></ol>
   </nav>
 </section>
 
