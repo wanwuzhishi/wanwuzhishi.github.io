@@ -861,6 +861,18 @@ code, kbd, pre { font-family: var(--font-mono); }
   border-bottom: 1px solid var(--border);
 }
 .page-banner.has-banner { border-bottom: none; }
+/* 浅色主题下横幅是深色大图，与浅色正文之间会形成硬边；
+   在底部铺一段渐隐，让横幅平滑溶进页面底色（深色主题下自动几乎不可见）。 */
+.page-banner.has-banner::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: var(--banner-fade, 104px);
+  background: linear-gradient(180deg, transparent, var(--bg) 94%);
+  pointer-events: none;
+}
 .page-banner-scrim {
   position: absolute;
   inset: 0;
@@ -869,11 +881,16 @@ code, kbd, pre { font-family: var(--font-mono); }
 }
 .page-banner-inner {
   position: relative;
+  z-index: 1;
   max-width: var(--layout-max);
   margin: 0 auto;
   padding: 30px 24px 34px;
 }
+/* 有横幅时给底部渐隐留出空间，避免卡片被渐变压住 */
+.page-banner.has-banner .page-banner-inner { padding-bottom: calc(34px + var(--banner-fade, 104px) * .55); }
 .page-banner-card {
+  position: relative;
+  z-index: 1;
   padding: 22px 24px;
   border-radius: var(--radius);
   background: color-mix(in srgb, var(--bg-elev) 82%, transparent);
@@ -894,7 +911,8 @@ code, kbd, pre { font-family: var(--font-mono); }
   font-weight: 800;
   letter-spacing: -.02em;
 }
-.page-banner-title .icon { color: var(--accent); }
+/* 图标跟随标题文字色，不再单独用主色蓝——横幅标题是一个整体 */
+.page-banner-title .icon { color: currentColor; opacity: .85; }
 .page-banner.has-banner .page-banner-title,
 .page-banner.has-banner .page-banner-desc { color: #fff; }
 .page-banner-desc { margin: 0; font-size: 14px; color: var(--text-soft); }
@@ -906,6 +924,145 @@ code, kbd, pre { font-family: var(--font-mono); }
   .page-banner-card { padding: 18px 18px; }
   .post-grid, .resource-grid { grid-template-columns: 1fr; }
 }
+
+/* ==========================================================================
+   浅色主题下的横幅配色
+   浅色页面里深色大图 + 深色蒙层会又闷又割裂，所以浅色主题整套换成
+   「明亮浅蓝」配色：取消大图与蒙层，底色用 --banner-light 浅蓝，
+   文字/图标用高对比深色，边界靠细描边而不是重投影。
+
+   注意选择器：除了 [data-theme='light']（JS 手动/自动解析后的值），
+   还要覆盖 prefers-color-scheme: light —— 因为 auto 模式下 <html>
+   上的 data-theme 要等 JS 执行后才有值，JS 未跑完/被缓存时若只写
+   [data-theme='light'] 就会退回深色大图，出现「发灰」闪帧。
+   ========================================================================== */
+
+/* --- 1. 顶部导航横幅：明亮浅蓝 --- */
+[data-theme='light'] .site-header-bg,
+[data-theme='light'] .page-banner,
+[data-theme-hint='light'] .site-header-bg,
+[data-theme-hint='light'] .page-banner {
+  background-image: none !important;
+}
+/* 关掉深色蒙层与深色叠加层——它们是浅色下发灰看不清的元凶 */
+[data-theme='light'] .site-header-bg.has-banner::after,
+[data-theme='light'] .site-header-scrim,
+[data-theme-hint='light'] .site-header-bg.has-banner::after,
+[data-theme-hint='light'] .site-header-scrim { display: none; }
+[data-theme='light'] .site-header-bg,
+[data-theme='light'] .site-header-bg.has-banner,
+[data-theme-hint='light'] .site-header-bg,
+[data-theme-hint='light'] .site-header-bg.has-banner {
+  background:
+    radial-gradient(760px 340px at 12% -40%, color-mix(in srgb, #fff 55%, transparent), transparent 70%),
+    linear-gradient(180deg, var(--banner-light) 0%, color-mix(in srgb, var(--banner-light) 55%, #fff) 100%) !important;
+}
+/* 浅蓝底上用常规描边收边 */
+[data-theme='light'] .site-header:not(.has-hero):not(.is-scrolled).has-banner,
+[data-theme-hint='light'] .site-header:not(.has-hero):not(.is-scrolled).has-banner {
+  border-bottom: 1px solid var(--banner-light-line);
+}
+/* 文字与图标：高对比深色（在浅蓝上清晰可读） */
+[data-theme='light'] .site-header:not(.has-hero):not(.is-scrolled) .brand-text strong,
+[data-theme='light'] .site-header:not(.has-hero):not(.is-scrolled).has-banner .brand-text strong,
+[data-theme-hint='light'] .site-header:not(.has-hero):not(.is-scrolled) .brand-text strong,
+[data-theme-hint='light'] .site-header:not(.has-hero):not(.is-scrolled).has-banner .brand-text strong { color: #0f172a; }
+[data-theme='light'] .site-header:not(.has-hero):not(.is-scrolled) .brand-text small,
+[data-theme='light'] .site-header:not(.has-hero):not(.is-scrolled).has-banner .brand-text small,
+[data-theme-hint='light'] .site-header:not(.has-hero):not(.is-scrolled) .brand-text small,
+[data-theme-hint='light'] .site-header:not(.has-hero):not(.is-scrolled).has-banner .brand-text small { color: #475569; }
+[data-theme='light'] .site-header:not(.has-hero):not(.is-scrolled) .nav-link,
+[data-theme='light'] .site-header:not(.has-hero):not(.is-scrolled).has-banner .nav-link,
+[data-theme-hint='light'] .site-header:not(.has-hero):not(.is-scrolled) .nav-link,
+[data-theme-hint='light'] .site-header:not(.has-hero):not(.is-scrolled).has-banner .nav-link { color: #1e293b; }
+[data-theme='light'] .site-header:not(.has-hero):not(.is-scrolled).has-banner .nav-link:hover,
+[data-theme='light'] .site-header:not(.has-hero):not(.is-scrolled).has-banner .nav-link.is-active,
+[data-theme-hint='light'] .site-header:not(.has-hero):not(.is-scrolled).has-banner .nav-link:hover,
+[data-theme-hint='light'] .site-header:not(.has-hero):not(.is-scrolled).has-banner .nav-link.is-active {
+  background: color-mix(in srgb, #fff 62%, transparent);
+  color: #0f172a;
+}
+[data-theme='light'] .site-header:not(.has-hero):not(.is-scrolled) .icon-btn,
+[data-theme='light'] .site-header:not(.has-hero):not(.is-scrolled).has-banner .icon-btn,
+[data-theme-hint='light'] .site-header:not(.has-hero):not(.is-scrolled) .icon-btn,
+[data-theme-hint='light'] .site-header:not(.has-hero):not(.is-scrolled).has-banner .icon-btn { color: #334155; }
+[data-theme='light'] .site-header:not(.has-hero):not(.is-scrolled).has-banner .icon-btn:hover,
+[data-theme-hint='light'] .site-header:not(.has-hero):not(.is-scrolled).has-banner .icon-btn:hover {
+  background: color-mix(in srgb, #fff 62%, transparent);
+  color: #0f172a;
+}
+[data-theme='light'] .site-header:not(.has-hero):not(.is-scrolled).has-banner .brand-mark,
+[data-theme-hint='light'] .site-header:not(.has-hero):not(.is-scrolled).has-banner .brand-mark { box-shadow: var(--shadow-sm); }
+
+/* --- 2. 内页横幅：明亮浅蓝 + 白卡片 --- */
+[data-theme='light'] .page-banner,
+[data-theme='light'] .page-banner.has-banner,
+[data-theme-hint='light'] .page-banner,
+[data-theme-hint='light'] .page-banner.has-banner {
+  background:
+    radial-gradient(900px 360px at 8% -30%, color-mix(in srgb, #fff 50%, transparent), transparent 72%),
+    linear-gradient(165deg, var(--banner-light) 0%, color-mix(in srgb, var(--banner-light) 45%, #fff) 100%) !important;
+  border-bottom: 1px solid var(--banner-light-line);
+}
+[data-theme='light'] .page-banner-scrim,
+[data-theme-hint='light'] .page-banner-scrim { display: none; }
+/* 横幅本身已是浅色，底部渐隐不需要了 */
+[data-theme='light'] .page-banner.has-banner::after,
+[data-theme-hint='light'] .page-banner.has-banner::after { display: none; }
+[data-theme='light'] .page-banner.has-banner .page-banner-inner,
+[data-theme-hint='light'] .page-banner.has-banner .page-banner-inner { padding-bottom: 34px; }
+/* 卡片实心白 + 浅蓝描边 */
+[data-theme='light'] .page-banner.has-banner .page-banner-card,
+[data-theme='light'] .page-banner .page-banner-card,
+[data-theme-hint='light'] .page-banner.has-banner .page-banner-card,
+[data-theme-hint='light'] .page-banner .page-banner-card {
+  background: #fff;
+  border: 1px solid var(--banner-light-line);
+  box-shadow: 0 2px 12px color-mix(in srgb, #0f172a 8%, transparent);
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+[data-theme='light'] .page-banner.has-banner .page-banner-title,
+[data-theme='light'] .page-banner .page-banner-title,
+[data-theme-hint='light'] .page-banner.has-banner .page-banner-title,
+[data-theme-hint='light'] .page-banner .page-banner-title { color: #0f172a; }
+[data-theme='light'] .page-banner.has-banner .page-banner-title .icon,
+[data-theme='light'] .page-banner .page-banner-title .icon,
+[data-theme-hint='light'] .page-banner.has-banner .page-banner-title .icon,
+[data-theme-hint='light'] .page-banner .page-banner-title .icon { color: currentColor; }
+[data-theme='light'] .page-banner.has-banner .page-banner-desc,
+[data-theme='light'] .page-banner .page-banner-desc,
+[data-theme-hint='light'] .page-banner.has-banner .page-banner-desc,
+[data-theme-hint='light'] .page-banner .page-banner-desc { color: #475569; }
+[data-theme='light'] .page-banner.has-banner .page-banner-desc strong,
+[data-theme='light'] .page-banner .page-banner-desc strong,
+[data-theme-hint='light'] .page-banner.has-banner .page-banner-desc strong,
+[data-theme-hint='light'] .page-banner .page-banner-desc strong { color: var(--accent-text); }
+
+/* --- 3. 窄屏抽屉导航 ---
+   抽屉是自带实底（background: var(--bg-elev)）的浮层，不属于「导航有实底」，
+   但它的链接会继承 hero 悬浮态的白字，浅色主题下就成了白底白字。
+   所以这里在 ≤900px 时强制改回跟随主题的文字色。
+   注意：抽屉关闭时不可见，但为了 tab 键可达性保持可读配色即可。 */
+@media (max-width: 900px) {
+  [data-theme='light'] .site-nav .nav-link,
+  [data-theme-hint='light'] .site-nav .nav-link { color: #1e293b; }
+  [data-theme='light'] .site-nav .nav-link:hover,
+  [data-theme='light'] .site-nav .nav-link.is-active,
+  [data-theme-hint='light'] .site-nav .nav-link:hover,
+  [data-theme-hint='light'] .site-nav .nav-link.is-active {
+    background: var(--accent-soft);
+    color: var(--accent-text);
+  }
+  /* 抽屉底色在浅色下是纯白，给一点分隔层次 */
+  [data-theme='light'] .site-nav,
+  [data-theme-hint='light'] .site-nav {
+    background: var(--bg-elev);
+    border-bottom: 1px solid var(--border);
+  }
+}
+
+
 
 /* ==========================================================================
    Post single
@@ -1595,11 +1752,13 @@ figure.highlight:hover > .code-copy { opacity: 1; }
 .rail-title .icon { color: var(--accent); }
 
 /* ---------- 个人名片 ---------- */
+/* 尺寸可经配置覆盖：--avatar-size / --icon-size（由 profile.ejs 内联输出） */
 .profile-card { text-align: center; padding-top: 18px; }
+.profile-card .rail-head { text-align: left; }
 .profile-avatar-wrap {
   position: relative;
-  width: 96px;
-  height: 96px;
+  width: var(--avatar-size, 96px);
+  height: var(--avatar-size, 96px);
   margin: 0 auto 12px;
 }
 .profile-avatar {
@@ -1610,11 +1769,33 @@ figure.highlight:hover > .code-copy { opacity: 1; }
   border: 2px solid var(--bg-elev);
   box-shadow: 0 0 0 3px var(--accent-soft), var(--shadow-sm);
 }
+/* 头像角标（如「博主」「V」等） */
+.profile-badge {
+  position: absolute;
+  right: -2px;
+  bottom: -2px;
+  padding: 2px 7px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 1.6;
+  color: #fff;
+  background: var(--accent);
+  border: 2px solid var(--bg-elev);
+  box-shadow: var(--shadow-sm);
+}
 .profile-name { margin: 0 0 6px; font-size: 15.5px; font-weight: 700; }
 .profile-bio {
   margin: 0;
   font-size: 12.5px;
   line-height: 1.65;
+  color: var(--text-mute);
+}
+.profile-social-title {
+  margin: 14px 0 0;
+  font-size: 11.5px;
+  font-weight: 600;
+  letter-spacing: .04em;
   color: var(--text-mute);
 }
 .profile-social {
@@ -1624,11 +1805,12 @@ figure.highlight:hover > .code-copy { opacity: 1; }
   gap: 8px;
   margin-top: 14px;
 }
+.profile-social-title + .profile-social { margin-top: 8px; }
 .social-btn {
   display: grid;
   place-items: center;
-  width: 34px;
-  height: 34px;
+  width: calc(var(--icon-size, 19px) + 15px);
+  height: calc(var(--icon-size, 19px) + 15px);
   border-radius: 10px;
   background: var(--bg-sunken);
   border: 1px solid var(--border-soft);
