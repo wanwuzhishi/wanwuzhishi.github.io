@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" width="800" height="450" role="img" aria-label="小林家的龙女仆 2017 电视动画">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="1" x2="1" y2="0">
+      <stop offset="0" stop-color="#071b33"/>
+      <stop offset=".55" stop-color="#12496f"/>
+      <stop offset="1" stop-color="#2a8f96"/>
+    </linearGradient>
+    <!-- 龙鳞纹理：交错的半圆弧 -->
+    <pattern id="scale" width="56" height="32" patternUnits="userSpaceOnUse">
+      <path d="M0 32a28 28 0 0 1 56 0" fill="none" stroke="#ffffff" stroke-opacity=".10" stroke-width="1.4"/>
+      <path d="M-28 32a28 28 0 0 1 56 0M28 32a28 28 0 0 1 56 0" fill="none" stroke="#ffffff" stroke-opacity=".05" stroke-width="1.4"/>
+    </pattern>
+    <!-- 托尔发色的一条暖色光带，压住整体冷调 -->
+    <linearGradient id="glow" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#7ad3c4" stop-opacity=".55"/>
+      <stop offset="1" stop-color="#7ad3c4" stop-opacity="0"/>
+    </linearGradient>
+    <!-- 底部压暗，保证白色文字对比度 -->
+    <linearGradient id="shade" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#04101f" stop-opacity="0"/>
+      <stop offset=".55" stop-color="#04101f" stop-opacity=".55"/>
+      <stop offset="1" stop-color="#04101f" stop-opacity=".85"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="800" height="450" fill="url(#bg)"/>
+  <rect width="800" height="450" fill="url(#scale)"/>
+  <rect width="800" height="450" fill="url(#glow)"/>
+
+  <!-- 右上角光源 -->
+  <circle cx="672" cy="82" r="148" fill="#ffffff" fill-opacity=".08"/>
+  <circle cx="672" cy="82" r="82" fill="#ffffff" fill-opacity=".10"/>
+  <!-- 左下角压暗的龙尾剪影 -->
+  <path d="M40 450c60-34 74-92 40-140-18-25-14-48 12-64 34-21 78-4 90 34 12 39-16 74-54 82-26 6-38 30-30 62 6 22 4 44-6 64z"
+        fill="#04101f" fill-opacity=".30"/>
+  <rect width="800" height="450" fill="url(#shade)"/>
+
+  <!-- 角标：小标签 -->
+  <g transform="translate(58 74)">
+    <rect x="0" y="0" width="196" height="30" rx="15" fill="#7ad3c4" fill-opacity=".22" stroke="#7ad3c4" stroke-opacity=".55"/>
+    <text x="98" y="20" text-anchor="middle" font-family="Inter, 'Noto Sans SC', sans-serif"
+          font-size="13" letter-spacing="2" fill="#bff0e8" fill-opacity=".95">2017 · 京都动画</text>
+  </g>
+
+  <!-- 主标题 -->
+  <text x="56" y="228" font-family="'Noto Sans SC', 'Source Han Sans SC', sans-serif"
+        font-size="62" font-weight="700" fill="#ffffff" fill-opacity=".97"
+        letter-spacing="2">小林家的龙女仆</text>
+
+  <!-- 装饰细线 -->
+  <rect x="58" y="252" width="74" height="2" fill="#7ad3c4" fill-opacity=".8"/>
+
+  <!-- 副标题 -->
+  <text x="58" y="292" font-family="Inter, 'Noto Sans SC', sans-serif"
+        font-size="19" letter-spacing="1.2" fill="#dceaf2" fill-opacity=".78">Kobayashi-san Chi no Maid Dragon</text>
+
+  <!-- 信息行 -->
+  <text x="58" y="336" font-family="'Noto Sans SC', sans-serif"
+        font-size="15" fill="#c7dbe6" fill-opacity=".62">电视动画 · 全 13 话 + OVA · 改编自酷教信者同名漫画</text>
+</svg>
