@@ -2,6 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://blog.126330.xyz/posts/57eaa899/</loc>
+    
+    <lastmod>2026-10-19</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://blog.126330.xyz/posts/11155126/</loc>
     
     <lastmod>2026-10-08</lastmod>
@@ -425,6 +434,41 @@
     <priority>0.2</priority>
   </url>
   
+  <url>
+    <loc>https://blog.126330.xyz/tags/hosts/</loc>
+    <lastmod>2026-10-19</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.126330.xyz/tags/GitHub/</loc>
+    <lastmod>2026-10-19</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.126330.xyz/tags/Cloudflare/</loc>
+    <lastmod>2026-10-19</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.126330.xyz/tags/%E7%BD%91%E7%BB%9C%E4%BC%98%E5%8C%96/</loc>
+    <lastmod>2026-10-19</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.126330.xyz/tags/%E5%BC%80%E6%BA%90%E5%B7%A5%E5%85%B7/</loc>
+    <lastmod>2026-10-19</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
 
   
   <url>
@@ -478,6 +522,13 @@
   
   <url>
     <loc>https://blog.126330.xyz/categories/%E4%B8%BB%E9%A2%98%E6%8C%87%E5%8D%97/</loc>
+    <lastmod>2026-10-19</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.126330.xyz/categories/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E5%85%B7/</loc>
     <lastmod>2026-10-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>

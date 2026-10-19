@@ -6,7 +6,7 @@
   <link href="https://blog.126330.xyz/atom.xml" rel="self"/>
   
   <link href="https://blog.126330.xyz/"/>
-  <updated>2026-10-08T12:30:00.000Z</updated>
+  <updated>2026-10-19T07:43:00.000Z</updated>
   <id>https://blog.126330.xyz/</id>
   
   <author>
@@ -15,6 +15,35 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>hosts-opt：给 GitHub、Cloudflare、Vercel 挑一个更快的 IP</title>
+    <link href="https://blog.126330.xyz/posts/57eaa899/"/>
+    <id>https://blog.126330.xyz/posts/57eaa899/</id>
+    <published>2026-10-19T07:43:00.000Z</published>
+    <updated>2026-10-19T07:43:00.000Z</updated>
+    
+    <content type="html"><![CDATA[<span id="more"></span><p>访问 GitHub 慢，很多时候不是带宽不够，而是域名被解析到了一个并不适合当前网络的 IP。网上现成的 hosts 文件更新频率有限，而且同一组 IP 在不同地区、不同运营商下的效果可能完全相反。</p><p><strong>hosts-opt</strong> 是我写的一个 Windows 小工具：把多个公开 hosts 源和 Cloudflare、Vercel 的候选 IP 汇总起来，在本机逐个做真实的 TCP + TLS 握手测速，再把当前网络下真正能连通的 IP 写进系统 hosts。</p><h2 id="它解决什么问题"><a href="#它解决什么问题" class="headerlink" title="它解决什么问题"></a>它解决什么问题</h2><ul><li><strong>多源合并</strong>：同时拉取 GitHub520、ineo6&#x2F;hosts、maxiaof&#x2F;github-hosts 三个公开源，某个源失效时自动回退到本地缓存。</li><li><strong>本地真实测速</strong>：不是 ping，而是对每个「域名 + IP」完成带 SNI 和证书校验的 TLS 握手，默认采样 3 次取中位数，优先选择全部采样成功的 IP。</li><li><strong>Cloudflare &#x2F; Vercel 优选</strong>：从 IPDB 的 <code>bestcf</code> 榜单和内置的 Vercel Anycast 地址里取候选，再按本机延迟挑选。</li><li><strong>可视化确认</strong>：图形界面能看到每个域名最终选中的 IP、延迟、采样成功率和来源，应用后还会自动检测连通性。</li><li><strong>安全可回退</strong>：只修改 hosts 里带标记的托管块，首次写入前永久保留原始备份，每次写入前自动备份，随时可以回退。</li><li><strong>定时刷新</strong>：通过 Windows 计划任务按 1–24 小时的间隔自动重新测速和更新，CDN 波动时不用手动折腾。</li></ul><h2 id="工作流程"><a href="#工作流程" class="headerlink" title="工作流程"></a>工作流程</h2><ol><li><strong>拉取 GitHub hosts 源</strong>：并发请求配置里的三个源，成功结果写入 <code>cache/</code>。</li><li><strong>拉取 IP 池</strong>：读取 IPDB 的 Cloudflare <code>bestcf</code> 列表和内置的 Vercel Anycast IP。</li><li><strong>DoH 补候选</strong>：对候选不足的域名，用腾讯 <code>doh.pub</code> 和阿里 <code>dns.alidns.com</code> 补充解析结果。</li><li><strong>本地测速</strong>：对每个候选 IP 建立 TCP 连接并完成 TLS 握手，记录延迟和成功次数。</li><li><strong>选优</strong>：优先选全部采样成功的 IP；延迟接近时保持上一轮结果，避免频繁切换。</li><li><strong>写入</strong>：生成托管块、备份原文件、替换块内容、刷新 DNS；IP 映射没变化时直接跳过。</li></ol><h2 id="快速开始"><a href="#快速开始" class="headerlink" title="快速开始"></a>快速开始</h2><ol><li>从 <a href="https://github.com/wanwuzhishi/hosts-opt/releases/latest">Releases</a> 下载 <code>hosts-opt-1.0.0-windows-x64.zip</code>。</li><li>解压到一个固定目录，双击 <code>hosts-opt.exe</code>，无需安装 Python。</li><li>点击「拉取并测速」先预览结果，这一步不需要管理员权限，也不会修改系统 hosts。</li><li>在「选中结果」「连通性」「候选明细」里确认 IP 和延迟。</li><li>点击「应用 hosts」，按提示以管理员身份重启并写入。</li><li>需要自动更新时，设置间隔小时数后点击「安装任务」。</li></ol><blockquote><p>EXE 没有代码签名，Windows SmartScreen 可能提示「未知发布者」。可以核对 Release 页面提供的 SHA256，或者从源码运行、自行构建。</p></blockquote><h2 id="命令行用法"><a href="#命令行用法" class="headerlink" title="命令行用法"></a>命令行用法</h2><p>发布版在 <code>hosts-opt.exe</code> 后加 <code>--cli</code> 即可使用命令行模式：</p><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 只预览，不写系统 hosts</span></span><br><span class="line">.\hosts<span class="literal">-opt</span>.exe <span class="literal">--cli</span> update <span class="literal">--verbose</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看前 5 个候选的测速结果</span></span><br><span class="line">.\hosts<span class="literal">-opt</span>.exe <span class="literal">--cli</span> update <span class="literal">--verbose</span> <span class="literal">--top</span> <span class="number">5</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 写入系统 hosts（需要管理员 PowerShell）</span></span><br><span class="line">.\hosts<span class="literal">-opt</span>.exe <span class="literal">--cli</span> update <span class="literal">--apply</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 备份、列出备份、回退</span></span><br><span class="line">.\hosts<span class="literal">-opt</span>.exe <span class="literal">--cli</span> backup</span><br><span class="line">.\hosts<span class="literal">-opt</span>.exe <span class="literal">--cli</span> rollback <span class="literal">--list</span></span><br><span class="line">.\hosts<span class="literal">-opt</span>.exe <span class="literal">--cli</span> rollback</span><br><span class="line"></span><br><span class="line"><span class="comment"># 只移除本工具写入的托管块</span></span><br><span class="line">.\hosts<span class="literal">-opt</span>.exe <span class="literal">--cli</span> restore</span><br></pre></td></tr></table></figure><p>源码模式把 <code>.\hosts-opt.exe --cli</code> 换成 <code>python hosts_opt.py</code> 即可。离线环境下可以加 <code>--offline</code>，只使用缓存的源和 IP 池，仍然会做本地测速。</p><h2 id="安全与回退"><a href="#安全与回退" class="headerlink" title="安全与回退"></a>安全与回退</h2><p>工具只会修改下面这对标记之间的内容：</p><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># &gt;&gt;&gt; hosts-opt managed block begin &gt;&gt;&gt;</span><br><span class="line">...</span><br><span class="line"># &lt;&lt;&lt; hosts-opt managed block end &lt;&lt;&lt;</span><br></pre></td></tr></table></figure><p>hosts 里的其他内容原样保留。几个关键保护：</p><ul><li>首次写入前创建 <code>backups/hosts.original.bak</code>，永久保留，不会被自动清理。</li><li>每次写入前创建带时间戳的自动备份，默认保留最近 10 份。</li><li>回退前会再备份一次当前 hosts，所以回退本身也可以撤销。</li><li>开始标记存在但结束标记缺失时直接中止，不修改文件。</li><li>运行期间使用文件锁，避免 GUI 和计划任务同时写入。</li></ul><p>注意 <code>restore</code> 和 <code>rollback</code> 的区别：<code>restore</code> 只删除本工具写入的托管块，hosts 其他内容不动；<code>rollback</code> 是用备份文件完整覆盖当前 hosts。</p><h2 id="使用限制"><a href="#使用限制" class="headerlink" title="使用限制"></a>使用限制</h2><ul><li><strong>代理和 VPN</strong>：如果浏览器走 HTTP&#x2F;HTTPS 代理，DNS 通常在代理端解析，hosts 基本无效；TUN 模式或全局 VPN 也可能绕过 hosts。</li><li><strong>Cloudflare 模式</strong>：只对 Cloudflare 代理的域名有效，且应使用 <code>bestcf</code> 这类官方边缘 IP，不要用第三方反代 IP，否则容易出现证书不匹配。</li><li><strong>Vercel 模式</strong>：Anycast IP 数量少，收益通常小于 Cloudflare；<code>*.vercel.app</code> 无法用 hosts 通配。</li><li><strong>Notion 加速</strong>：可选的 NotionFaster 是第三方 TCP 反代，默认关闭；启用后连接会经过第三方服务器，请自行评估信任和隐私风险。</li><li><strong>不是万能加速</strong>：hosts 只能解决「解析到较优 IP」，无法绕过带宽限制、丢包或链路拥塞；TLS 握手快也不等于下载速度快。</li></ul><h2 id="数据来源"><a href="#数据来源" class="headerlink" title="数据来源"></a>数据来源</h2><p>项目能工作，主要依赖这些公开项目的持续维护：</p><ul><li><a href="https://github.com/521xueweihan/GitHub520">521xueweihan&#x2F;GitHub520</a>：GitHub hosts 源</li><li><a href="https://github.com/ineo6/hosts">ineo6&#x2F;hosts</a>：GitHub hosts 源，MIT</li><li><a href="https://github.com/maxiaof/github-hosts">maxiaof&#x2F;github-hosts</a>：GitHub hosts 源</li><li><a href="https://github.com/ymyuuu/IPDB">ymyuuu&#x2F;IPDB</a>：Cloudflare <code>bestcf</code> 优选 IP，MIT</li><li><a href="https://notionfaster.org/">NotionFaster</a>：可选的第三方 Notion 反代，默认关闭</li><li><a href="https://pyinstaller.org/">PyInstaller</a>：构建 Windows EXE</li></ul><p>项目代码采用 MIT 许可证，完整的第三方声明见仓库里的 <code>THIRD_PARTY_NOTICES.md</code>。如果这个工具帮到了你，欢迎在 GitHub 上提 issue 或点个 star。</p>]]></content>
+    
+    
+    <summary type="html">Windows 上的 hosts 优化工具：多源拉取 GitHub hosts，在本机做 TCP + TLS 测速，支持 Cloudflare / Vercel 优选、备份回退与定时刷新，附 v1.0.0 下载。</summary>
+    
+    
+    
+    <category term="软件工具" scheme="https://blog.126330.xyz/categories/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E5%85%B7/"/>
+    
+    
+    <category term="hosts" scheme="https://blog.126330.xyz/tags/hosts/"/>
+    
+    <category term="GitHub" scheme="https://blog.126330.xyz/tags/GitHub/"/>
+    
+    <category term="Cloudflare" scheme="https://blog.126330.xyz/tags/Cloudflare/"/>
+    
+    <category term="网络优化" scheme="https://blog.126330.xyz/tags/%E7%BD%91%E7%BB%9C%E4%BC%98%E5%8C%96/"/>
+    
+    <category term="开源工具" scheme="https://blog.126330.xyz/tags/%E5%BC%80%E6%BA%90%E5%B7%A5%E5%85%B7/"/>
+    
+  </entry>
   
   <entry>
     <title>小林家的龙女仆 (2017)</title>
@@ -498,31 +527,6 @@
     <category term="整合版" scheme="https://blog.126330.xyz/tags/%E6%95%B4%E5%90%88%E7%89%88/"/>
     
     <category term="演示" scheme="https://blog.126330.xyz/tags/%E6%BC%94%E7%A4%BA/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>演示：影视资源《示例电影》4K 蓝光原盘</title>
-    <link href="https://blog.126330.xyz/posts/76ddbdea/"/>
-    <id>https://blog.126330.xyz/posts/76ddbdea/</id>
-    <published>2026-09-30T12:10:00.000Z</published>
-    <updated>2026-09-30T12:10:00.000Z</updated>
-    
-    <content type="html"><![CDATA[<span id="more"></span><h2 id="影片信息"><a href="#影片信息" class="headerlink" title="影片信息"></a>影片信息</h2><table><thead><tr><th>项目</th><th>内容</th></tr></thead><tbody><tr><td>片名</td><td>示例电影</td></tr><tr><td>年份</td><td>2026</td></tr><tr><td>分辨率</td><td>3840 × 2160（4K HDR）</td></tr><tr><td>音轨</td><td>国语 DTS-HD 5.1</td></tr><tr><td>字幕</td><td>中英双语（外挂 + 内嵌）</td></tr></tbody></table><h2 id="资源说明"><a href="#资源说明" class="headerlink" title="资源说明"></a>资源说明</h2><p>本资源为 4K 蓝光原盘 Remux，保留完整音轨与字幕，适合大屏观看。</p><ul><li>视频：HEVC 10bit，码率约 45 Mbps</li><li>音轨：国语 DTS-HD MA 5.1、英语 AC3 5.1</li><li>字幕：简中、繁中、中英双语</li></ul><h2 id="播放建议"><a href="#播放建议" class="headerlink" title="播放建议"></a>播放建议</h2><p>推荐使用 <strong>PotPlayer</strong> 或 <strong>MPV</strong> 播放，显卡硬解支持 HEVC 10bit 即可流畅播放。</p><blockquote><p>注意：本页仅为排版演示，网盘链接为占位地址。</p></blockquote>]]></content>
-    
-    
-    <summary type="html">这是一条资源演示，展示影视类资源在主题里的完整呈现方式。</summary>
-    
-    
-    
-    <category term="影视资源" scheme="https://blog.126330.xyz/categories/%E5%BD%B1%E8%A7%86%E8%B5%84%E6%BA%90/"/>
-    
-    
-    <category term="演示" scheme="https://blog.126330.xyz/tags/%E6%BC%94%E7%A4%BA/"/>
-    
-    <category term="电影" scheme="https://blog.126330.xyz/tags/%E7%94%B5%E5%BD%B1/"/>
-    
-    <category term="4K" scheme="https://blog.126330.xyz/tags/4K/"/>
     
   </entry>
   
