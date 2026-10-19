@@ -26,7 +26,7 @@
 
 
 
-<meta property="og:image" content="/images/covers/hexo-theme.svg">
+<meta property="og:image" content="https://blog.126330.xyz/images/covers/hexo-theme.svg">
 
 
 
@@ -37,6 +37,12 @@
 
 
 <link rel="canonical" href="https://blog.126330.xyz/posts/bb3f690/">
+
+
+
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Echo 主题使用指南（五）：写作、代码块与文章页","description":"Echo 主题指南第五篇：front-matter 全字段说明、摘要与封面、代码块样式、目录、上下篇与文章页其它功能。","url":"https://blog.126330.xyz/posts/bb3f690/","mainEntityOfPage":{"@type":"WebPage","@id":"https://blog.126330.xyz/posts/bb3f690/"},"datePublished":"2026-10-06T03:00:00.000Z","dateModified":"2026-10-07T02:00:00.000Z","author":{"@type":"Person","name":"万物之时"},"publisher":{"@type":"Organization","name":"万物之时","logo":{"@type":"ImageObject","url":"https://blog.126330.xyz/favicon.png"}},"inLanguage":"zh-CN","isPartOf":{"@type":"Blog","name":"万物之时","url":"https://blog.126330.xyz/"},"image":["https://blog.126330.xyz/images/covers/hexo-theme.svg"],"keywords":"Echo 主题, 教程, Markdown, 写作","articleSection":"主题指南"}</script>
+
+
 <link rel="alternate" type="application/atom+xml" href="/atom.xml" title="万物之时">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -313,19 +319,19 @@
     
       <a class="tag-chip" href="/tags/RE3R/">RE3R</a>
     
-      <a class="tag-chip" href="/tags/%E5%8D%95%E6%9C%BA%E6%B8%B8%E6%88%8F/">单机游戏</a>
-    
-      <a class="tag-chip" href="/tags/%E6%95%B4%E5%90%88%E7%89%88/">整合版</a>
-    
-      <a class="tag-chip" href="/tags/MOD/">MOD</a>
-    
-      <a class="tag-chip" href="/tags/%E7%8E%A9%E6%B3%95%E6%89%A9%E5%B1%95/">玩法扩展</a>
-    
       <a class="tag-chip" href="/tags/%E5%B7%A5%E5%85%B7/">工具</a>
+    
+      <a class="tag-chip" href="/tags/%E7%94%9F%E5%8C%96%E5%8D%B1%E6%9C%BA2/">生化危机2</a>
+    
+      <a class="tag-chip" href="/tags/RE2/">RE2</a>
+    
+      <a class="tag-chip" href="/tags/CabbyCodes/">CabbyCodes</a>
     
       <a class="tag-chip" href="/tags/SEO/">SEO</a>
     
       <a class="tag-chip" href="/tags/%E6%8A%98%E8%85%BE%E8%AE%B0%E5%BD%95/">折腾记录</a>
+    
+      <a class="tag-chip" href="/tags/MOD/">MOD</a>
     
   </div>
 </section>
@@ -338,8 +344,8 @@
     <article class="post-single ">
       <header class="post-header">
         <div class="post-chips">
-          <span class="chip"><svg class="icon" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m3 17 6-6 4 4 8-8"/><path d="M21 7v6h-6"/></svg> 1259 字</span>
-          <span class="chip"><svg class="icon" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> 4 分钟</span>
+          <span class="chip"><svg class="icon" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m3 17 6-6 4 4 8-8"/><path d="M21 7v6h-6"/></svg> 1369 字</span>
+          <span class="chip"><svg class="icon" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> 5 分钟</span>
           
         </div>
 
@@ -390,7 +396,7 @@
     <span class="toc-inline-hint">点击展开 / 收起</span>
   </summary>
   <nav class="toc-body toc-inline-body" aria-label="文章目录">
-    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%B0%E5%BB%BA%E4%B8%80%E7%AF%87%E6%96%87%E7%AB%A0"><span class="toc-text">新建一篇文章</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#front-matter-%E5%85%A8%E5%AD%97%E6%AE%B5"><span class="toc-text">front-matter 全字段</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%B3%E4%BA%8E-cover"><span class="toc-text">关于 cover</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%91%98%E8%A6%81%E4%B8%8E"><span class="toc-text">摘要与 &lt;!-- more --&gt;</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81%E5%9D%97"><span class="toc-text">代码块</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A1%8C%E5%86%85%E4%BB%A3%E7%A0%81"><span class="toc-text">行内代码</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%87%E7%AB%A0%E7%9B%AE%E5%BD%95"><span class="toc-text">文章目录</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%87%E7%AB%A0%E9%A1%B5%E5%85%B6%E5%AE%83%E5%BC%80%E5%85%B3"><span class="toc-text">文章页其它开关</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AF%BC%E8%88%AA%E8%8F%9C%E5%8D%95"><span class="toc-text">导航菜单</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%87%E7%AB%A0%E5%88%86%E7%B1%BB%E5%AF%BC%E8%88%AA"><span class="toc-text">文章分类导航</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%86%85%E5%AE%B9%E6%8E%92%E5%BA%8F"><span class="toc-text">内容排序</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%8A%E4%B8%80%E7%AF%87-%E4%B8%8B%E4%B8%80%E7%AF%87"><span class="toc-text">上一篇 &#x2F; 下一篇</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AB%99%E7%82%B9%E5%9B%BE%E6%A0%87"><span class="toc-text">站点图标</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%8B%AC%E7%AB%8B%E9%A1%B5%E9%9D%A2"><span class="toc-text">独立页面</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AB%99%E5%86%85%E6%90%9C%E7%B4%A2"><span class="toc-text">站内搜索</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%8B%E4%B8%80%E7%AF%87"><span class="toc-text">下一篇</span></a></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%B0%E5%BB%BA%E4%B8%80%E7%AF%87%E6%96%87%E7%AB%A0"><span class="toc-text">新建一篇文章</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#front-matter-%E5%85%A8%E5%AD%97%E6%AE%B5"><span class="toc-text">front-matter 全字段</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%B3%E4%BA%8E-cover"><span class="toc-text">关于 cover</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#SEO-%E4%B8%8E%E7%BB%93%E6%9E%84%E5%8C%96%E6%95%B0%E6%8D%AE"><span class="toc-text">SEO 与结构化数据</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%91%98%E8%A6%81%E4%B8%8E"><span class="toc-text">摘要与 &lt;!-- more --&gt;</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81%E5%9D%97"><span class="toc-text">代码块</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A1%8C%E5%86%85%E4%BB%A3%E7%A0%81"><span class="toc-text">行内代码</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%87%E7%AB%A0%E7%9B%AE%E5%BD%95"><span class="toc-text">文章目录</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%87%E7%AB%A0%E9%A1%B5%E5%85%B6%E5%AE%83%E5%BC%80%E5%85%B3"><span class="toc-text">文章页其它开关</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AF%BC%E8%88%AA%E8%8F%9C%E5%8D%95"><span class="toc-text">导航菜单</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%87%E7%AB%A0%E5%88%86%E7%B1%BB%E5%AF%BC%E8%88%AA"><span class="toc-text">文章分类导航</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%86%85%E5%AE%B9%E6%8E%92%E5%BA%8F"><span class="toc-text">内容排序</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%8A%E4%B8%80%E7%AF%87-%E4%B8%8B%E4%B8%80%E7%AF%87"><span class="toc-text">上一篇 &#x2F; 下一篇</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AB%99%E7%82%B9%E5%9B%BE%E6%A0%87"><span class="toc-text">站点图标</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%8B%AC%E7%AB%8B%E9%A1%B5%E9%9D%A2"><span class="toc-text">独立页面</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AB%99%E5%86%85%E6%90%9C%E7%B4%A2"><span class="toc-text">站内搜索</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%8B%E4%B8%80%E7%AF%87"><span class="toc-text">下一篇</span></a></li></ol>
   </nav>
 </details>
 
@@ -448,6 +454,44 @@
 </ul>
 <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">photos:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">/images/covers/game.svg</span></span><br></pre></td></tr></table></figure>
 
+<h3 id="SEO-与结构化数据"><a href="#SEO-与结构化数据" class="headerlink" title="SEO 与结构化数据"></a>SEO 与结构化数据</h3><p>文章页会自动在 <code>&lt;head&gt;</code> 里输出 <code>BlogPosting</code> 结构化数据（JSON-LD），不需要手动加脚本。字段来源：</p>
+<table>
+<thead>
+<tr>
+<th>JSON-LD 字段</th>
+<th>来源</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>headline</code></td>
+<td><code>title</code></td>
+</tr>
+<tr>
+<td><code>description</code></td>
+<td><code>description</code>，为空时回退站点 <code>description</code></td>
+</tr>
+<tr>
+<td><code>datePublished</code> &#x2F; <code>dateModified</code></td>
+<td><code>date</code> &#x2F; <code>updated</code></td>
+</tr>
+<tr>
+<td><code>author</code></td>
+<td>站点 <code>author</code></td>
+</tr>
+<tr>
+<td><code>image</code></td>
+<td><code>cover</code>，没有则不输出</td>
+</tr>
+<tr>
+<td><code>keywords</code></td>
+<td><code>tags</code></td>
+</tr>
+<tr>
+<td><code>articleSection</code></td>
+<td><code>categories</code></td>
+</tr>
+</tbody></table>
+<p><code>og:image</code> 同时会输出绝对 URL。建议每篇文章都填 <code>description</code> 和 <code>cover</code>；没有 <code>cover</code> 时卡片会用渐变占位块，社交分享也没有预览图。</p>
 <h2 id="摘要与"><a href="#摘要与" class="headerlink" title="摘要与 &lt;!-- more --&gt;"></a>摘要与 <code>&lt;!-- more --&gt;</code></h2><p>在正文里插入 <code>&lt;!-- more --&gt;</code>，它之前的内容就是摘要：</p>
 <figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">这是一段导语，会出现在首页卡片上。</span><br><span class="line"></span><br><span class="line">&lt;!-- more --&gt;</span><br><span class="line"></span><br><span class="line"><span class="section">## 正文从这里开始</span></span><br></pre></td></tr></table></figure>
 
@@ -665,7 +709,7 @@
       <li>
         <span class="stat-label"><svg class="icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m3 17 6-6 4 4 8-8"/><path d="M21 7v6h-6"/></svg> 总字数</span>
         <span class="stat-value is-accent">
-          26,624
+          26,734
         </span>
       </li>
     
@@ -695,7 +739,7 @@
     <h3 class="rail-title"><svg class="icon" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></svg> 目录</h3>
   </div>
   <nav class="toc-body" aria-label="文章目录">
-    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%B0%E5%BB%BA%E4%B8%80%E7%AF%87%E6%96%87%E7%AB%A0"><span class="toc-text">新建一篇文章</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#front-matter-%E5%85%A8%E5%AD%97%E6%AE%B5"><span class="toc-text">front-matter 全字段</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%B3%E4%BA%8E-cover"><span class="toc-text">关于 cover</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%91%98%E8%A6%81%E4%B8%8E"><span class="toc-text">摘要与 &lt;!-- more --&gt;</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81%E5%9D%97"><span class="toc-text">代码块</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A1%8C%E5%86%85%E4%BB%A3%E7%A0%81"><span class="toc-text">行内代码</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%87%E7%AB%A0%E7%9B%AE%E5%BD%95"><span class="toc-text">文章目录</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%87%E7%AB%A0%E9%A1%B5%E5%85%B6%E5%AE%83%E5%BC%80%E5%85%B3"><span class="toc-text">文章页其它开关</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AF%BC%E8%88%AA%E8%8F%9C%E5%8D%95"><span class="toc-text">导航菜单</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%87%E7%AB%A0%E5%88%86%E7%B1%BB%E5%AF%BC%E8%88%AA"><span class="toc-text">文章分类导航</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%86%85%E5%AE%B9%E6%8E%92%E5%BA%8F"><span class="toc-text">内容排序</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%8A%E4%B8%80%E7%AF%87-%E4%B8%8B%E4%B8%80%E7%AF%87"><span class="toc-text">上一篇 &#x2F; 下一篇</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AB%99%E7%82%B9%E5%9B%BE%E6%A0%87"><span class="toc-text">站点图标</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%8B%AC%E7%AB%8B%E9%A1%B5%E9%9D%A2"><span class="toc-text">独立页面</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AB%99%E5%86%85%E6%90%9C%E7%B4%A2"><span class="toc-text">站内搜索</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%8B%E4%B8%80%E7%AF%87"><span class="toc-text">下一篇</span></a></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%B0%E5%BB%BA%E4%B8%80%E7%AF%87%E6%96%87%E7%AB%A0"><span class="toc-text">新建一篇文章</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#front-matter-%E5%85%A8%E5%AD%97%E6%AE%B5"><span class="toc-text">front-matter 全字段</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%B3%E4%BA%8E-cover"><span class="toc-text">关于 cover</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#SEO-%E4%B8%8E%E7%BB%93%E6%9E%84%E5%8C%96%E6%95%B0%E6%8D%AE"><span class="toc-text">SEO 与结构化数据</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%91%98%E8%A6%81%E4%B8%8E"><span class="toc-text">摘要与 &lt;!-- more --&gt;</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81%E5%9D%97"><span class="toc-text">代码块</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A1%8C%E5%86%85%E4%BB%A3%E7%A0%81"><span class="toc-text">行内代码</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%87%E7%AB%A0%E7%9B%AE%E5%BD%95"><span class="toc-text">文章目录</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%87%E7%AB%A0%E9%A1%B5%E5%85%B6%E5%AE%83%E5%BC%80%E5%85%B3"><span class="toc-text">文章页其它开关</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AF%BC%E8%88%AA%E8%8F%9C%E5%8D%95"><span class="toc-text">导航菜单</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%87%E7%AB%A0%E5%88%86%E7%B1%BB%E5%AF%BC%E8%88%AA"><span class="toc-text">文章分类导航</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%86%85%E5%AE%B9%E6%8E%92%E5%BA%8F"><span class="toc-text">内容排序</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%8A%E4%B8%80%E7%AF%87-%E4%B8%8B%E4%B8%80%E7%AF%87"><span class="toc-text">上一篇 &#x2F; 下一篇</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AB%99%E7%82%B9%E5%9B%BE%E6%A0%87"><span class="toc-text">站点图标</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%8B%AC%E7%AB%8B%E9%A1%B5%E9%9D%A2"><span class="toc-text">独立页面</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AB%99%E5%86%85%E6%90%9C%E7%B4%A2"><span class="toc-text">站内搜索</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%8B%E4%B8%80%E7%AF%87"><span class="toc-text">下一篇</span></a></li></ol>
   </nav>
 </section>
 

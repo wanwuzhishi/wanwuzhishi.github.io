@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://blog.126330.xyz/sitemap.xml
