@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" width="800" height="450">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#f97316"/>
+      <stop offset="1" stop-color="#1e3a8a"/>
+    </linearGradient>
+    <pattern id="p" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M40 0H0V40" fill="none" stroke="#ffffff" stroke-opacity=".09" stroke-width="1"/>
+    </pattern>
+  </defs>
+  <rect width="800" height="450" fill="url(#g)"/>
+  <rect width="800" height="450" fill="url(#p)"/>
+  <circle cx="660" cy="90" r="150" fill="#ffffff" fill-opacity=".07"/>
+  <circle cx="120" cy="390" r="180" fill="#000000" fill-opacity=".07"/>
+  <g fill="none" stroke="#ffffff" stroke-opacity=".34" stroke-width="3" stroke-linecap="round">
+    <path d="M540 92a26 26 0 0 1 50 6 20 20 0 0 1 4 39H536a18 18 0 0 1 4-36 26 26 0 0 1 0-9z"/>
+    <path d="M560 158v30c0 12 10 22 22 22h74"/>
+    <path d="M646 198l12 12-12 12"/>
+    <rect x="676" y="182" width="54" height="56" rx="8"/>
+    <path d="M690 210h26M690 224h18"/>
+  </g>
+  <text x="60" y="250" font-family="Inter, 'Noto Sans SC', sans-serif" font-size="60" font-weight="700" fill="#ffffff" fill-opacity=".95">CF TUNNEL</text>
+</svg>
