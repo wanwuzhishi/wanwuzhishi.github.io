@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" width="800" height="450">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0ea5e9"/>
+      <stop offset="1" stop-color="#4338ca"/>
+    </linearGradient>
+    <pattern id="p" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M40 0H0V40" fill="none" stroke="#ffffff" stroke-opacity=".09" stroke-width="1"/>
+    </pattern>
+  </defs>
+  <rect width="800" height="450" fill="url(#g)"/>
+  <rect width="800" height="450" fill="url(#p)"/>
+  <circle cx="660" cy="90" r="150" fill="#ffffff" fill-opacity=".07"/>
+  <circle cx="120" cy="390" r="180" fill="#000000" fill-opacity=".07"/>
+  <g transform="translate(620,120)">
+    <circle r="66" fill="none" stroke="#ffffff" stroke-opacity=".32" stroke-width="9" stroke-dasharray="7 11"/>
+    <g font-family="Inter, 'Noto Sans SC', sans-serif" font-size="14" font-weight="600" fill="#ffffff" fill-opacity=".85" text-anchor="middle">
+      <text x="0" y="-80">JPG</text>
+      <text x="84" y="5">PDF</text>
+      <text x="0" y="96">MP4</text>
+      <text x="-84" y="5">ZIP</text>
+    </g>
+    <rect x="-25" y="-31" width="50" height="62" rx="7" fill="#ffffff" fill-opacity=".2" stroke="#ffffff" stroke-opacity=".55" stroke-width="2"/>
+    <path d="M-10 -12h20M-10 0h20M-10 12h12" stroke="#ffffff" stroke-opacity=".7" stroke-width="2.5" stroke-linecap="round"/>
+  </g>
+  <text x="60" y="250" font-family="Inter, 'Noto Sans SC', sans-serif" font-size="60" font-weight="700" fill="#ffffff" fill-opacity=".95">FILEE</text>
+</svg>
