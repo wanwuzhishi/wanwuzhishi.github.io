@@ -6,7 +6,7 @@
   <link href="https://blog.126330.xyz/atom.xml" rel="self"/>
   
   <link href="https://blog.126330.xyz/"/>
-  <updated>2026-10-19T07:43:00.000Z</updated>
+  <updated>2026-10-19T08:04:00.000Z</updated>
   <id>https://blog.126330.xyz/</id>
   
   <author>
@@ -15,6 +15,93 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>给 UPX 加壳的修改器做汉化：一次二进制汉化的完整记录</title>
+    <link href="https://blog.126330.xyz/posts/c0e6cee2/"/>
+    <id>https://blog.126330.xyz/posts/c0e6cee2/</id>
+    <published>2026-10-19T08:04:00.000Z</published>
+    <updated>2026-10-19T08:04:00.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>前段时间把《生化危机 3 重制版》的 Raz0r’s Ultimate Trainer 做了一份简体中文汉化，930 条界面文本全部搞定。这不是普通的「改文本」——修改器是个 UPX 加壳的原生 C++ 插件，所有界面文字都硬编码在 DLL 里，而且引用方式五花八门。这篇文章完整记录整个过程，算是给同样想做二进制汉化的朋友铺个路。</p><blockquote><p>先说结论：最终补丁涉及 <strong>1,127 处指令重定向 + 72 处字节原地覆写 + 1 处指针改写</strong>，全部经过字节级校验。工具链已开源（文末链接）。</p><p>汉化成品与安装步骤见：<a href="/posts/5a6f40cc/">RE3R 终极修改器 v2.0.3 简体中文汉化</a>。</p></blockquote><h2 id="一、目标：一个「看不见文本」的修改器"><a href="#一、目标：一个「看不见文本」的修改器" class="headerlink" title="一、目标：一个「看不见文本」的修改器"></a>一、目标：一个「看不见文本」的修改器</h2><p>Raz0r 的 Ultimate Trainer 是 RE3R 功能最全的修改器，以 REFramework 插件形式发布。拿到手的是一个 2 MB 的 <code>re3r_ultimate_trainer.dll</code>，用 DIE 看一眼：<strong>UPX 加壳的 x64 原生 DLL</strong>。</p><p>这意味着两件事：</p><ol><li>常规汉化思路（改资源、改配置文件）全部失效——界面文本是编译进去的 C++ 字符串字面量；</li><li>就算解了壳，也不能随便改：<code>.rdata</code> 里的字符串有各种共享和引用，改错一个字节就是闪退。</li></ol><p>所以整个工程拆解成四个问题：<strong>解壳 → 找到所有该翻译的字符串 → 弄清它们被怎么引用 → 安全地替换</strong>。</p><h2 id="二、解壳：一行命令解决，但别忘了备份"><a href="#二、解壳：一行命令解决，但别忘了备份" class="headerlink" title="二、解壳：一行命令解决，但别忘了备份"></a>二、解壳：一行命令解决，但别忘了备份</h2><p>UPX 官方工具直接处理：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">upx -d -o re3r_ultimate_trainer_unpacked.dll re3r_ultimate_trainer.dll</span><br><span class="line"><span class="comment"># 7,517,696 bytes &lt;- 2,046,464 bytes</span></span><br></pre></td></tr></table></figure><p>解壳后是标准的 MSVC x64 PE：<code>.text</code> &#x2F; <code>.rdata</code> &#x2F; <code>.data</code> &#x2F; <code>.pdata</code> &#x2F; <code>_RDATA</code> &#x2F; <code>.rsrc</code> &#x2F; <code>.reloc</code> 七个节，ImageBase <code>0x180000000</code>。</p><p>一个值得记住的细节：<strong>解壳后的 DLL 本身就能直接用</strong>（比加壳版大但功能无损），这给后面的验证带来了巨大便利——我可以在「打补丁前」和「打补丁后」之间做任意对比。</p><h2 id="三、找字符串：76-758-条里的淘金"><a href="#三、找字符串：76-758-条里的淘金" class="headerlink" title="三、找字符串：76,758 条里的淘金"></a>三、找字符串：76,758 条里的淘金</h2><p>用自写的 PE 解析器把 <code>.rdata</code> &#x2F; <code>.data</code> 里所有 NUL 结尾的可打印字符串抽出来，得到 <strong>76,758 条</strong>。其中绝大部分是静态链接库的噪音：nlohmann&#x2F;json 的报错、sol2&#x2F;Lua 的元方法名、ImGui 的枚举、Crypto++ 的异常文本……</p><p>真正的修改器字符串靠两个特征定位：</p><p><strong>特征一：值&#x2F;键成对出现。</strong> 修改器内部用一张字符串表做展示文本查找（Lua 侧通过 <code>get_string__</code> 取值），布局规律是「显示文本 + 内部键」相邻，比如：</p><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">0x1803d4710  &quot;Save Settings&quot;      ← 显示文本，翻译对象</span><br><span class="line">0x1803d4720  &quot;SaveSettings&quot;       ← 内部键，绝对不能碰</span><br></pre></td></tr></table></figure><p>所以第一条铁律：<strong>蛇形命名（<code>player_invincibility</code>）和大驼峰（<code>TitleWindow</code>）一律不翻</strong>。它们是配置文件键名和热键存储键，翻译了等于破坏用户的旧配置。</p><p><strong>特征二：RE Engine 的标识符长得像名字但不是名字。</strong> <code>Metallic</code>、<code>Roughness</code>、<code>pl2000_Skin_Mat</code>、<code>em0000</code> 这些字符串同时是引擎的查找键——翻译它们，材质编辑器和敌人设置直接失效。这类词只能保留英文。</p><p>筛完之后，真正需要翻译的约 930 条。</p><h2 id="四、核心难题：字符串是怎么被引用的"><a href="#四、核心难题：字符串是怎么被引用的" class="headerlink" title="四、核心难题：字符串是怎么被引用的"></a>四、核心难题：字符串是怎么被引用的</h2><p>找到字符串只是开始，改写方案取决于<strong>代码怎么引用它们</strong>。扫描 <code>.text</code> 里所有 RIP 相对寻址后发现了三种情况，只能分别处理。</p><h3 id="1-常规-lea-引用（约-860-条）"><a href="#1-常规-lea-引用（约-860-条）" class="headerlink" title="1. 常规 lea 引用（约 860 条）"></a>1. 常规 <code>lea</code> 引用（约 860 条）</h3><p>最标准的形态：<code>lea rdx, [rip+disp32]</code> 把字符串地址装进寄存器。处理方案是把全部译文（UTF-8）追加到 <code>.reloc</code> 节末尾形成一块新的字符串区，然后逐条改写 <code>lea</code> 的 32 位位移指向新地址。</p><p>选追加而不是原地改写，有三个理由：新字符串区在同一个镜像内，位移永远在 ±2 GB 内；原始字节零改动，天然规避 MSVC 的字符串合并陷阱（<code>&quot;Speed Increase&quot;</code> 是 <code>&quot;Firing Speed Increase&quot;</code> 的尾部时，原地改写会同时破坏后者）；译文不再有长度限制。</p><p>连带要处理的还有三件事：<code>.reloc</code> 节的 <code>SizeOfRawData</code> &#x2F; <code>VirtualSize</code> 扩容并去掉 Discardable 标志（防止加载器把字符串区丢掉）、<code>SizeOfImage</code> 重新对齐、PE 校验和重算。</p><h3 id="2-指针表引用（1-条）"><a href="#2-指针表引用（1-条）" class="headerlink" title="2. 指针表引用（1 条）"></a>2. 指针表引用（1 条）</h3><p><code>.data</code> 里有 <code>char*</code> 数组指向字符串。改指针值本身简单，但必须先确认该位置在重定位表里有 <code>DIR64</code> 项——否则它可能是巧合的数值，改了就是灾难。</p><h3 id="3-SSE-内联构造（72-条）——整个项目最有意思的发现"><a href="#3-SSE-内联构造（72-条）——整个项目最有意思的发现" class="headerlink" title="3. SSE 内联构造（72 条）——整个项目最有意思的发现"></a>3. SSE 内联构造（72 条）——整个项目最有意思的发现</h3><p>角色替换下拉框里的 “Carlos”、”Jill” 这些名字，<strong>既没有 <code>lea</code> 引用，也没有任何指针指向它们</strong>，但代码明明在用。暴力扫描后发现它们是这么构造的：</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">movsd xmm0, [rip+szCarlos]      ; 搬运前 8 字节</span><br><span class="line">movsd [rbp+7C8h], xmm0</span><br><span class="line">mov  eax, [rip+szCarlos+8]      ; 搬运第 8~11 字节</span><br><span class="line">movzx ax, word [rip+szCarlos+12] ; 搬运第 12~13 字节</span><br><span class="line">mov  byte [rbp+7D6h], 0         ; 显式 NUL</span><br><span class="line">mov  qword [rbp+7D8h], 0Eh      ; 长度=14，硬编码！</span><br></pre></td></tr></table></figure><p>MSVC 对较短的 SSO <code>std::string</code> 做了 SSE 优化：字符串字节被分成数据块直接搬进栈上的缓冲区，<strong>长度是硬编码的立即数</strong>。这意味着这类字符串没法重定向——代码读的是 <code>.rdata</code> 里的原始字节本身，唯一安全的办法是<strong>原地覆写</strong>，且译文长度不得超过原文（空格补齐），因为 NUL 写入位置和长度都被焊死在指令里。</p><p>原地覆写还有个隐藏雷区：必须确认没有其他字符串的引用落在覆写范围内。逐条校验后才敢动手。</p><h3 id="踩坑记录：过滤器的代价"><a href="#踩坑记录：过滤器的代价" class="headerlink" title="踩坑记录：过滤器的代价"></a>踩坑记录：过滤器的代价</h3><p>第二轮扫描时我给「SSE 字符串」加了个可读性正则过滤，结果 <code>[Item] First Aid Spray</code> 这类带方括号的字符串全被滤掉了——直到用户反馈「物品没汉化完」才回头补上。教训是：<strong>筛选条件应该用白名单思维列已知噪音，而不是用黑名单正则猜什么是噪音</strong>。最后用「按内容特征全文搜索」（直接搜 herb &#x2F; gunpowder &#x2F; grenade 等词根）做交叉验证，才确认真的清零了。</p><p>类似的还有双重引用问题：敌人 ESP 名字同时被 <code>lea</code> 和 <code>movsd</code> 引用，只做重定向的话，一条代码路径显示中文、另一条显示英文。全部改用原地覆写才统一。</p><h2 id="五、中文显示：REFramework-的隐藏彩蛋"><a href="#五、中文显示：REFramework-的隐藏彩蛋" class="headerlink" title="五、中文显示：REFramework 的隐藏彩蛋"></a>五、中文显示：REFramework 的隐藏彩蛋</h2><p>补丁做完只是成功一半——REFramework 覆盖层默认字体是 Roboto，不含汉字，汉化文本会全部显示为方块。</p><p>翻 REFramework 源码（对应用户手上的 nightly 版本）发现 <code>update_fonts()</code> 里有个检查：</p><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (::<span class="built_in">GetFileAttributesA</span>(<span class="string">&quot;reframework_pictographic.mode&quot;</span>) != INVALID_FILE_ATTRIBUTES) &#123;</span><br><span class="line">    <span class="comment">// 加载内嵌的方正综艺体（FZZongYi-M05S）</span></span><br><span class="line">    <span class="comment">// GetGlyphRangesChineseFull() —— 完整中文字形</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>这是 praydog 给中文玩家留的官方后门：游戏根目录放一个名为 <code>reframework_pictographic.mode</code> 的空文件，覆盖层字体就切换为 DLL 内嵌的中文方正综艺体。<strong>不需要下载任何字体，不需要任何设置界面</strong>（我的版本压根没有字体设置 UI，我一开始还写错了指引）。这个发现直接决定了发行包的形态：一个 0 字节的开关文件。</p><h2 id="六、验证：确定性构建"><a href="#六、验证：确定性构建" class="headerlink" title="六、验证：确定性构建"></a>六、验证：确定性构建</h2><p>二进制补丁最怕「看起来能跑」。我的做法是把校验做成流水线的一等公民：</p><ul><li><code>.text</code> 的改动字节必须恰好落在被翻译字符串的 <code>lea</code> 位移范围内；</li><li><code>.rdata</code> 的改动必须逐字节落在原地覆写区间内，且 UTF-8 解码结果与翻译表逐条一致；</li><li><code>SizeOfImage</code>、节区头、重定位表、导入导出表逐项断言；</li><li>构建<strong>确定性</strong>：同一输入永远产出字节级相同的输出（我用两台「路径」各跑一次，SHA1 完全一致），这样任何人工改动都会立刻暴露在校验里。</li></ul><h2 id="七、工具与-AI-披露"><a href="#七、工具与-AI-披露" class="headerlink" title="七、工具与 AI 披露"></a>七、工具与 AI 披露</h2><p>按惯例说明本次制作的软件与 AI 使用情况：</p><table><thead><tr><th>环节</th><th>工具</th></tr></thead><tbody><tr><td>UPX 解壳</td><td>UPX 5.2.1（开源官方版）</td></tr><tr><td>全部工具链（PE 解析、字符串&#x2F;引用扫描、补丁器、校验器，纯 JavaScript 无第三方依赖）</td><td>Node.js v24，脚本已开源</td></tr><tr><td>逆向分析与脚本编写</td><td>ZCode 智能编程助手（智谱 GLM-5.3-Flash 模型）辅助完成</td></tr></tbody></table><p>谈谈 AI 在这里的真实角色，不吹不黑：</p><p><strong>AI 干得好的</strong>：PE 头解析、RIP 相对寻址的批量扫描、补丁器的机械性代码——这类「规格明确、验证清晰」的工程活，AI 一次成型，我把精力省给了策略层。</p><p><strong>AI 会犯错、必须人盯的</strong>：中间有一版扫描正则把带方括号的字符串全滤掉了，AI 没意识到、我也没意识到，直到实际使用反馈才暴露；SSE 构造这种「不翻源码想不到」的结构，是在我的怀疑方向上由 AI 用暴力扫描证实的——<strong>提出正确的问题比生成正确的代码更关键</strong>。另外所有翻译都经过人工校对（Nemesis 按社区惯例译「追踪者」而不是直译「复仇女神」，就是人的判断）。</p><h2 id="八、开源与版权：为什么仓库里没有-DLL"><a href="#八、开源与版权：为什么仓库里没有-DLL" class="headerlink" title="八、开源与版权：为什么仓库里没有 DLL"></a>八、开源与版权：为什么仓库里没有 DLL</h2><p>这个项目已经开源（MIT），但仓库里<strong>只有工具链和翻译数据，没有任何二进制</strong>。原因很直接：原版修改器版权归 Raz0r 所有，通过 Nexus Mods &#x2F; Patreon 分发，未经授权转载二进制文件既有 DMCA 风险，也对不起原作者。</p><p>所以我采用了民间汉化的标准做法：用户自行下载原版，跑一条命令本地生成汉化版——</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">node tools/build.js <span class="string">&quot;你的原版 re3r_ultimate_trainer.dll&quot;</span></span><br><span class="line"><span class="comment"># 自动完成：UPX 解壳 → 补丁 → 校验 → 生成对照表</span></span><br></pre></td></tr></table></figure><p>构建脚本还会顺手生成那个 <code>reframework_pictographic.mode</code> 空文件。整个流程是确定性的，任何人构建出的结果都与我在本地验证的版本字节一致。</p><h2 id="九、后记"><a href="#九、后记" class="headerlink" title="九、后记"></a>九、后记</h2><p>回头看，这个项目 80% 的时间花在「理解」而不是「修改」上：字符串在哪、谁在引用、引擎哪些名字碰不得。真正的补丁代码反而只占了很小一部分。</p><p>给想做同类事情（游戏工具汉化、二进制本地化）的朋友三条建议：</p><ol><li><strong>先摸清引用机制，再动手改字节</strong>——同一个 DLL 里可能并存三四种字符串引用方式，一种方案打天下必翻车；</li><li><strong>把校验写进构建流程，而不是事后抽查</strong>——确定性构建 + 字节级断言能兜住绝大部分事故；</li><li><strong>发布形态优先选「补丁」而不是「成品」</strong>——既是版权上的自我保护，也让你的工作可以被社区复用和改进。</li></ol><h2 id="相关链接"><a href="#相关链接" class="headerlink" title="相关链接"></a>相关链接</h2><ul><li><a href="/posts/5a6f40cc/">RE3R 终极修改器 v2.0.3 简体中文汉化</a>：安装步骤与使用说明</li><li><a href="https://github.com/wanwuzhishi/re3r-ultimate-trainer-zh">汉化工具链仓库</a>：补丁器、校验器与 930 条译文</li><li><a href="https://www.nexusmods.com/residentevil32020/mods/9">原版修改器（Nexus Mods）</a>：Raz0r’s Ultimate Trainer v2.0.3</li><li><a href="https://github.com/praydog/REFramework">REFramework</a>：praydog 的插件框架</li></ul>]]></content>
+    
+    
+    <summary type="html">从 UPX 解壳、76,758 条字符串筛选、三种引用方式到确定性构建：记录 RE3R 终极修改器 930 条界面文本汉化的完整过程。</summary>
+    
+    
+    
+    <category term="折腾记录" scheme="https://blog.126330.xyz/categories/%E6%8A%98%E8%85%BE%E8%AE%B0%E5%BD%95/"/>
+    
+    
+    <category term="RE3R" scheme="https://blog.126330.xyz/tags/RE3R/"/>
+    
+    <category term="逆向工程" scheme="https://blog.126330.xyz/tags/%E9%80%86%E5%90%91%E5%B7%A5%E7%A8%8B/"/>
+    
+    <category term="二进制汉化" scheme="https://blog.126330.xyz/tags/%E4%BA%8C%E8%BF%9B%E5%88%B6%E6%B1%89%E5%8C%96/"/>
+    
+    <category term="UPX" scheme="https://blog.126330.xyz/tags/UPX/"/>
+    
+    <category term="游戏工具" scheme="https://blog.126330.xyz/tags/%E6%B8%B8%E6%88%8F%E5%B7%A5%E5%85%B7/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>RE3R 终极修改器 v2.0.3 简体中文汉化</title>
+    <link href="https://blog.126330.xyz/posts/5a6f40cc/"/>
+    <id>https://blog.126330.xyz/posts/5a6f40cc/</id>
+    <published>2026-10-19T08:02:00.000Z</published>
+    <updated>2026-10-19T08:02:00.000Z</updated>
+    
+    <content type="html"><![CDATA[<span id="more"></span><p>Raz0r’s Ultimate Trainer 是《生化危机 3 重制版》功能最全的修改器之一，以 REFramework 插件的形式运行。原版界面是全英文的，这份汉化把 <strong>930 条界面文本</strong>完整翻译成了简体中文。</p><p>汉化覆盖主界面与全部分类、所有功能开关与选项、热键界面、通知提示、约 200 个场景传送点、物品&#x2F;武器&#x2F;改装件名称、敌人 ESP 名称、角色替换名称、存档槽列表和悬停帮助说明。功能逻辑与原版完全一致，只改显示文本。</p><h2 id="安装前准备"><a href="#安装前准备" class="headerlink" title="安装前准备"></a>安装前准备</h2><ol><li><strong>安装 REFramework</strong>：到 <a href="https://github.com/praydog/REFramework-nightly/releases">REFramework-nightly Releases</a> 下载 RE3 版本，RT 显卡用 <code>RE3.zip</code>，非 RT 用 <code>RE3_TDB67.zip</code>，解压到游戏根目录（<code>re3.exe</code> 所在目录）。</li><li><strong>下载原版修改器 v2.0.3</strong>：从 <a href="https://www.nexusmods.com/residentevil32020/mods/9">Nexus Mods</a> 或 Raz0r 的 Patreon 获取。本汉化按 v2.0.3 的字节布局制作，其他版本不保证可用。</li><li><strong>安装 Node.js</strong>：汉化生成器是纯 JavaScript，无第三方依赖。</li><li><strong>准备 UPX（视情况）</strong>：如果原版 DLL 是 UPX 加壳的（Nexus 下载的一般是），需要 <a href="https://github.com/upx/upx/releases">UPX</a> 的 win64 版，放到 PATH 或用 <code>--upx</code> 参数指定。</li></ol><h2 id="生成与安装"><a href="#生成与安装" class="headerlink" title="生成与安装"></a>生成与安装</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/wanwuzhishi/re3r-ultimate-trainer-zh.git</span><br><span class="line"><span class="built_in">cd</span> re3r-ultimate-trainer-zh</span><br><span class="line">node tools/build.js <span class="string">&quot;你的原版 re3r_ultimate_trainer.dll 路径&quot;</span></span><br></pre></td></tr></table></figure><p>脚本会自动完成 UPX 解壳（如需要）→ 应用补丁 → 完整性校验 → 生成翻译对照表。输出在 <code>dist/</code> 目录：</p><table><thead><tr><th>文件</th><th>说明</th></tr></thead><tbody><tr><td><code>re3r_ultimate_trainer_zh.dll</code></td><td>汉化版修改器</td></tr><tr><td><code>reframework_pictographic.mode</code></td><td>中文显示开关（空文件）</td></tr><tr><td><code>patch_report.txt</code> &#x2F; <code>翻译对照表.txt</code></td><td>补丁报告与全部译文</td></tr></tbody></table><p>然后：</p><ol><li>关闭游戏，备份 <code>&lt;游戏根目录&gt;/reframework/plugins/re3r_ultimate_trainer.dll</code>；</li><li>把 <code>re3r_ultimate_trainer_zh.dll</code> 改名为 <code>re3r_ultimate_trainer.dll</code>，覆盖到 <code>reframework/plugins/</code>；</li><li>把 <code>reframework_pictographic.mode</code> 放到<strong>游戏根目录</strong>（和 <code>re3.exe</code>、<code>dinput8.dll</code> 同级）；</li><li>启动游戏，按 <code>Insert</code> 打开 REFramework 覆盖层，在 <strong>Script Generated UI</strong> 分类下就能看到「生化危机3 重制版 终极修改器」。</li></ol><h2 id="为什么需要那个空文件"><a href="#为什么需要那个空文件" class="headerlink" title="为什么需要那个空文件"></a>为什么需要那个空文件</h2><p>REFramework 默认使用不含汉字的 Roboto 字体。它内置了一个面向中文玩家的隐藏机制：只要游戏根目录存在名为 <code>reframework_pictographic.mode</code> 的文件（内容为空即可，只检测是否存在），覆盖层字体会切换为内置的中文方正综艺体，并按完整中文字形范围渲染。</p><p>所以这个 0 字节文件不是可选项——没有它，汉化文本会显示成方块或问号。文件必须放在 <code>re3.exe</code> 所在目录，放进 <code>reframework</code> 子文件夹不会生效。</p><h2 id="兼容性与注意事项"><a href="#兼容性与注意事项" class="headerlink" title="兼容性与注意事项"></a>兼容性与注意事项</h2><ul><li>只适用于 <strong>v2.0.3（2023-12 版）</strong>。如果游戏内提示 <code>Unsupported Version</code>，说明游戏或修改器版本不匹配。</li><li>汉化版 DLL 是解壳后的明文 DLL，体积约 7.2 MB，比原版大属于正常现象。</li><li>汉化没有改动任何内部键名，原有的 <code>re3r_ultimate_trainer.settings</code> 配置和已绑定的热键可以继续使用；个别条目（如 Bloom&#x2F;泛光）升级后到热键界面重新绑定一次即可。</li><li>「物品添加」的搜索框现在按中文关键词匹配，例如「草药」「弹药」「手枪」。</li><li>以下内容按惯例保留英文：热键按键名（SHIFT、ENTER 等）、图形术语缩写（AF&#x2F;AA&#x2F;DOF&#x2F;AO&#x2F;SSR&#x2F;TAA&#x2F;HBAO+ 等）、引擎敌人编号（em0000 等）和引擎材质名（Metallic、Roughness、pl2000_Skin_Mat 等）。这些同时是引擎查找键，翻译会导致功能失效。</li></ul><h2 id="为什么仓库里没有成品-DLL"><a href="#为什么仓库里没有成品-DLL" class="headerlink" title="为什么仓库里没有成品 DLL"></a>为什么仓库里没有成品 DLL</h2><p>原版修改器的版权归 Raz0r 所有，通过 Nexus Mods &#x2F; Patreon 分发。汉化仓库只包含自研的补丁工具链和翻译数据，不包含、也不分发原版或修改后的二进制文件。想使用汉化版的玩家，需要用自己的原版 DLL 跑一次生成脚本。</p><p>这样既避免未经授权转载二进制文件，也让汉化逻辑和译文可以被社区复用和改进。详细的逆向过程、字符串引用方式和校验方法写在<a href="/posts/c0e6cee2/">这篇实践记录</a>里。</p><h2 id="致谢"><a href="#致谢" class="headerlink" title="致谢"></a>致谢</h2><ul><li>修改器原作：Raz0r（<a href="https://www.patreon.com/_Raz0r">Patreon</a> &#x2F; <a href="https://www.nexusmods.com/residentevil32020/mods/9">Nexus Mods</a>）</li><li>REFramework：<a href="https://github.com/praydog/REFramework">praydog</a></li><li>汉化：万物之时，二进制字符串重定向方式，由 ZCode 辅助完成；译文经过人工校对</li></ul><p>如果遇到崩溃或显示异常，请先确认游戏版本与修改器版本都是 v2.0.3，并保留修改器生成的日志和 <code>patch_report.txt</code>。</p>]]></content>
+    
+    
+    <summary type="html">Raz0r&#39;s Ultimate Trainer v2.0.3 的简体中文汉化，930 条界面文本，覆盖主界面、物品与武器名称、场景传送和敌人 ESP；附生成器与安装说明。</summary>
+    
+    
+    
+    <category term="MOD汉化" scheme="https://blog.126330.xyz/categories/MOD%E6%B1%89%E5%8C%96/"/>
+    
+    
+    <category term="汉化" scheme="https://blog.126330.xyz/tags/%E6%B1%89%E5%8C%96/"/>
+    
+    <category term="修改器" scheme="https://blog.126330.xyz/tags/%E4%BF%AE%E6%94%B9%E5%99%A8/"/>
+    
+    <category term="生化危机3" scheme="https://blog.126330.xyz/tags/%E7%94%9F%E5%8C%96%E5%8D%B1%E6%9C%BA3/"/>
+    
+    <category term="RE3R" scheme="https://blog.126330.xyz/tags/RE3R/"/>
+    
+    <category term="Raz0r" scheme="https://blog.126330.xyz/tags/Raz0r/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>RE2 CabbyCodes 1.0.6 简体中文汉化版</title>
+    <link href="https://blog.126330.xyz/posts/a985f402/"/>
+    <id>https://blog.126330.xyz/posts/a985f402/</id>
+    <published>2026-10-19T08:00:00.000Z</published>
+    <updated>2026-10-19T08:00:00.000Z</updated>
+    
+    <content type="html"><![CDATA[<span id="more"></span><p>RE2CabbyCodes 是《生化危机 2 重制版》的一个暂停菜单作弊面板：按 Esc（手柄 Start）暂停游戏后，暂停菜单旁边会多出一块面板，按 F7 可以隐藏或显示。它把修改器、物品栏编辑、道具箱、记录开关和存档管理都塞进了游戏自己的暂停菜单里，不用切出去开独立窗口。</p><p>这份汉化把面板的 <strong>907 条界面文本</strong>换成了简体中文，并给原版 DLL 注入系统中文字体，让中文能正常显示。</p><h2 id="面板能做什么"><a href="#面板能做什么" class="headerlink" title="面板能做什么"></a>面板能做什么</h2><ul><li><strong>战斗辅助</strong>：上帝模式、一击必杀、无限弹药、小刀不掉耐久、木板无限。</li><li><strong>存档相关</strong>：不用墨带存档、存档不计数、编辑存档次数与游戏时间、冻结游戏时间、冻结倒计时。</li><li><strong>记录相关</strong>：开关游戏内的 Records 与 The Ghost Survivors 记录，解锁对应奖励。</li><li><strong>物品与道具箱</strong>：编辑角色每一个物品栏格子（物品和武器都能选），直接打开游戏自己的道具箱存取物品。</li><li><strong>难度切换</strong>：在 Assisted &#x2F; Standard &#x2F; Hardcore 之间即时切换，不用重开。</li><li><strong>存档文件管理</strong>：在 Load Game 界面管理存档文件。</li></ul><p>具体的作弊项、数值和限制以原版说明为准；汉化只改界面文字，不改任何功能逻辑。</p><h2 id="汉化做了什么"><a href="#汉化做了什么" class="headerlink" title="汉化做了什么"></a>汉化做了什么</h2><p>原版面板用 Dear ImGui 绘制，默认字体是只含 ASCII 的 ProggyClean，所以直接替换文本会全部显示成问号。这个补丁做了两件事：</p><ol><li>把 DLL 里的英文界面文本替换成中文，共 907 条；</li><li>在 DLL 里新增一个节区和一小段 trampoline，调用 <code>ImFontAtlas::AddFontFromFileTTF</code> 加载系统中文字体，替换掉默认字体。</li></ol><p>字体候选按顺序尝试微软雅黑、黑体、等线、宋体，以及 Linux &#x2F; Proton 下的文泉驿和 Noto CJK。如果字体加载失败，面板会回退到原来的英文显示，不会崩溃。</p><h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><h3 id="已经装了原版-RE2CabbyCodes"><a href="#已经装了原版-RE2CabbyCodes" class="headerlink" title="已经装了原版 RE2CabbyCodes"></a>已经装了原版 RE2CabbyCodes</h3><ol><li>关闭游戏；</li><li>从 Release 下载 <code>steam_api64.zip</code> 并解压；</li><li>用解压出的 <code>steam_api64.dll</code> 覆盖游戏目录里的同名文件。</li></ol><h3 id="还没装原版"><a href="#还没装原版" class="headerlink" title="还没装原版"></a>还没装原版</h3><ol><li>打开游戏目录（Steam 里右键游戏 → 管理 → 浏览本地文件），也就是 <code>re2.exe</code> 所在目录；</li><li>把游戏原有的 <code>steam_api64.dll</code> 改名为 <code>steam_api64_orig.dll</code>；</li><li>把汉化版 <code>steam_api64.dll</code> 复制进去；</li><li>启动游戏，暂停后即可看到中文面板。</li></ol><h3 id="卸载"><a href="#卸载" class="headerlink" title="卸载"></a>卸载</h3><p>删除汉化版 <code>steam_api64.dll</code>，再把 <code>steam_api64_orig.dll</code> 改回 <code>steam_api64.dll</code>。</p><p>Steam 的「验证游戏文件完整性」会把原版 DLL 放回来，之后需要重新覆盖一次。</p><h2 id="兼容性与注意事项"><a href="#兼容性与注意事项" class="headerlink" title="兼容性与注意事项"></a>兼容性与注意事项</h2><ul><li>支持 Steam 正式版（build 11636119）和 <code>dx11_non-rt</code> beta（build 11055033）。</li><li>在两个 Steam 版本之间切换后，Steam 会换回对应版本的 <code>steam_api64.dll</code>，需要重新执行覆盖步骤。</li><li>汉化基于 1.0.6 的 RVA；换用其他版本的 RE2CabbyCodes 时，补丁工具会在原文校验阶段报错并拒绝修改。</li><li>补丁经过静态校验（PE 结构、逐条字节回写、引用改写、新节区绝对地址扫描），但首次使用仍建议先备份存档和原始 DLL。存档位置通常在 <code>Steam/userdata/&lt;你的 ID&gt;/883710/remote/win64_save/</code>。</li><li>原作采用 GPL-3.0，汉化仓库同时提供补丁工具和全部译文，方便自行生成或修改。</li></ul><h2 id="致谢"><a href="#致谢" class="headerlink" title="致谢"></a>致谢</h2><ul><li>原版 MOD：<a href="https://github.com/SirCabby/RE2CabbyCodes">SirCabby&#x2F;RE2CabbyCodes</a></li><li>类型数据库参考：<a href="https://github.com/praydog/REFramework">praydog&#x2F;REFramework</a></li><li>界面库：Dear ImGui（MIT）</li><li>汉化：万物之时</li></ul><p>如果面板里的中文显示为 <code>?</code>，先确认系统字体路径存在；也可以在汉化仓库里用 <code>patch.js --fonts</code> 指定一个确定存在的中文字体重新生成。</p>]]></content>
+    
+    
+    <summary type="html">《生化危机 2 重制版》RE2CabbyCodes 1.0.6 暂停菜单作弊面板的简体中文汉化，907 条界面文本，自动注入系统中文字体，附安装与回退说明。</summary>
+    
+    
+    
+    <category term="MOD汉化" scheme="https://blog.126330.xyz/categories/MOD%E6%B1%89%E5%8C%96/"/>
+    
+    
+    <category term="汉化" scheme="https://blog.126330.xyz/tags/%E6%B1%89%E5%8C%96/"/>
+    
+    <category term="生化危机2" scheme="https://blog.126330.xyz/tags/%E7%94%9F%E5%8C%96%E5%8D%B1%E6%9C%BA2/"/>
+    
+    <category term="RE2" scheme="https://blog.126330.xyz/tags/RE2/"/>
+    
+    <category term="CabbyCodes" scheme="https://blog.126330.xyz/tags/CabbyCodes/"/>
+    
+    <category term="修改器" scheme="https://blog.126330.xyz/tags/%E4%BF%AE%E6%94%B9%E5%99%A8/"/>
+    
+  </entry>
   
   <entry>
     <title>hosts-opt：给 GitHub、Cloudflare、Vercel 挑一个更快的 IP</title>
@@ -452,81 +539,6 @@
     <category term="HexoDeck" scheme="https://blog.126330.xyz/tags/HexoDeck/"/>
     
     <category term="文档" scheme="https://blog.126330.xyz/tags/%E6%96%87%E6%A1%A3/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>演示：MOD 汉化补丁 v3.1.4 完整汉化</title>
-    <link href="https://blog.126330.xyz/posts/71a1b152/"/>
-    <id>https://blog.126330.xyz/posts/71a1b152/</id>
-    <published>2026-10-05T03:05:00.000Z</published>
-    <updated>2026-10-05T03:05:00.000Z</updated>
-    
-    <content type="html"><![CDATA[<span id="more"></span><h2 id="汉化说明"><a href="#汉化说明" class="headerlink" title="汉化说明"></a>汉化说明</h2><p>本补丁为 <strong>《示例模组》v3.1.4</strong> 的完整汉化，覆盖 UI、任务、物品与提示文本。</p><h2 id="汉化范围"><a href="#汉化范围" class="headerlink" title="汉化范围"></a>汉化范围</h2><table><thead><tr><th>模块</th><th>覆盖率</th></tr></thead><tbody><tr><td>界面 UI</td><td>100%</td></tr><tr><td>任务文本</td><td>100%</td></tr><tr><td>物品描述</td><td>100%</td></tr><tr><td>剧情对话</td><td>96%</td></tr></tbody></table><h2 id="安装方法"><a href="#安装方法" class="headerlink" title="安装方法"></a>安装方法</h2><ol><li>先安装原版 MOD <strong>v3.1.4</strong></li><li>将汉化包内的 <code>Localization</code> 文件夹覆盖到 MOD 根目录</li><li>在游戏设置里把语言切换为「简体中文」</li><li>重启游戏生效</li></ol><blockquote><p>如果游戏更新导致 MOD 版本变化，请等待对应版本的汉化更新，不要跨版本覆盖。</p></blockquote>]]></content>
-    
-    
-    <summary type="html">汉化补丁类资源演示，展示语言、版本对应关系等信息。</summary>
-    
-    
-    
-    <category term="MOD汉化" scheme="https://blog.126330.xyz/categories/MOD%E6%B1%89%E5%8C%96/"/>
-    
-    
-    <category term="演示" scheme="https://blog.126330.xyz/tags/%E6%BC%94%E7%A4%BA/"/>
-    
-    <category term="汉化" scheme="https://blog.126330.xyz/tags/%E6%B1%89%E5%8C%96/"/>
-    
-    <category term="补丁" scheme="https://blog.126330.xyz/tags/%E8%A1%A5%E4%B8%81/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>演示：游戏 MOD《示例模组》v3.1.4</title>
-    <link href="https://blog.126330.xyz/posts/c7d4ae22/"/>
-    <id>https://blog.126330.xyz/posts/c7d4ae22/</id>
-    <published>2026-10-04T07:20:00.000Z</published>
-    <updated>2026-10-04T07:20:00.000Z</updated>
-    
-    <content type="html"><![CDATA[<span id="more"></span><h2 id="MOD-简介"><a href="#MOD-简介" class="headerlink" title="MOD 简介"></a>MOD 简介</h2><p>这是一个玩法扩展 MOD，新增了 40+ 建筑、12 条任务线，并重做了经济系统。</p><h2 id="主要改动"><a href="#主要改动" class="headerlink" title="主要改动"></a>主要改动</h2><ul><li>新增 40 个建筑与 15 种科技</li><li>重做经济系统，削弱后期滚雪球</li><li>新增 12 条支线任务</li><li>修复原版 30 余个已知 BUG</li></ul><h2 id="安装方法"><a href="#安装方法" class="headerlink" title="安装方法"></a>安装方法</h2><ol><li>确认游戏版本为 <strong>v1.9.x</strong></li><li>解压 MOD 包到 <code>Documents/My Games/游戏名/Mods</code></li><li>启动器内勾选启用</li><li>新建存档（旧存档可能不兼容）</li></ol><h2 id="兼容性"><a href="#兼容性" class="headerlink" title="兼容性"></a>兼容性</h2><table><thead><tr><th>MOD</th><th>状态</th></tr></thead><tbody><tr><td>官方 DLC</td><td>兼容</td></tr><tr><td>中文语言包</td><td>兼容</td></tr><tr><td>大型平衡 MOD</td><td>不兼容</td></tr></tbody></table>]]></content>
-    
-    
-    <summary type="html">MOD 类资源演示，展示多版本、多网盘链接的呈现。</summary>
-    
-    
-    
-    <category term="游戏MOD" scheme="https://blog.126330.xyz/categories/%E6%B8%B8%E6%88%8FMOD/"/>
-    
-    
-    <category term="演示" scheme="https://blog.126330.xyz/tags/%E6%BC%94%E7%A4%BA/"/>
-    
-    <category term="MOD" scheme="https://blog.126330.xyz/tags/MOD/"/>
-    
-    <category term="玩法扩展" scheme="https://blog.126330.xyz/tags/%E7%8E%A9%E6%B3%95%E6%89%A9%E5%B1%95/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>演示：游戏资源《示例游戏》v1.2.0 免安装整合版</title>
-    <link href="https://blog.126330.xyz/posts/162b2e44/"/>
-    <id>https://blog.126330.xyz/posts/162b2e44/</id>
-    <published>2026-10-02T10:45:00.000Z</published>
-    <updated>2026-10-02T10:45:00.000Z</updated>
-    
-    <content type="html"><![CDATA[<span id="more"></span><h2 id="版本说明"><a href="#版本说明" class="headerlink" title="版本说明"></a>版本说明</h2><p>已整合全部 DLC 与官方简体中文，解压即玩，无需安装。</p><h2 id="配置要求"><a href="#配置要求" class="headerlink" title="配置要求"></a>配置要求</h2><table><thead><tr><th>项目</th><th>最低配置</th><th>推荐配置</th></tr></thead><tbody><tr><td>CPU</td><td>i5-8400</td><td>i7-12700</td></tr><tr><td>内存</td><td>8 GB</td><td>16 GB</td></tr><tr><td>显卡</td><td>GTX 1060 6G</td><td>RTX 3060</td></tr><tr><td>硬盘</td><td>50 GB</td><td>60 GB SSD</td></tr></tbody></table><h2 id="安装步骤"><a href="#安装步骤" class="headerlink" title="安装步骤"></a>安装步骤</h2><ol><li>下载全部分卷，放在同一个文件夹</li><li>右键第一个分卷解压到当前目录</li><li>进入 <code>Binaries</code> 目录，双击主程序运行</li><li>如果提示缺少运行库，请安装目录下的 <code>_CommonRedist</code></li></ol><blockquote><p>解压密码：<code>echo</code></p></blockquote>]]></content>
-    
-    
-    <summary type="html">游戏类资源演示，展示版本、平台、大小等字段的呈现。</summary>
-    
-    
-    
-    <category term="游戏资源" scheme="https://blog.126330.xyz/categories/%E6%B8%B8%E6%88%8F%E8%B5%84%E6%BA%90/"/>
-    
-    
-    <category term="单机游戏" scheme="https://blog.126330.xyz/tags/%E5%8D%95%E6%9C%BA%E6%B8%B8%E6%88%8F/"/>
-    
-    <category term="整合版" scheme="https://blog.126330.xyz/tags/%E6%95%B4%E5%90%88%E7%89%88/"/>
-    
-    <category term="演示" scheme="https://blog.126330.xyz/tags/%E6%BC%94%E7%A4%BA/"/>
     
   </entry>
   
