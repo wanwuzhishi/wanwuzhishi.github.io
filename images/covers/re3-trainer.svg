@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" width="800" height="450">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#ef4444"/>
+      <stop offset="1" stop-color="#312e81"/>
+    </linearGradient>
+    <pattern id="p" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M40 0H0V40" fill="none" stroke="#ffffff" stroke-opacity=".09" stroke-width="1"/>
+    </pattern>
+  </defs>
+  <rect width="800" height="450" fill="url(#g)"/>
+  <rect width="800" height="450" fill="url(#p)"/>
+  <circle cx="660" cy="90" r="150" fill="#ffffff" fill-opacity=".07"/>
+  <circle cx="120" cy="390" r="180" fill="#000000" fill-opacity=".07"/>
+  <g stroke="#ffffff" stroke-opacity=".35" stroke-width="2.5" fill="none" stroke-linecap="round">
+    <path d="M560 88h40l14 14v36h-54z"/>
+    <path d="M574 100v22M588 100v22M602 100v22M566 132h42"/>
+    <circle cx="632" cy="118" r="26"/>
+    <path d="M650 136l16 16"/>
+  </g>
+  <text x="60" y="250" font-family="Inter, 'Noto Sans SC', sans-serif" font-size="60" font-weight="700" fill="#ffffff" fill-opacity=".95">RE3 TRAINER</text>
+</svg>
