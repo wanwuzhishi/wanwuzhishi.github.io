@@ -67,7 +67,7 @@
 <link rel="alternate" type="application/atom+xml" href="/atom.xml" title="万物之时">
 
 
-<link rel="stylesheet" href="/css/echo.css?v=dc9f3291">
+<link rel="stylesheet" href="/css/echo.css?v=1fe22f8f">
 
 <style>
   :root {
@@ -406,10 +406,10 @@
       
 
       
-<details class="toc-inline" open>
+<details class="toc-inline">
   <summary class="toc-inline-head">
     <span class="toc-inline-title"><svg class="icon" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></svg> 目录</span>
-    <span class="toc-inline-hint">点击展开 / 收起</span>
+    <span class="toc-inline-hint">展开 / 收起</span>
   </summary>
   <nav class="toc-body toc-inline-body" aria-label="文章目录">
     <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E8%A7%92%E8%89%B2%E4%B8%8E%E9%93%BE%E8%B7%AF"><span class="toc-text">一、角色与链路</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E5%89%8D%E7%BD%AE%E6%9D%A1%E4%BB%B6"><span class="toc-text">二、前置条件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E7%AC%AC%E4%B8%80%E6%AD%A5%EF%BC%9A%E5%9C%A8%E5%8A%A0%E9%80%9F%E5%9F%9F%E5%90%8D%E4%B8%8A%E9%85%8D%E7%BD%AE-Tunnel"><span class="toc-text">三、第一步：在加速域名上配置 Tunnel</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%9B%E3%80%81%E7%AC%AC%E4%BA%8C%E6%AD%A5%EF%BC%9A%E5%BC%80%E5%90%AF-SaaS-%E5%B9%B6%E8%AE%BE%E7%BD%AE%E5%9B%9E%E9%80%80%E6%BA%90"><span class="toc-text">四、第二步：开启 SaaS 并设置回退源</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E8%AE%BE%E7%BD%AE%E5%9B%9E%E9%80%80%E6%BA%90"><span class="toc-text">1. 设置回退源</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E6%B7%BB%E5%8A%A0%E8%87%AA%E5%AE%9A%E4%B9%89%E4%B8%BB%E6%9C%BA%E5%90%8D"><span class="toc-text">2. 添加自定义主机名</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E8%AE%BE%E7%BD%AE%E5%9B%9E%E6%BA%90-Host%EF%BC%88%E5%BE%88%E5%85%B3%E9%94%AE%EF%BC%89"><span class="toc-text">3. 设置回源 Host（很关键）</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%94%E3%80%81%E7%AC%AC%E4%B8%89%E6%AD%A5%EF%BC%9A%E5%AE%8C%E6%88%90%E8%AF%81%E4%B9%A6%E9%AA%8C%E8%AF%81"><span class="toc-text">五、第三步：完成证书验证</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%AD%E3%80%81%E7%AC%AC%E5%9B%9B%E6%AD%A5%EF%BC%9A%E6%B7%BB%E5%8A%A0%E4%BC%98%E9%80%89%E8%AE%B0%E5%BD%95"><span class="toc-text">六、第四步：添加优选记录</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%83%E3%80%81%E7%AC%AC%E4%BA%94%E6%AD%A5%EF%BC%9A%E6%8A%8A%E8%AE%BF%E9%97%AE%E5%9F%9F%E5%90%8D%E6%8C%87%E5%90%91%E5%8A%A0%E9%80%9F%E8%AE%B0%E5%BD%95"><span class="toc-text">七、第五步：把访问域名指向加速记录</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%AB%E3%80%81DNS-%E8%AE%B0%E5%BD%95%E6%80%BB%E8%A1%A8"><span class="toc-text">八、DNS 记录总表</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B9%9D%E3%80%81%E9%AA%8C%E8%AF%81%E4%B8%8E%E6%8E%92%E9%94%99"><span class="toc-text">九、验证与排错</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E6%A3%80%E6%9F%A5-DNS"><span class="toc-text">1. 检查 DNS</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E6%A3%80%E6%9F%A5-HTTP-%E5%92%8C%E8%AF%81%E4%B9%A6"><span class="toc-text">2. 检查 HTTP 和证书</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E6%A3%80%E6%9F%A5-Tunnel"><span class="toc-text">3. 检查 Tunnel</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF"><span class="toc-text">4. 常见错误</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8D%81%E3%80%81%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9"><span class="toc-text">十、注意事项</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8D%81%E4%B8%80%E3%80%81%E5%8F%82%E8%80%83%E9%93%BE%E6%8E%A5"><span class="toc-text">十一、参考链接</span></a></li></ol>
@@ -846,7 +846,7 @@
       <li>
         <span class="stat-label"><svg class="icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m3 17 6-6 4 4 8-8"/><path d="M21 7v6h-6"/></svg> 总字数</span>
         <span class="stat-value is-accent">
-          32,703
+          32,872
         </span>
       </li>
     
@@ -854,7 +854,7 @@
       <li>
         <span class="stat-label"><svg class="icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2 2M9 2h6"/></svg> 运行时长</span>
         <span class="stat-value ">
-          19<em class="stat-unit">天</em>
+          20<em class="stat-unit">天</em>
         </span>
       </li>
     
@@ -862,7 +862,7 @@
       <li>
         <span class="stat-label"><svg class="icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12h4l2-6 3 12 2-6h7"/></svg> 最后活动</span>
         <span class="stat-value ">
-          2026-10-20
+          2026-10-21
         </span>
       </li>
     
