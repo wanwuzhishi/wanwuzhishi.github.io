@@ -360,7 +360,7 @@
     <article class="post-single ">
       <header class="post-header">
         <div class="post-chips">
-          <span class="chip"><svg class="icon" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m3 17 6-6 4 4 8-8"/><path d="M21 7v6h-6"/></svg> 2419 字</span>
+          <span class="chip"><svg class="icon" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m3 17 6-6 4 4 8-8"/><path d="M21 7v6h-6"/></svg> 2481 字</span>
           <span class="chip"><svg class="icon" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> 8 分钟</span>
           
         </div>
@@ -515,9 +515,9 @@
 <p>日历支持翻月，当天有描边标记，<strong>有文章的日期会显示小圆点</strong>，<br>下方列出最近更新的 3 篇内容。</p>
 <h3 id="站点信息"><a href="#站点信息" class="headerlink" title="站点信息"></a>站点信息</h3><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">siteinfo:</span></span><br><span class="line">  <span class="attr">enable:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">title:</span> <span class="string">站点信息</span></span><br><span class="line">  <span class="attr">build:</span> <span class="string">Hexo</span></span><br><span class="line">  <span class="attr">version:</span> <span class="string">Echo</span> <span class="number">1.0</span></span><br><span class="line">  <span class="attr">license:</span> <span class="string">CC</span> <span class="string">BY-NC-SA</span> <span class="number">4.0</span></span><br><span class="line">  <span class="attr">domain:</span> <span class="string">&#x27;&#x27;</span>      <span class="comment"># 留空则使用站点 url</span></span><br></pre></td></tr></table></figure>
 
-<h2 id="页脚"><a href="#页脚" class="headerlink" title="页脚"></a>页脚</h2><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">footer:</span></span><br><span class="line">  <span class="attr">since:</span> <span class="number">2024</span></span><br><span class="line">  <span class="attr">powered:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">beian:</span></span><br><span class="line">    <span class="attr">enable:</span> <span class="literal">false</span></span><br><span class="line">    <span class="attr">text:</span> <span class="string">粤ICP备00000000号</span></span><br><span class="line">    <span class="attr">link:</span> <span class="string">https://beian.miit.gov.cn/</span></span><br></pre></td></tr></table></figure>
+<h2 id="页脚"><a href="#页脚" class="headerlink" title="页脚"></a>页脚</h2><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">footer:</span></span><br><span class="line">  <span class="attr">since:</span> <span class="number">2024</span></span><br><span class="line">  <span class="attr">powered:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">theme_name:</span> <span class="string">Echo</span> <span class="string">主题</span></span><br><span class="line">  <span class="attr">theme_url:</span> <span class="string">https://github.com/wanwuzhishi/hexo-theme-echo</span></span><br><span class="line">  <span class="attr">beian:</span></span><br><span class="line">    <span class="attr">enable:</span> <span class="literal">false</span></span><br><span class="line">    <span class="attr">text:</span> <span class="string">粤ICP备00000000号</span></span><br><span class="line">    <span class="attr">link:</span> <span class="string">https://beian.miit.gov.cn/</span></span><br></pre></td></tr></table></figure>
 
-<p>页脚会显示 <code>© 2024 - 2026</code> 这样的年份区间，起始年份取 <code>since</code>。<br>开了 <code>beian</code> 之后会额外显示一条备案链接。</p>
+<p>页脚会显示 <code>© 2024 - 2026</code> 这样的年份区间，起始年份取 <code>since</code>；<br>如果 <code>since</code> 与当前年份相同（例如建站当年），则只显示当前年，如 <code>© 2026</code>。<br><code>theme_name</code> &#x2F; <code>theme_url</code> 控制「由 Hexo 与 …… 驱动」里的主题名与链接，<br>留空则回退到内置的「Echo 主题」与主题仓库地址。<br>开了 <code>beian</code> 之后会额外显示一条备案链接。</p>
 <h2 id="接入评论"><a href="#接入评论" class="headerlink" title="接入评论"></a>接入评论</h2><p>主题内置 <strong>Giscus</strong>（基于 GitHub Discussions），在 <code>_config.yml</code> 里填好参数即可：</p>
 <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">comments:</span></span><br><span class="line">  <span class="attr">enable:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">provider:</span> <span class="string">giscus</span></span><br><span class="line">  <span class="attr">giscus:</span></span><br><span class="line">    <span class="attr">repo:</span> <span class="string">用户名/仓库名</span></span><br><span class="line">    <span class="attr">repo_id:</span> <span class="string">R_kgDOxxxxxx</span></span><br><span class="line">    <span class="attr">category:</span> <span class="string">Announcements</span></span><br><span class="line">    <span class="attr">category_id:</span> <span class="string">DIC_kwDOxxxxxx</span></span><br><span class="line">    <span class="attr">mapping:</span> <span class="string">url</span>          <span class="comment"># 用页面 URL 关联 discussion</span></span><br></pre></td></tr></table></figure>
 
@@ -802,7 +802,7 @@
       <li>
         <span class="stat-label"><svg class="icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m3 17 6-6 4 4 8-8"/><path d="M21 7v6h-6"/></svg> 总字数</span>
         <span class="stat-value is-accent">
-          32,641
+          32,703
         </span>
       </li>
     
@@ -866,11 +866,12 @@
     </div>
   </div>
 
+  
   <div class="footer-bottom">
-    <span>© 2024 - 2026 万物之时</span>
+    <span>© 2026 万物之时</span>
     
     
-      <span>由 <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> 与 <a href="https://github.com/" target="_blank" rel="noopener">Echo 主题</a> 驱动</span>
+      <span>由 <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> 与 <a href="https://github.com/wanwuzhishi/hexo-theme-echo" target="_blank" rel="noopener">Echo 主题</a>驱动</span>
     
   </div>
 </footer>
