@@ -1429,6 +1429,19 @@ figure.highlight .code .line { padding-left: 0; }
 .post-content th { background: var(--bg-sunken); font-weight: 600; }
 .post-content tr:last-child td { border-bottom: none; }
 
+/* 窄屏表格：内容比容器宽时在表格内部横向滚动，而不是撑破页面。
+   display:block 才能让 overflow 生效（table 布局元素会忽略它），
+   width:max-content 让表格按内容宽度排布，max-width:100% 再把可视宽度收在容器内。 */
+@media (max-width: 900px) {
+  .post-content table {
+    display: block;
+    width: max-content;
+    max-width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
 .post-content iframe { max-width: 100%; border-radius: 12px; }
 
 /* ---------- highlight.js theme (github-dark) ---------- */
