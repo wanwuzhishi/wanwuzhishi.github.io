@@ -1211,6 +1211,9 @@ a.chip:hover { color: var(--link); border-color: var(--link); }
 .resource-info-table th { background: var(--bg-sunken); font-weight: 600; }
 /* 行名都是短词，不换行；长内容留给第二列伸缩 */
 .resource-info-table td:first-child { white-space: nowrap; }
+/* 值里可能有长 URL 或没有空格的串（项目地址、校验值），允许任意断点，
+   否则 min-content 宽度会把表格撑出窄屏容器 */
+.resource-info-table td { overflow-wrap: anywhere; }
 .resource-info-table tr:last-child td { border-bottom: none; }
 
 /* ---------- Resource summary ---------- */
@@ -1440,6 +1443,8 @@ figure.highlight .code .line { padding-left: 0; }
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
   }
+  /* 表头优先按一行排布：否则浏览器会先压缩表头、把「单源结果」挤成两行 */
+  .post-content table th { white-space: nowrap; }
 }
 
 .post-content iframe { max-width: 100%; border-radius: 12px; }

@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" width="800" height="450">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0ea5e9"/>
+      <stop offset="1" stop-color="#4338ca"/>
+    </linearGradient>
+    <pattern id="p" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M40 0H0V40" fill="none" stroke="#ffffff" stroke-opacity=".09" stroke-width="1"/>
+    </pattern>
+  </defs>
+  <rect width="800" height="450" fill="url(#g)"/>
+  <rect width="800" height="450" fill="url(#p)"/>
+  <circle cx="660" cy="90" r="150" fill="#ffffff" fill-opacity=".07"/>
+  <circle cx="120" cy="390" r="180" fill="#000000" fill-opacity=".07"/>
+  <g>
+    <g stroke="#ffffff" stroke-opacity=".15" stroke-width="1.5" fill="none">
+      <path d="M476 74L548 158"/>
+      <path d="M476 102L548 158"/>
+      <path d="M476 130L548 158"/>
+      <path d="M476 158L548 158"/>
+      <path d="M476 186L548 158"/>
+      <path d="M476 214L548 158"/>
+      <path d="M476 242L548 158"/>
+    </g>
+    <g font-family="Inter, 'Noto Sans SC', sans-serif" font-size="10" font-weight="500" fill="#ffffff">
+      <rect x="402" y="64" width="74" height="20" rx="5" fill-opacity=".1"/>
+      <circle cx="415" cy="74" r="2.6" fill-opacity=".62"/>
+      <text x="424" y="77.6" fill-opacity=".78">乐视</text>
+      <rect x="402" y="92" width="74" height="20" rx="5" fill-opacity=".1"/>
+      <circle cx="415" cy="102" r="2.6" fill-opacity=".5"/>
+      <text x="424" y="105.6" fill-opacity=".78">搜狐</text>
+      <rect x="402" y="120" width="74" height="20" rx="5" fill-opacity=".1"/>
+      <circle cx="415" cy="130" r="2.6" fill-opacity=".72"/>
+      <text x="424" y="133.6" fill-opacity=".78">AcFun</text>
+      <rect x="402" y="148" width="74" height="20" rx="5" fill-opacity=".1"/>
+      <circle cx="415" cy="158" r="2.6" fill-opacity=".4"/>
+      <text x="424" y="161.6" fill-opacity=".78">爱奇艺</text>
+      <rect x="402" y="176" width="74" height="20" rx="5" fill-opacity=".1"/>
+      <circle cx="415" cy="186" r="2.6" fill-opacity=".66"/>
+      <text x="424" y="189.6" fill-opacity=".78">腾讯</text>
+      <rect x="402" y="204" width="74" height="20" rx="5" fill-opacity=".1"/>
+      <circle cx="415" cy="214" r="2.6" fill-opacity=".46"/>
+      <text x="424" y="217.6" fill-opacity=".78">优酷</text>
+      <rect x="402" y="232" width="74" height="20" rx="5" fill-opacity=".1"/>
+      <circle cx="415" cy="242" r="2.6" fill-opacity=".78"/>
+      <text x="424" y="245.6" fill-opacity=".78">B站</text>
+    </g>
+    <circle cx="548" cy="158" r="41" fill="none" stroke="#ffffff" stroke-opacity=".2" stroke-width="1.5" stroke-dasharray="3 8"/>
+    <circle cx="548" cy="158" r="32" fill="#0b1020" fill-opacity=".62" stroke="#ffffff" stroke-opacity=".36" stroke-width="2"/>
+    <text x="548" y="164" text-anchor="middle" font-family="Inter, 'Noto Sans SC', sans-serif" font-size="17" font-weight="600" fill="#ffffff" fill-opacity=".88">合</text>
+    <circle cx="584" cy="158" r="3.2" fill="#ffffff" fill-opacity=".45"/>
+    <g stroke="#ffffff" stroke-opacity=".28" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M580 158L616 108H772"/>
+      <path d="M580 158H772"/>
+      <path d="M580 158L616 208H772"/>
+    </g>
+    <g fill="#ffffff">
+      <rect x="632" y="102" width="64" height="12" rx="6" fill-opacity=".17"/>
+      <rect x="706" y="102" width="40" height="12" rx="6" fill-opacity=".12"/>
+      <rect x="752" y="102" width="16" height="12" rx="6" fill-opacity=".2"/>
+      <rect x="626" y="152" width="70" height="12" rx="6" fill-opacity=".14"/>
+      <rect x="704" y="152" width="50" height="12" rx="6" fill-opacity=".2"/>
+      <rect x="636" y="202" width="56" height="12" rx="6" fill-opacity=".18"/>
+      <rect x="700" y="202" width="44" height="12" rx="6" fill-opacity=".12"/>
+      <rect x="750" y="202" width="20" height="12" rx="6" fill-opacity=".17"/>
+    </g>
+  </g>
+  <text x="60" y="246" font-family="Inter, 'Noto Sans SC', sans-serif" font-size="60" font-weight="700" fill="#ffffff" fill-opacity=".95">DANMAKU</text>
+  <text x="62" y="288" font-family="Inter, 'Noto Sans SC', sans-serif" font-size="21" font-weight="500" fill="#ffffff" fill-opacity=".62">多源弹幕聚合</text>
+</svg>
