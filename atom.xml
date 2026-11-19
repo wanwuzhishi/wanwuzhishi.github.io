@@ -30,16 +30,16 @@
     
     
     
-    <category term="软件工具" scheme="https://blog.126330.xyz/categories/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E5%85%B7/"/>
+    <category term="软件工具" scheme="https://blog.126330.xyz/categories/software/"/>
     
     
     <category term="Android" scheme="https://blog.126330.xyz/tags/Android/"/>
     
-    <category term="弹幕" scheme="https://blog.126330.xyz/tags/%E5%BC%B9%E5%B9%95/"/>
+    <category term="弹幕" scheme="https://blog.126330.xyz/tags/danmaku/"/>
     
-    <category term="数据聚合" scheme="https://blog.126330.xyz/tags/%E6%95%B0%E6%8D%AE%E8%81%9A%E5%90%88/"/>
+    <category term="数据聚合" scheme="https://blog.126330.xyz/tags/data-aggregation/"/>
     
-    <category term="逆向工程" scheme="https://blog.126330.xyz/tags/%E9%80%86%E5%90%91%E5%B7%A5%E7%A8%8B/"/>
+    <category term="逆向工程" scheme="https://blog.126330.xyz/tags/reverse-engineering/"/>
     
   </entry>
   
@@ -57,10 +57,10 @@
     
     
     
-    <category term="软件工具" scheme="https://blog.126330.xyz/categories/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E5%85%B7/"/>
+    <category term="软件工具" scheme="https://blog.126330.xyz/categories/software/"/>
     
     
-    <category term="开源工具" scheme="https://blog.126330.xyz/tags/%E5%BC%80%E6%BA%90%E5%B7%A5%E5%85%B7/"/>
+    <category term="开源工具" scheme="https://blog.126330.xyz/tags/open-source-tools/"/>
     
     <category term="KernelSU" scheme="https://blog.126330.xyz/tags/KernelSU/"/>
     
@@ -68,7 +68,7 @@
     
     <category term="Android" scheme="https://blog.126330.xyz/tags/Android/"/>
     
-    <category term="提权" scheme="https://blog.126330.xyz/tags/%E6%8F%90%E6%9D%83/"/>
+    <category term="提权" scheme="https://blog.126330.xyz/tags/privilege-escalation/"/>
     
   </entry>
   
@@ -86,20 +86,20 @@
     
     
     
-    <category term="软件工具" scheme="https://blog.126330.xyz/categories/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E5%85%B7/"/>
+    <category term="软件工具" scheme="https://blog.126330.xyz/categories/software/"/>
     
     
     <category term="Filee" scheme="https://blog.126330.xyz/tags/Filee/"/>
     
-    <category term="文件转换" scheme="https://blog.126330.xyz/tags/%E6%96%87%E4%BB%B6%E8%BD%AC%E6%8D%A2/"/>
+    <category term="文件转换" scheme="https://blog.126330.xyz/tags/file-conversion/"/>
     
-    <category term="格式转换" scheme="https://blog.126330.xyz/tags/%E6%A0%BC%E5%BC%8F%E8%BD%AC%E6%8D%A2/"/>
+    <category term="格式转换" scheme="https://blog.126330.xyz/tags/format-conversion/"/>
     
-    <category term="开源工具" scheme="https://blog.126330.xyz/tags/%E5%BC%80%E6%BA%90%E5%B7%A5%E5%85%B7/"/>
+    <category term="开源工具" scheme="https://blog.126330.xyz/tags/open-source-tools/"/>
     
     <category term="Windows" scheme="https://blog.126330.xyz/tags/Windows/"/>
     
-    <category term="效率工具" scheme="https://blog.126330.xyz/tags/%E6%95%88%E7%8E%87%E5%B7%A5%E5%85%B7/"/>
+    <category term="效率工具" scheme="https://blog.126330.xyz/tags/productivity-tools/"/>
     
   </entry>
   
@@ -117,7 +117,7 @@
     
     
     
-    <category term="折腾记录" scheme="https://blog.126330.xyz/categories/%E6%8A%98%E8%85%BE%E8%AE%B0%E5%BD%95/"/>
+    <category term="折腾记录" scheme="https://blog.126330.xyz/categories/tinkering/"/>
     
     
     <category term="Cloudflare" scheme="https://blog.126330.xyz/tags/Cloudflare/"/>
@@ -126,9 +126,9 @@
     
     <category term="SaaS" scheme="https://blog.126330.xyz/tags/SaaS/"/>
     
-    <category term="内网穿透" scheme="https://blog.126330.xyz/tags/%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/"/>
+    <category term="内网穿透" scheme="https://blog.126330.xyz/tags/intranet-tunneling/"/>
     
-    <category term="优选域名" scheme="https://blog.126330.xyz/tags/%E4%BC%98%E9%80%89%E5%9F%9F%E5%90%8D/"/>
+    <category term="优选域名" scheme="https://blog.126330.xyz/tags/preferred-domain/"/>
     
   </entry>
   
@@ -146,12 +146,12 @@
     
     
     
-    <category term="游戏MOD" scheme="https://blog.126330.xyz/categories/%E6%B8%B8%E6%88%8FMOD/"/>
+    <category term="游戏MOD" scheme="https://blog.126330.xyz/categories/game-mod/"/>
     
     
-    <category term="修改器" scheme="https://blog.126330.xyz/tags/%E4%BF%AE%E6%94%B9%E5%99%A8/"/>
+    <category term="修改器" scheme="https://blog.126330.xyz/tags/trainer/"/>
     
-    <category term="生化危机3" scheme="https://blog.126330.xyz/tags/%E7%94%9F%E5%8C%96%E5%8D%B1%E6%9C%BA3/"/>
+    <category term="生化危机3" scheme="https://blog.126330.xyz/tags/resident-evil-3/"/>
     
     <category term="RE3" scheme="https://blog.126330.xyz/tags/RE3/"/>
     
@@ -175,18 +175,18 @@
     
     
     
-    <category term="折腾记录" scheme="https://blog.126330.xyz/categories/%E6%8A%98%E8%85%BE%E8%AE%B0%E5%BD%95/"/>
+    <category term="折腾记录" scheme="https://blog.126330.xyz/categories/tinkering/"/>
     
-    
-    <category term="逆向工程" scheme="https://blog.126330.xyz/tags/%E9%80%86%E5%90%91%E5%B7%A5%E7%A8%8B/"/>
     
     <category term="RE3R" scheme="https://blog.126330.xyz/tags/RE3R/"/>
     
-    <category term="二进制汉化" scheme="https://blog.126330.xyz/tags/%E4%BA%8C%E8%BF%9B%E5%88%B6%E6%B1%89%E5%8C%96/"/>
+    <category term="逆向工程" scheme="https://blog.126330.xyz/tags/reverse-engineering/"/>
+    
+    <category term="二进制汉化" scheme="https://blog.126330.xyz/tags/binary-translation/"/>
     
     <category term="UPX" scheme="https://blog.126330.xyz/tags/UPX/"/>
     
-    <category term="游戏工具" scheme="https://blog.126330.xyz/tags/%E6%B8%B8%E6%88%8F%E5%B7%A5%E5%85%B7/"/>
+    <category term="游戏工具" scheme="https://blog.126330.xyz/tags/game-tools/"/>
     
   </entry>
   
@@ -204,14 +204,14 @@
     
     
     
-    <category term="MOD汉化" scheme="https://blog.126330.xyz/categories/MOD%E6%B1%89%E5%8C%96/"/>
+    <category term="MOD汉化" scheme="https://blog.126330.xyz/categories/mod-translation/"/>
     
     
-    <category term="修改器" scheme="https://blog.126330.xyz/tags/%E4%BF%AE%E6%94%B9%E5%99%A8/"/>
+    <category term="修改器" scheme="https://blog.126330.xyz/tags/trainer/"/>
     
-    <category term="汉化" scheme="https://blog.126330.xyz/tags/%E6%B1%89%E5%8C%96/"/>
+    <category term="汉化" scheme="https://blog.126330.xyz/tags/translation/"/>
     
-    <category term="生化危机3" scheme="https://blog.126330.xyz/tags/%E7%94%9F%E5%8C%96%E5%8D%B1%E6%9C%BA3/"/>
+    <category term="生化危机3" scheme="https://blog.126330.xyz/tags/resident-evil-3/"/>
     
     <category term="RE3R" scheme="https://blog.126330.xyz/tags/RE3R/"/>
     
@@ -233,18 +233,18 @@
     
     
     
-    <category term="MOD汉化" scheme="https://blog.126330.xyz/categories/MOD%E6%B1%89%E5%8C%96/"/>
+    <category term="MOD汉化" scheme="https://blog.126330.xyz/categories/mod-translation/"/>
     
     
-    <category term="生化危机2" scheme="https://blog.126330.xyz/tags/%E7%94%9F%E5%8C%96%E5%8D%B1%E6%9C%BA2/"/>
+    <category term="生化危机2" scheme="https://blog.126330.xyz/tags/resident-evil-2/"/>
     
     <category term="RE2" scheme="https://blog.126330.xyz/tags/RE2/"/>
     
     <category term="CabbyCodes" scheme="https://blog.126330.xyz/tags/CabbyCodes/"/>
     
-    <category term="修改器" scheme="https://blog.126330.xyz/tags/%E4%BF%AE%E6%94%B9%E5%99%A8/"/>
+    <category term="修改器" scheme="https://blog.126330.xyz/tags/trainer/"/>
     
-    <category term="汉化" scheme="https://blog.126330.xyz/tags/%E6%B1%89%E5%8C%96/"/>
+    <category term="汉化" scheme="https://blog.126330.xyz/tags/translation/"/>
     
   </entry>
   
@@ -262,18 +262,18 @@
     
     
     
-    <category term="软件工具" scheme="https://blog.126330.xyz/categories/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E5%85%B7/"/>
+    <category term="软件工具" scheme="https://blog.126330.xyz/categories/software/"/>
     
     
     <category term="Cloudflare" scheme="https://blog.126330.xyz/tags/Cloudflare/"/>
     
-    <category term="开源工具" scheme="https://blog.126330.xyz/tags/%E5%BC%80%E6%BA%90%E5%B7%A5%E5%85%B7/"/>
+    <category term="开源工具" scheme="https://blog.126330.xyz/tags/open-source-tools/"/>
     
     <category term="hosts" scheme="https://blog.126330.xyz/tags/hosts/"/>
     
     <category term="GitHub" scheme="https://blog.126330.xyz/tags/GitHub/"/>
     
-    <category term="网络优化" scheme="https://blog.126330.xyz/tags/%E7%BD%91%E7%BB%9C%E4%BC%98%E5%8C%96/"/>
+    <category term="网络优化" scheme="https://blog.126330.xyz/tags/network-optimization/"/>
     
   </entry>
   
@@ -291,14 +291,14 @@
     
     
     
-    <category term="影视资源" scheme="https://blog.126330.xyz/categories/%E5%BD%B1%E8%A7%86%E8%B5%84%E6%BA%90/"/>
+    <category term="影视资源" scheme="https://blog.126330.xyz/categories/movie/"/>
     
     
-    <category term="动画" scheme="https://blog.126330.xyz/tags/%E5%8A%A8%E7%94%BB/"/>
+    <category term="动画" scheme="https://blog.126330.xyz/tags/animation/"/>
     
     <category term="2017" scheme="https://blog.126330.xyz/tags/2017/"/>
     
-    <category term="京都动画" scheme="https://blog.126330.xyz/tags/%E4%BA%AC%E9%83%BD%E5%8A%A8%E7%94%BB/"/>
+    <category term="京都动画" scheme="https://blog.126330.xyz/tags/kyoto-animation/"/>
     
   </entry>
   
@@ -316,16 +316,16 @@
     
     
     
-    <category term="主题指南" scheme="https://blog.126330.xyz/categories/%E4%B8%BB%E9%A2%98%E6%8C%87%E5%8D%97/"/>
+    <category term="主题指南" scheme="https://blog.126330.xyz/categories/theme-guide/"/>
     
     
-    <category term="Echo 主题" scheme="https://blog.126330.xyz/tags/Echo-%E4%B8%BB%E9%A2%98/"/>
+    <category term="Echo 主题" scheme="https://blog.126330.xyz/tags/echo-theme/"/>
     
-    <category term="教程" scheme="https://blog.126330.xyz/tags/%E6%95%99%E7%A8%8B/"/>
+    <category term="教程" scheme="https://blog.126330.xyz/tags/tutorial/"/>
     
-    <category term="侧栏" scheme="https://blog.126330.xyz/tags/%E4%BE%A7%E6%A0%8F/"/>
+    <category term="侧栏" scheme="https://blog.126330.xyz/tags/sidebar/"/>
     
-    <category term="常见问题" scheme="https://blog.126330.xyz/tags/%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98/"/>
+    <category term="常见问题" scheme="https://blog.126330.xyz/tags/faq/"/>
     
   </entry>
   
@@ -343,16 +343,16 @@
     
     
     
-    <category term="主题指南" scheme="https://blog.126330.xyz/categories/%E4%B8%BB%E9%A2%98%E6%8C%87%E5%8D%97/"/>
+    <category term="主题指南" scheme="https://blog.126330.xyz/categories/theme-guide/"/>
     
     
-    <category term="Echo 主题" scheme="https://blog.126330.xyz/tags/Echo-%E4%B8%BB%E9%A2%98/"/>
+    <category term="Echo 主题" scheme="https://blog.126330.xyz/tags/echo-theme/"/>
     
-    <category term="教程" scheme="https://blog.126330.xyz/tags/%E6%95%99%E7%A8%8B/"/>
+    <category term="教程" scheme="https://blog.126330.xyz/tags/tutorial/"/>
     
     <category term="Markdown" scheme="https://blog.126330.xyz/tags/Markdown/"/>
     
-    <category term="写作" scheme="https://blog.126330.xyz/tags/%E5%86%99%E4%BD%9C/"/>
+    <category term="写作" scheme="https://blog.126330.xyz/tags/writing/"/>
     
   </entry>
   
@@ -370,16 +370,16 @@
     
     
     
-    <category term="主题指南" scheme="https://blog.126330.xyz/categories/%E4%B8%BB%E9%A2%98%E6%8C%87%E5%8D%97/"/>
+    <category term="主题指南" scheme="https://blog.126330.xyz/categories/theme-guide/"/>
     
     
-    <category term="Echo 主题" scheme="https://blog.126330.xyz/tags/Echo-%E4%B8%BB%E9%A2%98/"/>
+    <category term="Echo 主题" scheme="https://blog.126330.xyz/tags/echo-theme/"/>
     
-    <category term="教程" scheme="https://blog.126330.xyz/tags/%E6%95%99%E7%A8%8B/"/>
+    <category term="教程" scheme="https://blog.126330.xyz/tags/tutorial/"/>
     
-    <category term="资源库" scheme="https://blog.126330.xyz/tags/%E8%B5%84%E6%BA%90%E5%BA%93/"/>
+    <category term="资源库" scheme="https://blog.126330.xyz/tags/resource-library/"/>
     
-    <category term="网盘" scheme="https://blog.126330.xyz/tags/%E7%BD%91%E7%9B%98/"/>
+    <category term="网盘" scheme="https://blog.126330.xyz/tags/cloud-drive/"/>
     
   </entry>
   
@@ -397,16 +397,16 @@
     
     
     
-    <category term="主题指南" scheme="https://blog.126330.xyz/categories/%E4%B8%BB%E9%A2%98%E6%8C%87%E5%8D%97/"/>
+    <category term="主题指南" scheme="https://blog.126330.xyz/categories/theme-guide/"/>
     
     
-    <category term="Echo 主题" scheme="https://blog.126330.xyz/tags/Echo-%E4%B8%BB%E9%A2%98/"/>
+    <category term="Echo 主题" scheme="https://blog.126330.xyz/tags/echo-theme/"/>
     
-    <category term="教程" scheme="https://blog.126330.xyz/tags/%E6%95%99%E7%A8%8B/"/>
+    <category term="教程" scheme="https://blog.126330.xyz/tags/tutorial/"/>
     
-    <category term="布局" scheme="https://blog.126330.xyz/tags/%E5%B8%83%E5%B1%80/"/>
+    <category term="布局" scheme="https://blog.126330.xyz/tags/layout/"/>
     
-    <category term="响应式" scheme="https://blog.126330.xyz/tags/%E5%93%8D%E5%BA%94%E5%BC%8F/"/>
+    <category term="响应式" scheme="https://blog.126330.xyz/tags/responsive/"/>
     
   </entry>
   
@@ -424,16 +424,16 @@
     
     
     
-    <category term="主题指南" scheme="https://blog.126330.xyz/categories/%E4%B8%BB%E9%A2%98%E6%8C%87%E5%8D%97/"/>
+    <category term="主题指南" scheme="https://blog.126330.xyz/categories/theme-guide/"/>
     
     
     <category term="Hexo" scheme="https://blog.126330.xyz/tags/Hexo/"/>
     
-    <category term="Echo 主题" scheme="https://blog.126330.xyz/tags/Echo-%E4%B8%BB%E9%A2%98/"/>
+    <category term="Echo 主题" scheme="https://blog.126330.xyz/tags/echo-theme/"/>
     
-    <category term="教程" scheme="https://blog.126330.xyz/tags/%E6%95%99%E7%A8%8B/"/>
+    <category term="教程" scheme="https://blog.126330.xyz/tags/tutorial/"/>
     
-    <category term="配置" scheme="https://blog.126330.xyz/tags/%E9%85%8D%E7%BD%AE/"/>
+    <category term="配置" scheme="https://blog.126330.xyz/tags/configuration/"/>
     
   </entry>
   
@@ -451,14 +451,14 @@
     
     
     
-    <category term="主题指南" scheme="https://blog.126330.xyz/categories/%E4%B8%BB%E9%A2%98%E6%8C%87%E5%8D%97/"/>
+    <category term="主题指南" scheme="https://blog.126330.xyz/categories/theme-guide/"/>
     
     
     <category term="Hexo" scheme="https://blog.126330.xyz/tags/Hexo/"/>
     
-    <category term="Echo 主题" scheme="https://blog.126330.xyz/tags/Echo-%E4%B8%BB%E9%A2%98/"/>
+    <category term="Echo 主题" scheme="https://blog.126330.xyz/tags/echo-theme/"/>
     
-    <category term="教程" scheme="https://blog.126330.xyz/tags/%E6%95%99%E7%A8%8B/"/>
+    <category term="教程" scheme="https://blog.126330.xyz/tags/tutorial/"/>
     
   </entry>
   
@@ -476,14 +476,14 @@
     
     
     
-    <category term="建站笔记" scheme="https://blog.126330.xyz/categories/%E5%BB%BA%E7%AB%99%E7%AC%94%E8%AE%B0/"/>
+    <category term="建站笔记" scheme="https://blog.126330.xyz/categories/site-notes/"/>
     
     
     <category term="Hexo" scheme="https://blog.126330.xyz/tags/Hexo/"/>
     
     <category term="SEO" scheme="https://blog.126330.xyz/tags/SEO/"/>
     
-    <category term="折腾记录" scheme="https://blog.126330.xyz/tags/%E6%8A%98%E8%85%BE%E8%AE%B0%E5%BD%95/"/>
+    <category term="折腾记录" scheme="https://blog.126330.xyz/tags/tinkering/"/>
     
   </entry>
   
@@ -501,14 +501,14 @@
     
     
     
-    <category term="折腾记录" scheme="https://blog.126330.xyz/categories/%E6%8A%98%E8%85%BE%E8%AE%B0%E5%BD%95/"/>
+    <category term="折腾记录" scheme="https://blog.126330.xyz/categories/tinkering/"/>
     
     
     <category term="Hexo" scheme="https://blog.126330.xyz/tags/Hexo/"/>
     
     <category term="HexoDeck" scheme="https://blog.126330.xyz/tags/HexoDeck/"/>
     
-    <category term="工具" scheme="https://blog.126330.xyz/tags/%E5%B7%A5%E5%85%B7/"/>
+    <category term="工具" scheme="https://blog.126330.xyz/tags/tools/"/>
     
   </entry>
   
@@ -533,7 +533,7 @@
     
     <category term="HexoDeck" scheme="https://blog.126330.xyz/tags/HexoDeck/"/>
     
-    <category term="文档" scheme="https://blog.126330.xyz/tags/%E6%96%87%E6%A1%A3/"/>
+    <category term="文档" scheme="https://blog.126330.xyz/tags/documentation/"/>
     
   </entry>
   
@@ -558,7 +558,7 @@
     
     <category term="HexoDeck" scheme="https://blog.126330.xyz/tags/HexoDeck/"/>
     
-    <category term="文档" scheme="https://blog.126330.xyz/tags/%E6%96%87%E6%A1%A3/"/>
+    <category term="文档" scheme="https://blog.126330.xyz/tags/documentation/"/>
     
   </entry>
   
