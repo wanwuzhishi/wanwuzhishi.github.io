@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 Disallow: /search.json
-Sitemap: https://blog.126330.xyz/sitemap/sitemap.xml
+Sitemap: https://blog.126330.xyz/sitemap_index.xml
