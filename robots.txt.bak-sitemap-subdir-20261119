@@ -1,4 +1,0 @@
-User-agent: *
-Allow: /
-Disallow: /search.json
-Sitemap: https://blog.126330.xyz/sitemap.xml
