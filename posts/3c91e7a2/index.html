@@ -8,7 +8,7 @@
 
 <title>KSU Root：给 Redmi K90 Max 开一个重启就消失的临时 root · 万物之时</title>
 
-<meta name="description" content="把「电脑 + adb + 五段手工命令」的提权流程封装成一个 Android App：Shizuku 转发、KernelSU LKM 加载、pty 注入，手机上点一下拿到 uid=0 的临时 root，重启即失效。附前置条件、40% panic 的成因、断点续跑、失败后为何必须先重启，以及已知限制。">
+<meta name="description" content="把「电脑 + adb + 手工命令」的提权流程封装成一个 Android App，手机上点一下拿到 uid=0 的临时 root，重启即失效。v1.2.9 已从 CVE-2026-64560 迁到 CVE-2026-98260：不再需要 kprobe 布防，真机首次跑通零 panic。附双系统版本支持、SukiSU 与 KernelSU 双管理器、失败后为何必须先重启，以及已知限制。">
 
 <meta name="keywords" content="万物之时,资源分享,影视资源,游戏资源,Mod 汉化,游戏 Mod,Hexo,博客">
 
@@ -22,7 +22,7 @@
 <meta property="og:title" content="KSU Root：给 Redmi K90 Max 开一个重启就消失的临时 root">
 <meta property="og:url" content="https://blog.126330.xyz/posts/3c91e7a2/">
 <meta property="og:site_name" content="万物之时">
-<meta property="og:description" content="把「电脑 + adb + 五段手工命令」的提权流程封装成一个 Android App：Shizuku 转发、KernelSU LKM 加载、pty 注入，手机上点一下拿到 uid=0 的临时 root，重启即失效。附前置条件、40% panic 的成因、断点续跑、失败后为何必须先重启，以及已知限制。">
+<meta property="og:description" content="把「电脑 + adb + 手工命令」的提权流程封装成一个 Android App，手机上点一下拿到 uid=0 的临时 root，重启即失效。v1.2.9 已从 CVE-2026-64560 迁到 CVE-2026-98260：不再需要 kprobe 布防，真机首次跑通零 panic。附双系统版本支持、SukiSU 与 KernelSU 双管理器、失败后为何必须先重启，以及已知限制。">
 
 <meta property="og:image" content="https://blog.126330.xyz/images/covers/ksu-root.svg">
 <meta property="og:image:alt" content="KSU Root：给 Redmi K90 Max 开一个重启就消失的临时 root">
@@ -31,7 +31,7 @@
 
 <meta property="article:published_time" content="2026-10-25T17:10:00.000Z">
 
-<meta property="article:modified_time" content="2026-10-25T17:50:00.000Z">
+<meta property="article:modified_time" content="2026-11-21T07:55:00.000Z">
 
 
 <meta property="article:section" content="软件工具">
@@ -47,18 +47,20 @@
 
 <meta property="article:tag" content="提权">
 
+<meta property="article:tag" content="SukiSU">
+
 
 
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="KSU Root：给 Redmi K90 Max 开一个重启就消失的临时 root">
-<meta name="twitter:description" content="把「电脑 + adb + 五段手工命令」的提权流程封装成一个 Android App：Shizuku 转发、KernelSU LKM 加载、pty 注入，手机上点一下拿到 uid=0 的临时 root，重启即失效。附前置条件、40% panic 的成因、断点续跑、失败后为何必须先重启，以及已知限制。">
+<meta name="twitter:description" content="把「电脑 + adb + 手工命令」的提权流程封装成一个 Android App，手机上点一下拿到 uid=0 的临时 root，重启即失效。v1.2.9 已从 CVE-2026-64560 迁到 CVE-2026-98260：不再需要 kprobe 布防，真机首次跑通零 panic。附双系统版本支持、SukiSU 与 KernelSU 双管理器、失败后为何必须先重启，以及已知限制。">
 
 
 <link rel="canonical" href="https://blog.126330.xyz/posts/3c91e7a2/">
 
 
 
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"KSU Root：给 Redmi K90 Max 开一个重启就消失的临时 root","description":"把「电脑 + adb + 五段手工命令」的提权流程封装成一个 Android App：Shizuku 转发、KernelSU LKM 加载、pty 注入，手机上点一下拿到 uid=0 的临时 root，重启即失效。附前置条件、40% panic 的成因、断点续跑、失败后为何必须先重启，以及已知限制。","url":"https://blog.126330.xyz/posts/3c91e7a2/","mainEntityOfPage":{"@type":"WebPage","@id":"https://blog.126330.xyz/posts/3c91e7a2/"},"datePublished":"2026-10-25T17:10:00.000Z","dateModified":"2026-10-25T17:50:00.000Z","author":{"@type":"Person","name":"万物之时"},"publisher":{"@type":"Organization","name":"万物之时","logo":{"@type":"ImageObject","url":"https://blog.126330.xyz/favicon.png"}},"inLanguage":"zh-CN","isPartOf":{"@type":"Blog","name":"万物之时","url":"https://blog.126330.xyz/"},"image":["https://blog.126330.xyz/images/covers/ksu-root.svg"],"keywords":"开源工具, KernelSU, Shizuku, Android, 提权","articleSection":"软件工具"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"KSU Root：给 Redmi K90 Max 开一个重启就消失的临时 root","description":"把「电脑 + adb + 手工命令」的提权流程封装成一个 Android App，手机上点一下拿到 uid=0 的临时 root，重启即失效。v1.2.9 已从 CVE-2026-64560 迁到 CVE-2026-98260：不再需要 kprobe 布防，真机首次跑通零 panic。附双系统版本支持、SukiSU 与 KernelSU 双管理器、失败后为何必须先重启，以及已知限制。","url":"https://blog.126330.xyz/posts/3c91e7a2/","mainEntityOfPage":{"@type":"WebPage","@id":"https://blog.126330.xyz/posts/3c91e7a2/"},"datePublished":"2026-10-25T17:10:00.000Z","dateModified":"2026-11-21T07:55:00.000Z","author":{"@type":"Person","name":"万物之时"},"publisher":{"@type":"Organization","name":"万物之时","logo":{"@type":"ImageObject","url":"https://blog.126330.xyz/favicon.png"}},"inLanguage":"zh-CN","isPartOf":{"@type":"Blog","name":"万物之时","url":"https://blog.126330.xyz/"},"image":["https://blog.126330.xyz/images/covers/ksu-root.svg"],"keywords":"开源工具, KernelSU, Shizuku, Android, 提权, SukiSU","articleSection":"软件工具"}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"首页","item":"https://blog.126330.xyz/"},{"@type":"ListItem","position":2,"name":"软件工具","item":"https://blog.126330.xyz/categories/software/"},{"@type":"ListItem","position":3,"name":"KSU Root：给 Redmi K90 Max 开一个重启就消失的临时 root","item":"https://blog.126330.xyz/posts/3c91e7a2/"}]}</script>
 
 
@@ -362,8 +364,8 @@
     <article class="post-single is-resource-post">
       <header class="post-header">
         <div class="post-chips">
-          <span class="chip"><svg class="icon" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m3 17 6-6 4 4 8-8"/><path d="M21 7v6h-6"/></svg> 2931 字</span>
-          <span class="chip"><svg class="icon" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> 10 分钟</span>
+          <span class="chip"><svg class="icon" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m3 17 6-6 4 4 8-8"/><path d="M21 7v6h-6"/></svg> 4424 字</span>
+          <span class="chip"><svg class="icon" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> 15 分钟</span>
           
             <a class="chip is-accent" href="/resources/software/">
               <svg class="icon" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="3"/><path d="M4 9h16M8 6.5h.01M11 6.5h.01"/></svg> 软件工具
@@ -394,21 +396,23 @@
                 
                   <a href="/tags/Android/">Android</a> / 
                 
-                  <a href="/tags/privilege-escalation/">提权</a>
+                  <a href="/tags/privilege-escalation/">提权</a> / 
+                
+                  <a href="/tags/SukiSU/">SukiSU</a>
                 
               </span>
             </span>
           
           
             <span class="meta-chip">
-              <svg class="icon" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12h4l2-6 3 12 2-6h7"/></svg> 更新于 2026-10-26 01:50
+              <svg class="icon" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12h4l2-6 3 12 2-6h7"/></svg> 更新于 2026-11-21 15:55
             </span>
           
         </div>
       </header>
 
       
-        <p class="post-intro">把「电脑 + adb + 五段手工命令」的提权流程封装成一个 Android App：Shizuku 转发、KernelSU LKM 加载、pty 注入，手机上点一下拿到 uid=0 的临时 root，重启即失效。附前置条件、40% panic 的成因、断点续跑、失败后为何必须先重启，以及已知限制。</p>
+        <p class="post-intro">把「电脑 + adb + 手工命令」的提权流程封装成一个 Android App，手机上点一下拿到 uid=0 的临时 root，重启即失效。v1.2.9 已从 CVE-2026-64560 迁到 CVE-2026-98260：不再需要 kprobe 布防，真机首次跑通零 panic。附双系统版本支持、SukiSU 与 KernelSU 双管理器、失败后为何必须先重启，以及已知限制。</p>
       
 
       
@@ -427,12 +431,12 @@
           
             <div class="summary-item">
               <span class="summary-label">版本</span>
-              <span class="summary-value">v1.0.3</span>
+              <span class="summary-value">v1.2.9</span>
             </div>
           
             <div class="summary-item">
               <span class="summary-label">平台</span>
-              <span class="summary-value">Android 16（澎湃 OS 4.0.0.14）/ 仅 REDMI K90 Max</span>
+              <span class="summary-value">澎湃 OS 4.0.0.14 / 4.0.5.0.XAACNXM（内核 6.12.69）/ 仅 REDMI K90 Max</span>
             </div>
           
             <div class="summary-item">
@@ -442,7 +446,7 @@
           
             <div class="summary-item">
               <span class="summary-label">更新日期</span>
-              <span class="summary-value">2026-10-26</span>
+              <span class="summary-value">2026-11-21</span>
             </div>
           
         </div>
@@ -461,7 +465,7 @@
             
               <tr>
                 <td>当前版本</td>
-                <td>v1.0.3</td>
+                <td>v1.2.9（versionCode 41）</td>
               </tr>
             
               <tr>
@@ -471,7 +475,7 @@
             
               <tr>
                 <td>系统版本</td>
-                <td>澎湃 OS 4.0.0.14.XAACNXM</td>
+                <td>澎湃 OS 4.0.0.14.XAACNXM / 4.0.5.0.XAACNXM</td>
               </tr>
             
               <tr>
@@ -481,12 +485,17 @@
             
               <tr>
                 <td>安全补丁</td>
-                <td>2026-09-01</td>
+                <td>2026-09-01 / 2026-10-01</td>
               </tr>
             
               <tr>
                 <td>利用漏洞</td>
-                <td>CVE-2026-64560（posix-cpu-timers UAF）</td>
+                <td>CVE-2026-98260（exec / de_thread 未清理 POSIX CPU timer）</td>
+              </tr>
+            
+              <tr>
+                <td>内核管理器</td>
+                <td>SukiSU Ultra 或 KernelSU（运行期从已装 APK 抽取 ksud）</td>
               </tr>
             
               <tr>
@@ -515,18 +524,73 @@
     <span class="toc-inline-hint">展开 / 收起</span>
   </summary>
   <nav class="toc-body toc-inline-body" aria-label="文章目录">
-    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B5%B7%E7%82%B9%EF%BC%9A%E4%B8%80%E6%9D%A1%E5%8F%AA%E6%9C%89%E7%94%B5%E8%84%91%E8%83%BD%E8%B5%B0%E7%9A%84%E6%8F%90%E6%9D%83%E9%93%BE"><span class="toc-text">起点：一条只有电脑能走的提权链</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B0%81%E8%A3%85%E4%B9%8B%E5%90%8E%EF%BC%8C%E4%B8%80%E6%9D%A1%E5%91%BD%E4%BB%A4%E5%8F%98%E6%88%90%E4%B8%80%E4%B8%AA%E6%8C%89%E9%92%AE"><span class="toc-text">封装之后，一条命令变成一个按钮</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%83%E4%B8%8D%E6%98%AF%E4%BB%80%E4%B9%88"><span class="toc-text">它不是什么</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E7%BD%AE%E6%9D%A1%E4%BB%B6%EF%BC%9A%E4%B8%89%E4%BB%B6%E4%B8%9C%E8%A5%BF"><span class="toc-text">前置条件：三件东西</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%94%A8%E8%B5%B7%E6%9D%A5%E6%98%AF%E4%BB%80%E4%B9%88%E6%A0%B7"><span class="toc-text">用起来是什么样</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%AF%8F%E6%AC%A1%E9%87%8D%E5%90%AF%E5%90%8E%E9%83%BD%E5%BE%97%E6%89%8B%E5%8A%A8%E5%90%AF%E5%8A%A8-Shizuku"><span class="toc-text">每次重启后都得手动启动 Shizuku</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8D%A2-Shizuku-%E5%AE%9E%E7%8E%B0%EF%BC%9F%E5%85%88%E7%9C%8B%E6%9D%83%E9%99%90%E5%90%8D"><span class="toc-text">换 Shizuku 实现？先看权限名</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A4%B1%E8%B4%A5%E6%98%AF%E5%B8%B8%E6%80%81%EF%BC%8C%E4%B8%8D%E6%98%AF-bug"><span class="toc-text">失败是常态，不是 bug</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B9%B2%E5%87%80%E5%A4%B1%E8%B4%A5%E6%AF%94-panic-%E6%9B%B4%E9%98%B4%EF%BC%9A%E4%B8%8D%E9%87%8D%E5%90%AF%E5%B0%B1%E5%86%8D%E8%B7%91%E5%BF%85%E5%B4%A9"><span class="toc-text">干净失败比 panic 更阴：不重启就再跑必崩</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%88%90%E5%8A%9F%E7%8E%87%E8%B7%9F%E7%B3%BB%E7%BB%9F%E8%B4%9F%E8%BD%BD%E5%BC%BA%E7%9B%B8%E5%85%B3"><span class="toc-text">成功率跟系统负载强相关</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8E%9F%E7%90%86%EF%BC%88%E7%AE%80%E8%BF%B0%EF%BC%89"><span class="toc-text">原理（简述）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E6%B5%8B%E8%AE%B0%E5%BD%95"><span class="toc-text">实测记录</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B7%B2%E7%9F%A5%E9%99%90%E5%88%B6"><span class="toc-text">已知限制</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9E%84%E5%BB%BA"><span class="toc-text">构建</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AE%B8%E5%8F%AF%E4%B8%8E%E8%87%B4%E8%B0%A2"><span class="toc-text">许可与致谢</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%8D%E8%B4%A3%E5%A3%B0%E6%98%8E"><span class="toc-text">免责声明</span></a></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%99%E4%B8%80%E4%BB%A3%E6%8D%A2%E4%BA%86%E4%BB%80%E4%B9%88"><span class="toc-text">这一代换了什么</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B5%B7%E7%82%B9%EF%BC%9A%E4%B8%80%E6%9D%A1%E5%8F%AA%E6%9C%89%E7%94%B5%E8%84%91%E8%83%BD%E8%B5%B0%E7%9A%84%E9%93%BE"><span class="toc-text">起点：一条只有电脑能走的链</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B0%81%E8%A3%85%E4%B9%8B%E5%90%8E%EF%BC%8C%E4%B8%80%E6%9D%A1%E5%91%BD%E4%BB%A4%E5%8F%98%E6%88%90%E4%B8%80%E4%B8%AA%E6%8C%89%E9%92%AE"><span class="toc-text">封装之后，一条命令变成一个按钮</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%83%E4%B8%8D%E6%98%AF%E4%BB%80%E4%B9%88"><span class="toc-text">它不是什么</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88-4-0-5-0-%E4%B9%9F%E8%83%BD%E7%94%A8"><span class="toc-text">为什么 4.0.5.0 也能用</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E7%BD%AE%E6%9D%A1%E4%BB%B6%EF%BC%9A%E4%B8%89%E4%BB%B6%E4%B8%9C%E8%A5%BF"><span class="toc-text">前置条件：三件东西</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%94%A8%E8%B5%B7%E6%9D%A5%E6%98%AF%E4%BB%80%E4%B9%88%E6%A0%B7"><span class="toc-text">用起来是什么样</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%AF%8F%E6%AC%A1%E9%87%8D%E5%90%AF%E5%90%8E%E9%83%BD%E5%BE%97%E6%89%8B%E5%8A%A8%E5%90%AF%E5%8A%A8-Shizuku"><span class="toc-text">每次重启后都得手动启动 Shizuku</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8D%A2-Shizuku-%E5%AE%9E%E7%8E%B0%EF%BC%9F%E5%85%88%E7%9C%8B%E6%9D%83%E9%99%90%E5%90%8D"><span class="toc-text">换 Shizuku 实现？先看权限名</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A4%B1%E8%B4%A5%E6%98%AF%E5%B8%B8%E6%80%81%EF%BC%8C%E4%BD%86%E5%88%A4%E6%8D%AE%E5%8F%98%E7%BB%86%E4%BA%86"><span class="toc-text">失败是常态，但判据变细了</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%A6%E4%B8%80%E4%B8%AA%E6%AE%8B%E7%95%99%EF%BC%9A%E6%82%AC%E7%A9%BA%E7%9A%84-victim-timer"><span class="toc-text">另一个残留：悬空的 victim timer</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%AB%E5%86%8D%E6%8B%BF-loadavg-%E5%88%A4%E6%96%AD%E8%83%BD%E4%B8%8D%E8%83%BD%E5%BC%80"><span class="toc-text">别再拿 loadavg 判断能不能开</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8E%9F%E7%90%86%EF%BC%88%E7%AE%80%E8%BF%B0%EF%BC%89"><span class="toc-text">原理（简述）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E6%B5%8B%E8%AE%B0%E5%BD%95"><span class="toc-text">实测记录</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%89%88%E6%9C%AC%E6%BC%94%E8%BF%9B"><span class="toc-text">版本演进</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B7%B2%E7%9F%A5%E9%99%90%E5%88%B6"><span class="toc-text">已知限制</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9E%84%E5%BB%BA"><span class="toc-text">构建</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AE%B8%E5%8F%AF%E4%B8%8E%E8%87%B4%E8%B0%A2"><span class="toc-text">许可与致谢</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%8D%E8%B4%A3%E5%A3%B0%E6%98%8E"><span class="toc-text">免责声明</span></a></li></ol>
   </nav>
 </details>
 
       <div class="post-content" id="post-content">
-        <span id="more"></span>
-
-<p>这台 Redmi K90 Max（代号 <code>prague</code>，澎湃 OS 4.0.0.14）现在可以在手机上点两下拿到 root：不用电脑、不刷机、不解锁 Bootloader。当前版本 <code>v1.0.3</code>。</p>
-<p>代价说清楚：<strong>重启就没了</strong>，而且<strong>大概四次里有三次能成，剩下一次会把内核干到 panic 重启</strong>。</p>
+        <p>这台 Redmi K90 Max（代号 <code>prague</code>）现在可以在手机上点两下拿到 root：不用电脑、不刷机、不解锁 Bootloader。当前版本 <code>v1.2.9</code>，支持澎湃 OS <code>4.0.0.14</code> 和 <code>4.0.5.0</code> 两个系统版本。</p>
+<p>代价还是那两条：<strong>重启就没了</strong>；<strong>它不是 Magisk</strong>，没有模块系统、没有隐藏、不会开机自启。</p>
 <p>这不是一个给所有人用的 root 方案。它是一段已经被人研究透的漏洞利用链，被我封装成了一个能重复点击的 App。</p>
-<h2 id="起点：一条只有电脑能走的提权链"><a href="#起点：一条只有电脑能走的提权链" class="headerlink" title="起点：一条只有电脑能走的提权链"></a>起点：一条只有电脑能走的提权链</h2><p>ChaYeWuu 把 prague 上 <code>CVE-2026-64560</code>（<code>posix-cpu-timers</code> 的 UAF）的完整利用链公开了——偏移、失败模式、每个 stage 在干什么，写得非常细。但它是一套给电脑用的命令行流程：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">adb push kp_arm.sh pk64560 ptyrun ksud /data/local/tmp/</span><br><span class="line">adb shell sh kp_arm.sh          <span class="comment"># 布防 kprobe</span></span><br><span class="line">adb shell -tt ./pk64560 --run   <span class="comment"># 分配 pty 后触发</span></span><br><span class="line"><span class="comment"># 然后在 root shell 里手敲 ksud late-load</span></span><br><span class="line">adb shell su -c <span class="built_in">id</span>              <span class="comment"># 验证</span></span><br></pre></td></tr></table></figure>
+<span id="more"></span>
+
+<blockquote>
+<p><strong>2026-11-21 更新</strong>：仓库从发布这一篇时的 <code>v1.0.3</code> 迭代到了 <code>v1.2.9</code>，改动比版本号看起来大得多——v1.2.0 起整条链从 <code>CVE-2026-64560</code> 换成了 <code>CVE-2026-98260</code>，不再需要 kprobe 布防，真机首次跑通零 panic。另外，上一版这里写的「看 loadavg 决定要不要开」是<strong>错的</strong>，原因见下面那一节。</p>
+</blockquote>
+<h2 id="这一代换了什么"><a href="#这一代换了什么" class="headerlink" title="这一代换了什么"></a>这一代换了什么</h2><p>上一版用的是 <code>CVE-2026-64560</code>（<code>posix-cpu-timers</code> 的 UAF）。那条链的竞争窗口只有 14 条指令，大约 10 ns，必须靠 kprobe 在 <code>posix_cpu_timer_del+72</code> 人为制造延迟才抓得到——实测无扰动时 21 次全 miss。</p>
+<p>v1.2.0 起换成 <code>CVE-2026-98260</code>：<code>exec</code> 在 <code>de_thread()</code> 之后、<code>exec_mmap()</code> 之前没有清理 POSIX CPU timer。窗口由父进程要不要 <code>wait4()</code> 决定，理论上是无限的。</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>CVE-2026-64560（v1.0.x ~ v1.1.x）</th>
+<th>CVE-2026-98260（v1.2.x）</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>竞争窗口</td>
+<td>14 条指令，约 10 ns</td>
+<td>由 <code>wait4()</code> 决定，理论上无限</td>
+</tr>
+<tr>
+<td>kprobe 布防</td>
+<td>必须，靠它在 <code>posix_cpu_timer_del+72</code> 拖时间</td>
+<td>不需要</td>
+</tr>
+<tr>
+<td>tracefs</td>
+<td>需要</td>
+<td>不需要</td>
+</tr>
+<tr>
+<td>触发层</td>
+<td>多线程抢那段精确时序</td>
+<td>B 线程建 32 个 <code>CLOCK_THREAD_CPUTIME_ID</code> timer 后 <code>execv</code>，S 线程循环 <code>mprotect</code> 抢 <code>mmap</code> 写锁，逼 <code>exec_mmap()</code> 失败</td>
+</tr>
+<tr>
+<td>真机首次运行</td>
+<td>两次里一次 panic</td>
+<td>一次跑通，零 panic、零重启</td>
+</tr>
+</tbody></table>
+<p>洞在哪，四步：</p>
+<ol>
+<li>非 leader 线程 <code>execve()</code> 时，<code>begin_new_exec()</code> 先调 <code>de_thread(me)</code>，把 leader 的 <code>struct pid</code> 从 <code>PIDTYPE_PID</code> 哈希桶里摘掉（<code>transfer_pid(leader, tsk, PIDTYPE_TGID)</code> + <code>release_task(leader)</code>）。</li>
+<li>接着调 <code>exec_mmap(bprm-&gt;mm)</code>。这一步失败返回，<code>begin_new_exec()</code> 走 <code>goto out</code>，<strong>跳过</strong>后面的 <code>posix_cpu_timers_exit(me)</code>。</li>
+<li>在此之前，<code>posix_cpu_timer_del()</code> 会调 <code>cpu_timer_task_rcu(timer)</code>，也就是 <code>pid_task(it.cpu.pid, PIDTYPE_PID)</code>。桶已经空了，返回 NULL，函数直接 <code>goto out</code>——<strong>不 disarm</strong>，<code>k_itimer</code> 对象照常被释放。</li>
+<li>定时器红黑树里就留下一个指向已释放对象的节点。等 <code>cleanup_timerqueue()</code> 对这颗节点做 <code>timerqueue_del</code> → <code>rb_erase_cached</code>，<code>rb_next()</code> 读到的 <code>node-&gt;rb_right</code> 正好落在 SLUB 对象的 freepointer 位置（<code>s-&gt;offset = object_size/2</code>），于是拿一个垃圾指针去解引用——panic。</li>
+</ol>
+<p><strong>触发条件比较挑</strong>：</p>
+<ul>
+<li>clock 必须是 <code>CLOCK_THREAD_CPUTIME_ID</code>。进程级的 <code>CLOCK_PROCESS_CPUTIME_ID</code> 走 <code>PIDTYPE_TGID</code>，桶是完好的，没有 UAF。</li>
+<li>定时器得真的入树：<code>SIGEV_SIGNAL</code>、<code>it_value</code> 给一个很大的值、信号被 <code>sigmask</code> 挡住。</li>
+<li>leader 必须活着。<code>group_dead</code> 一旦为真，整棵树会被清干净，反而没洞。</li>
+<li>必须让 <code>exec_mmap()</code> 失败。</li>
+</ul>
+<p>上游的修复是把 <code>posix_cpu_timers_exit()</code> 提前到 <code>de_thread()</code> 紧后面执行，不等 <code>exec_mmap()</code>。</p>
+<h2 id="起点：一条只有电脑能走的链"><a href="#起点：一条只有电脑能走的链" class="headerlink" title="起点：一条只有电脑能走的链"></a>起点：一条只有电脑能走的链</h2><p>ChaYeWuu 把 prague 上的完整利用链公开了——上一代在 <a target="_blank" rel="noopener" href="https://github.com/ChaYeWuu/prague-CVE-2026-64560-OS4.0">prague-CVE-2026-64560-OS4.0</a>，这一代在 <a target="_blank" rel="noopener" href="https://github.com/ChaYeWuu/prague-CVE-2026-98260-OS4.0">prague-CVE-2026-98260-OS4.0</a>。偏移、失败模式、每个 stage 在干什么，写得非常细。</p>
+<p>但它是一套给电脑用的命令行流程：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">adb push kp_arm.sh pk64560 ptyrun ksud /data/local/tmp/</span><br><span class="line">adb shell sh kp_arm.sh          <span class="comment"># 布防 kprobe（v1.2.x 已不需要）</span></span><br><span class="line">adb shell -tt ./pk64560 --run   <span class="comment"># 分配 pty 后触发</span></span><br><span class="line"><span class="comment"># 然后在 root shell 里手敲 ksud late-load</span></span><br><span class="line">adb shell su -c <span class="built_in">id</span>              <span class="comment"># 验证</span></span><br></pre></td></tr></table></figure>
 
 <p>每一步都能出错，每一步都要人盯着终端看输出判断下一步。做一次很爽，做第五次就开始想：为什么不能是个按钮？</p>
 <h2 id="封装之后，一条命令变成一个按钮"><a href="#封装之后，一条命令变成一个按钮" class="headerlink" title="封装之后，一条命令变成一个按钮"></a>封装之后，一条命令变成一个按钮</h2><table>
@@ -537,12 +601,8 @@
 </tr>
 </thead>
 <tbody><tr>
-<td>插线、<code>adb push</code> 五个载荷</td>
+<td>插线、<code>adb push</code> 载荷</td>
 <td>App 自动部署到 <code>/data/local/tmp</code></td>
-</tr>
-<tr>
-<td><code>adb shell sh kp_arm.sh</code> 布防 kprobe</td>
-<td>自动布防并校验返回值</td>
 </tr>
 <tr>
 <td><code>adb shell -tt ./pk64560 --run</code></td>
@@ -550,31 +610,44 @@
 </tr>
 <tr>
 <td>手动往 root shell 里敲 ksud 命令</td>
-<td>捕获 <code>ROOT_CHILD_HOLD_PASS</code> 后自动注入</td>
+<td>捕获 <code>interactive root child</code> 后自动注入</td>
 </tr>
 <tr>
 <td><code>su -c id</code> 验证</td>
 <td>自动验证并把结果写进状态行</td>
 </tr>
 </tbody></table>
+<p>（载荷在仓库里的文件名还叫 <code>pk64560</code>，是历史遗留：现在放的是上游 98260 那版 <code>payload/libexploit.so</code> 的原样拷贝，2,296,288 B，静态链接 ET_EXEC，没有 PT_INTERP。）</p>
 <p>成功的标志很明确：<code>su -c id</code> 返回</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">uid=0(root) gid=0(root) groups=0(root) context=u:r:ksu:s0</span><br></pre></td></tr></table></figure>
 
-<p><code>context=u:r:ksu:s0</code> 是 KernelSU 的证据——普通 <code>su</code> 拿到的会是不一样的 SELinux 上下文。</p>
+<p><code>context=u:r:ksu:s0</code> 是 KernelSU 的证据——普通 <code>su</code> 拿到的会是不一样的 SELinux 上下文。界面上则是状态行变 <code>root: 已开启</code>、<code>模块: kernelsu 已加载</code>，再弹一个「root 已就绪」。</p>
 <h2 id="它不是什么"><a href="#它不是什么" class="headerlink" title="它不是什么"></a>它不是什么</h2><p>这一段比上面那段重要。</p>
 <ul>
 <li><strong>不是持久化 root</strong>。不碰 boot 分区，重启即失效。想要持久化就去走解锁 Bootloader + 刷 KernelSU 补丁的正路，别指望这个。</li>
-<li><strong>只支持这一台机器、这一个系统版本</strong>。代码里有严格的机型和指纹校验，不匹配直接退出。这不是保守，是 hazard：内核地址、结构体偏移、slab 参数全是在这一版内核上量出来的，换一版可能不是”失败”，而是把内核写坏。</li>
+<li><strong>只支持这一台机器、这一版内核</strong>。代码里有严格的机型和指纹校验，不匹配直接退出。这不是保守，是 hazard：内核地址、结构体偏移、slab 参数全是在这一版内核上量出来的，换一版可能不是”失败”，而是把内核写坏。</li>
 <li><strong>不是 Magisk</strong>。没有模块系统、没有隐藏、没有开机自启。</li>
-<li><strong>不保证成功</strong>。<code>stage0</code> 靠几个线程的精确竞争时序拿窗口，系统一忙就有概率翻车，翻车的表现是 panic 而不是报错。</li>
+<li><strong>不保证一次成功</strong>。新链比旧链稳得多，但不是 100%——<code>stage0</code> 仍要精确的时序，<code>drain</code> 不干净时需要 <code>ATTEMPT_DEFER</code> 重试，最坏情况要等好几分钟。</li>
 </ul>
-<p>支持的设备只有这一台：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">机型        REDMI K90 Max（2604FRK1EC）</span><br><span class="line">代号        prague</span><br><span class="line">系统        澎湃 OS 4.0.0.14.XAACNXM</span><br><span class="line">指纹        Redmi/prague/prague:17/CP2A.260605.016/OS4.0.0.14.XAACNXM:user/release-keys</span><br><span class="line">内核        6.12.69-android16-6-g586bfab1b9c5-abogki536749445-4k</span><br><span class="line">安全补丁     2026-09-01</span><br></pre></td></tr></table></figure>
+<p>支持的设备只有这一台，两个系统版本：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">机型        REDMI K90 Max（2604FRK1EC）</span><br><span class="line">代号        prague</span><br><span class="line">内核        6.12.69-android16-6-g586bfab1b9c5-abogki536749445-4k</span><br><span class="line">系统        澎湃 OS 4.0.0.14.XAACNXM     ← 真机实测通过（2026-10-25）</span><br><span class="line">            OS4.0.5.0.XAACNXM           ← 真机实测通过（2026-11-05）</span><br><span class="line">指纹        Redmi/prague/prague:17/CP2A.260605.016/OS4.0.0.14.XAACNXM:user/release-keys</span><br><span class="line">            Redmi/prague/prague:17/CP2A.260605.016/OS4.0.5.0.XAACNXM:user/release-keys</span><br><span class="line">            Redmi/prague/prague:17/CP2A.260605.016/17OS4.0.261020.233332783.MTPECN.S:user/release-keys</span><br><span class="line">安全补丁     2026-09-01 / 2026-10-01</span><br></pre></td></tr></table></figure>
 
+<h3 id="为什么-4-0-5-0-也能用"><a href="#为什么-4-0-5-0-也能用" class="headerlink" title="为什么 4.0.5.0 也能用"></a>为什么 4.0.5.0 也能用</h3><p>那个 OTA <strong>没有重编内核</strong>。把 8.96 GB 的 full payload 里 <code>boot</code> 分区解出来，镜像和 4.0.0.14 是同一个二进制：版本串、git hash、ABO build id、编译时间（<code>#1 SMP PREEMPT Mon Jul 20 18:34:35 UTC 2026</code>）全部相同，<code>CVE-2026-64560</code> 的上游修复（<code>920f893f</code>）也不在其中。逐地址反汇编核验过 9 个关键偏移。</p>
+<blockquote>
+<p><strong>一个坑</strong>：OTA 的 <code>META-INF/com/android/metadata</code> 里 <code>post-build</code> 写的是预发布串 <code>17OS4.0.261020.233332783.MTPECN.S</code>，真机安装后 <code>getprop ro.build.fingerprint</code> 报的却是 <code>OS4.0.5.0.XAACNXM</code>。<code>v1.0.4</code> 只认前者，会在正式版机器上被 gate 拒绝；<code>v1.0.5</code> 起同时认两个串。</p>
+</blockquote>
+<p>判断标准看 <strong><code>uname -r</code> 和 ABO build id</strong>，不是看系统版本号。内核一变，全部硬编码偏移作废。</p>
 <h2 id="前置条件：三件东西"><a href="#前置条件：三件东西" class="headerlink" title="前置条件：三件东西"></a>前置条件：三件东西</h2><p><strong>1. Shizuku 已经在跑。</strong></p>
 <p>从 RikkaApps&#x2F;Shizuku 下官方版——<strong>不要用各种”优化版””内置 adb 版”</strong>，实测有假包。然后用无线调试或 adb 启动服务，并授权给这个 App。</p>
-<p><strong>2. KernelSU 管理器装着。</strong></p>
-<p>不需要它现在是”工作”状态，只需要它装在机器上——App 会在运行时从它的 APK 里抽出 <code>ksud</code>。这么做是为了不分发 GPL-3.0 的二进制，同时保证 uapi 版本跟已装的管理器匹配。</p>
+<p><strong>2. 内核管理器装着，SukiSU Ultra 或 KernelSU，二选一。</strong></p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://github.com/SukiSU-Ultra/SukiSU-Ultra">SukiSU Ultra</a>（优先）或 <a target="_blank" rel="noopener" href="https://github.com/tiann/KernelSU">tiann&#x2F;KernelSU</a></li>
+<li>不需要它现在是”工作”状态，只需要装在那儿——App 会在运行时从它的 APK 里抽出 <code>ksud</code></li>
+<li>两个都装也行，默认按 SukiSU → KernelSU 取第一个能用的；想指定，点主界面的「管理器」那行切换</li>
+<li>⚠️ <strong><code>ksud</code> 和内核模块必须来自同一个管理器</strong>：<code>late-load</code> 加载的就是 ksud 自带那份 ko。混用会 uapi 不匹配，管理器一直报”需要更新内核”</li>
+<li>换了管理器分支之后<strong>必须先重启</strong>再点按钮。旧模块还在内核里，新 ko 会因为模块名 <code>kernelsu</code> 重名而加载失败（<code>File exists</code>）</li>
+<li>SukiSU 不同版本里 ksud 的伪装文件名会变（实测 <code>libfdbqiupsrx.so</code> → <code>libtqqfthevwb.so</code>，大小从 6,102,016 变成 6,093,280）。App 在 <code>lib/arm64/</code> 下按大小自动找，不用手动指定</li>
+</ul>
 <p><strong>3. 如果之前手动跑过，把旧的 <code>.ko</code> 改名。</strong></p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/data/local/tmp/kernelsu-prague.ko.disabled</span><br></pre></td></tr></table></figure>
 
@@ -582,9 +655,10 @@
 <h2 id="用起来是什么样"><a href="#用起来是什么样" class="headerlink" title="用起来是什么样"></a>用起来是什么样</h2><p>首次：</p>
 <ol>
 <li>启动 Shizuku，确认 App 状态行显示 <code>Shizuku: 已就绪</code></li>
+<li>（可选）点 <strong>管理器</strong> 那行，确认要用哪个。默认「自动」；两个都装时建议手动选一次</li>
 <li>点 <strong>开启 root</strong></li>
 <li>读一遍风险提示，点 <strong>我已知晓风险，继续</strong></li>
-<li>等 3–8 分钟，<strong>期间不要退出 App</strong></li>
+<li>等 1–10 分钟，<strong>期间不要退出 App</strong></li>
 </ol>
 <div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin:1.8em 0">
   <img src="/images/ksu-root/main.webp" alt="主界面" style="width:240px;margin:0" />
@@ -593,7 +667,8 @@
 </div>
 <p style="text-align:center;font-size:13px;color:var(--text-mute);margin-top:-4px">主界面 · 风险确认 · 运行日志</p>
 
-<p>之后想关掉 root，点 <strong>关闭 root（重启）</strong>。这是唯一可靠的方式——<code>stage0</code> 改过内核的 <code>random_table</code>，没法热恢复，只能靠重启清干净。</p>
+<p><code>[5/5]</code> 会弹一个「等待 root 生效」的进度框——那是在等 <code>ksud late-load</code> 把 <code>su</code> 装好，不是卡住了。这一步有 240 秒硬上限。</p>
+<p>之后想关掉 root，点 <strong>关闭 root（重启）</strong>。这是唯一可靠的方式——内核内存已经被改过，没法热恢复，只能靠重启清干净。</p>
 <h3 id="每次重启后都得手动启动-Shizuku"><a href="#每次重启后都得手动启动-Shizuku" class="headerlink" title="每次重启后都得手动启动 Shizuku"></a>每次重启后都得手动启动 Shizuku</h3><p>Shizuku 是用户态进程，不在 init 服务表里，重启就没了。两种启动方式：</p>
 <p><strong>手机上（推荐）</strong>：设置 → 开发者选项 → 无线调试打开 → 回到 Shizuku 点启动（首次点”配对”输六位码，配一次就够）→ 授权本 App。</p>
 <p><strong>电脑 adb</strong>：</p>
@@ -658,91 +733,176 @@
 </tr>
 </tbody></table>
 <p>打 ❌ 的两个，App 能识别出”装了”，但授权会失败，状态行显示 <code>Shizuku: 版本不兼容</code>。另外这些 fork <strong>签名冲突，只能装一个</strong>。</p>
-<h2 id="失败是常态，不是-bug"><a href="#失败是常态，不是-bug" class="headerlink" title="失败是常态，不是 bug"></a>失败是常态，不是 bug</h2><p>大约 40% 的概率，<code>stage0</code> 会在 slab 竞争阶段触发内核 panic。手机黑屏自动重启，等 40–60 秒。</p>
-<p>重开 App，主按钮会变成 <strong>继续上次（已中断）</strong>。App 把当前步骤写进 SharedPreferences，重启后通过 <code>elapsedRealtime</code> 变小判断出”被整机重启打断”，所以不需要你回忆跑到哪了。启动 Shizuku，点继续，接着跑。</p>
-<p><strong>连续两次 panic</strong> 就别硬刚了：正常重启一次让 SELinux 回到 Enforcing 再试。panic 之后那一轮 boot，MTK AEE 可能让 SELinux 停在 Permissive，这时候再跑会在 <code>STAGE8_ENV_GATE</code> 因为 <code>enforcing=0</code> 失败。</p>
-<h3 id="干净失败比-panic-更阴：不重启就再跑必崩"><a href="#干净失败比-panic-更阴：不重启就再跑必崩" class="headerlink" title="干净失败比 panic 更阴：不重启就再跑必崩"></a>干净失败比 panic 更阴：不重启就再跑必崩</h3><p>panic 至少是当场告诉你”这一轮废了”。更麻烦的是那种<strong>看起来没崩</strong>的失败。</p>
+<h2 id="失败是常态，但判据变细了"><a href="#失败是常态，但判据变细了" class="headerlink" title="失败是常态，但判据变细了"></a>失败是常态，但判据变细了</h2><p><strong>失败之后必须先重启，不能直接重试。</strong> 这条仍然成立，而且是最容易被忽略、代价最大的一条。</p>
 <p>exploit 中途失败时（<code>PIPE_PREP_FAIL</code>、<code>ATTEMPT_MISS</code> 这类），它会自己打一行 <code>KERNEL_STATE_RESTORE_PASS dirty=0</code>，看起来把内核收拾干净了。其实没有：<code>restore_misc_list</code> 只把 <code>misc_list</code> 的头指针指回去，中间那个伪造的 <code>miscdevice</code> 节点<strong>没有从链表里摘下来</strong>，而它指向的内存已经被释放。</p>
 <p>这时候手机一切正常——<code>getenforce</code> 还是 Enforcing，<code>boot_id</code> 还是原来那个，照样能用。但只要你再点一次「开启 root」，下一次 <code>misc_open</code> 遍历链表就会踩到那块已释放内存，直接 panic。pstore 里留下的是：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">pc : [0xffffffdd63bdf810] misc_open+0x4c/0x180</span><br><span class="line">x23: ffffffdd6589f178</span><br></pre></td></tr></table></figure>
 
 <p>那个 <code>x23</code> 正是上一轮日志里打印过的 <code>MISC_LIST_RESTORE_SCAN head</code>。</p>
-<p>所以 <strong>v1.0.3 起，App 在开跑之前会检查上次是不是失败退出且还没重启过</strong>，是的话直接拒绝并提示你重启，不再让你白跑一趟——白跑的结果就是 panic。这一版之前没有这道闸，只能靠人记住。</p>
-<h3 id="成功率跟系统负载强相关"><a href="#成功率跟系统负载强相关" class="headerlink" title="成功率跟系统负载强相关"></a>成功率跟系统负载强相关</h3><p><code>stage0</code> 拿的是几个线程之间的精确竞争窗口。系统忙的时候调度抖动大，窗口被打偏，<code>rb_erase</code> 就会拿一棵对不上的红黑树去改内存——失败的表现就是 panic，栈长这样：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">pc : rb_erase+0xf8/0x2fc</span><br><span class="line">lr : timerqueue_del+0x48/0x74</span><br></pre></td></tr></table></figure>
-
-<p>这台机器（OS4.0.0.14）负载常态偏高：刚开机 <code>load average</code> 能到 20–35（8 核，也就是 2.5–4 倍超载），此时失败率明显比上游说的 40% 高。</p>
-<p>所以 App 会读 <code>/proc/loadavg</code> 和 <code>/proc/uptime</code>，直接显示在状态卡片第 5 行：</p>
+<p><strong>v1.1.0 起 App 用三种结局区分这件事</strong>，不再”失败过就一律拒绝”：</p>
 <table>
 <thead>
 <tr>
-<th>显示</th>
+<th>结局</th>
 <th>含义</th>
+<th>要不要重启</th>
 </tr>
 </thead>
 <tbody><tr>
-<td><code>系统: 负载 3.2</code></td>
-<td>适合开</td>
+<td><code>GATE_REFUSED</code></td>
+<td>入口就被拦下，没碰内核</td>
+<td>不用</td>
 </tr>
 <tr>
-<td><code>系统: 负载 34.1 · 偏高，建议等系统闲下来再开</code></td>
-<td>现在点大概率 panic</td>
+<td><code>CLEAN_RESTORE</code></td>
+<td>跑过，但确实收回去了</td>
+<td>不用</td>
+</tr>
+<tr>
+<td><code>TOUCHED</code></td>
+<td>改过内核内存且没干净</td>
+<td><strong>必须重启</strong></td>
 </tr>
 </tbody></table>
-<p>判断标准是 <code>load1 &gt; 8</code> 或开机不到 5 分钟。只是提示，不拦你点。</p>
-<p>v1.0.3 顺手把「刚开机」和「负载偏高」拆成了两种文案——更早的版本两条规则会同时命中，显示成「负载 0.0 · 偏高」这种自相矛盾的提示。</p>
-<p>降低失败率的实际做法：</p>
-<ol>
-<li><strong>别急着重试</strong>。panic → 重启 → 系统重新拉起一堆后台服务 → 负载又上去了，90 秒内再点等于重蹈覆辙。</li>
-<li><strong>关机放一会儿再开</strong>，或者重启后等 5–10 分钟。</li>
-<li><strong>关掉常驻后台应用</strong>（微信、淘宝这类），它们对 <code>load</code> 的贡献不小。</li>
-<li>注意 <code>load</code> 是<strong>1 分钟平均值</strong>，关掉应用不会立刻见效。</li>
-</ol>
-<h2 id="原理（简述）"><a href="#原理（简述）" class="headerlink" title="原理（简述）"></a>原理（简述）</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[1] stage0      用 rb_erase 的 Case 1 做一次受控写，改写 random_table[4].data</span><br><span class="line">                → 读 /proc/sys/kernel/random/boot_id 泄漏 KASLR</span><br><span class="line">[2] spray       k_itimer 256B order-1，逐 CPU 串行顶满 qhimark</span><br><span class="line">[3] UAF         第二次触发 CVE-2026-64560，用伪造 miscdevice 接管 misc_list</span><br><span class="line">[4] 物理读写    pipe_buffer 占据目标 slab，建立任意物理地址读写</span><br><span class="line">[5] cred        fork 子进程覆写 cred + SELinux state，拿到 uid=0 且 permissive</span><br><span class="line">[6] KernelSU    在 permissive 窗口里执行 ksud late-load，加载官方 LKM</span><br><span class="line">[7] su          模块就绪后 su_compat 生效，/system/bin/su 变成 ksud 的入口</span><br></pre></td></tr></table></figure>
+<p>以前只看”上次是不是失败退出”，会把压根没执行 exploit 的情况也算进去，白让你重启。现在只有 <code>TOUCHED</code> 才拦。</p>
+<h3 id="另一个残留：悬空的-victim-timer"><a href="#另一个残留：悬空的-victim-timer" class="headerlink" title="另一个残留：悬空的 victim timer"></a>另一个残留：悬空的 victim timer</h3><p><code>ATTEMPT_DEFER</code> 会把停在 <code>pause()</code> 的 victim 故意留着不 reap（这是设计的一部分，为了不打断后续轮次的时序）。这些 victim 每个挂着若干悬空 timer 节点，多轮 DEFER 之后会累积。长时间锁屏进深度休眠、系统集中回收 slab 时可能踩到，表现是「root 成功后锁屏十几分钟突然重启」。</p>
+<p><code>v1.1.15</code> 起加了 <code>retire_victims_safe()</code>：defer 之前先 kill victim、把 timer freelist 排空再决定要不要 <code>waitpid</code>。没排空就放弃这一轮、不 reap。</p>
+<h3 id="别再拿-loadavg-判断能不能开"><a href="#别再拿-loadavg-判断能不能开" class="headerlink" title="别再拿 loadavg 判断能不能开"></a>别再拿 loadavg 判断能不能开</h3><p>上一版这一节写的是：App 会读 <code>/proc/loadavg</code>，<code>load1 &gt; 8</code> 或开机不到 5 分钟就提示”偏高”，还附了四条”降低失败率”的做法，理由是系统忙的时候调度抖动会把 <code>stage0</code> 的窗口打偏。</p>
+<p><strong>那条建议是错的，得撤回。</strong></p>
+<p>这台机器的 <code>/proc/loadavg</code> 长期显示 19–21，但 <code>top</code> 是 757% idle、<code>procs_running=1</code>、<code>/proc/pressure/cpu</code> 全 0。读数被不可中断睡眠（D 状态）污染了，它根本不反映 CPU 忙不忙。按这个数字判断，等于永远显示”别开”。</p>
+<p><code>v1.1.11</code> 起 App 直接把这条提示删了。状态卡片还显示 loadavg，但只作参考，<strong>不要用它决定开不开</strong>。</p>
+<p>真正还有效的只有：失败了先重启，别在重启后 90 秒内连点。</p>
+<h2 id="原理（简述）"><a href="#原理（简述）" class="headerlink" title="原理（简述）"></a>原理（简述）</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">[1] 触发层      B 线程建 32 个 CLOCK_THREAD_CPUTIME_ID timer 后 execv，</span><br><span class="line">                S 线程循环 mprotect 抢 mmap 写锁，制造 exec_mmap() 失败</span><br><span class="line">[2] stage0      用 rb_erase 的 Case 1 做一次受控写，改写 random_table[4].data</span><br><span class="line">                → 读 /proc/sys/kernel/random/boot_id 泄漏 KASLR</span><br><span class="line">[3] spray       k_itimer 264B order-1（31 槽位），逐 CPU 串行</span><br><span class="line">[4] bridge      伪造 miscdevice 接管 misc_list，拿到任意内核读写</span><br><span class="line">[5] 物理读写    pipe_buffer 占据目标 slab，建立任意物理地址读写</span><br><span class="line">[6] cred        fork 子进程覆写 cred + SELinux state，拿到 uid=0 且 permissive</span><br><span class="line">[7] KernelSU    在 permissive 窗口里执行 ksud late-load，加载并安装 LKM</span><br><span class="line">[8] su          模块就绪后 su_compat 生效，/system/bin/su 指向 ksud</span><br></pre></td></tr></table></figure>
 
-<p>有一个细节值得单独说：<code>[6]</code> 必须用 <code>ptyrun</code> 分配伪终端。exploit 拿到 root 后会 <code>execl(&quot;/system/bin/sh&quot;, &quot;sh&quot;, &quot;-i&quot;)</code>，而 <code>sh -i</code> 没有 tty 会<strong>立刻退出</strong>，注入的命令就被外层 uid&#x3D;2000 的 shell 接走——表现是”明明注入了却没反应”。</p>
-<p>早期版本是用 <code>busybox script</code> 来分 pty 的，为了去掉那 1.4 MB 的 GPL-2.0 二进制，现在换成了自己写的 <code>ptyrun</code>（<code>app/src/main/cpp/ptyrun.c</code>）。在真机上 <code>tty</code> 返回 <code>/dev/pts/0</code>，能正常往 <code>sh -i</code> 里注入命令。</p>
-<h2 id="实测记录"><a href="#实测记录" class="headerlink" title="实测记录"></a>实测记录</h2><p>这台机器上两次完整跑通：</p>
+<p>对照上一代：<code>[1]</code> 从”线程抢 10 ns 窗口”变成了”用 <code>mprotect</code> 造 <code>exec_mmap()</code> 失败”，<code>[2]</code> 之后的受控写、spray、bridge 思路一脉相承，只是对象大小从 256B 变成 264B（31 槽位）。</p>
+<p>两个细节值得单独说：</p>
+<ul>
+<li><code>[7]</code> 必须用 <code>ptyrun</code> 分配伪终端。exploit 拿到 root 后会 <code>execve(&quot;/system/bin/sh&quot;, &quot;-i&quot;)</code>，而 <code>sh -i</code> 没有 tty 会<strong>立刻退出</strong>，注入的命令就被外层 uid&#x3D;2000 的 shell 接走——表现是”明明注入了却没反应”。早期用 <code>busybox script</code> 分 pty，为了去掉那 1.4 MB 的 GPL-2.0 二进制，换成了自己写的 <code>ptyrun</code>（<code>app/src/main/cpp/ptyrun.c</code>）。</li>
+<li><strong><code>ksud late-load</code> 不能拆开</strong>。exploit 的 payload 只做 <code>finit_module</code>，不创建 <code>/data/adb/ksu/bin/su</code> 和 <code>/system/bin/su</code>——这两个是 <code>late-load</code> 的用户空间安装部分做的。只加载模块不安装，结果就是「模块在、<code>su</code> 永远不出现」。<code>v1.2.6</code> 起让 payload 跳过模块加载，整个「加载 + 安装」都交给 <code>ksu_load_setup.sh</code> 的 <code>late-load</code> 一次做完。</li>
+</ul>
+<h2 id="实测记录"><a href="#实测记录" class="headerlink" title="实测记录"></a>实测记录</h2><p>新链（CVE-2026-98260）：</p>
 <table>
 <thead>
 <tr>
 <th>时间</th>
+<th>版本</th>
+<th>结果</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>2026-11-18 22:11</td>
+<td>v1.2.6（versionCode 38）</td>
+<td><strong>一次跑通，零 panic、零重启</strong>。<code>su -c id</code> → <code>uid=0</code> &#x2F; <code>u:r:ksu:s0</code>，<code>kernelsu 536576 - Live</code>，<code>/system/bin/su</code> 6,093,280 B</td>
+</tr>
+</tbody></table>
+<p>旧链（CVE-2026-64560）在这台机器上的记录：</p>
+<table>
+<thead>
+<tr>
+<th>时间</th>
+<th>版本</th>
 <th>场景</th>
 <th>结果</th>
 </tr>
 </thead>
 <tbody><tr>
 <td>2026-10-25 22:02</td>
+<td>v1.0.0</td>
 <td>冷启动，一次过，约 5 分钟</td>
 <td><code>su -c id</code> → <code>uid=0</code> &#x2F; <code>u:r:ksu:s0</code></td>
 </tr>
 <tr>
 <td>2026-10-25 23:08</td>
+<td>v1.0.0</td>
 <td>到 <code>[4/5]</code> 时 panic 重启 → 断点续跑</td>
 <td>同上；<code>uptime=162</code> 证明重启过</td>
 </tr>
+<tr>
+<td>2026-11-05</td>
+<td>v1.0.4</td>
+<td>OS4.0.5.0，第一次 stage0 panic，第二次成功</td>
+<td>同上</td>
+</tr>
+<tr>
+<td>2026-11-06</td>
+<td>v1.1.0</td>
+<td>SukiSU Ultra 分支首次全链通过</td>
+<td><code>ksud 4.3.0-r1 (uapi: 6)</code>，<code>late_rc=0</code></td>
+</tr>
+<tr>
+<td>2026-11-07</td>
+<td>v1.1.11</td>
+<td>发布版本验收</td>
+<td><code>feature check mount_hide</code> → supported，证明加载的是 SukiSU 模块</td>
+</tr>
 </tbody></table>
-<p>这两次是在 <code>1.0.0</code> 的早期构建上跑的，那一版用 <code>busybox script</code> 分 pty、<code>ksud</code> 随 APK 分发。之后陆续换成自写 <code>ptyrun</code>、运行期从已装管理器抽取 <code>ksud</code>，<code>v1.0.3</code> 又加了「上次失败且没重启过就拒绝开跑」这道闸。这些改动的关键路径都单独验证过——<code>ptyrun</code> 在真机上 <code>tty</code> 返回 <code>/dev/pts/0</code>、能往 <code>sh -i</code> 注入命令；<code>ksud</code> 提取返回 5172384 字节且对 shell 可读——但<strong>这几版合起来的完整流程尚未在真机上复测</strong>。跑通了或者跑挂了，都值得开个 issue。</p>
+<p>旧链那五次里，<code>v1.0.3</code> 之前的失败有一半是自家 bug：<code>ShizukuHelper.exec()</code> 每条命令漏一个 pipe，<code>shell</code> 用户的 pipe 配额（<code>pipe-user-pages-soft</code>）被吃光，exploit 在 <code>grow_reclaim</code> 阶段必然 <code>EPERM</code>。修掉之后同一台机器的成功率立刻不一样——这个教训比漏洞本身还值钱：<strong>先确认自己没在给 exploit 添乱</strong>。</p>
+<h2 id="版本演进"><a href="#版本演进" class="headerlink" title="版本演进"></a>版本演进</h2><table>
+<thead>
+<tr>
+<th>版本</th>
+<th>改动</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>v1.0.0（10-25）</td>
+<td>首个可用版本，64560 链</td>
+</tr>
+<tr>
+<td>v1.0.3（10-28）</td>
+<td>修 Shizuku pipe 泄漏；ksud 校验改成查 ELF 魔数（之前只比大小，全 0 的文件也能过）；失败后拒绝直接重跑</td>
+</tr>
+<tr>
+<td>v1.0.4（11-04）</td>
+<td>支持 OS4.0.5.0，gate 认第二个指纹</td>
+</tr>
+<tr>
+<td>v1.1.0（11-05）</td>
+<td>SukiSU Ultra 支持；管理器选择行；<code>ExploitOutcome</code> 三态，不再把”没碰内核的失败”算成脏</td>
+</tr>
+<tr>
+<td>v1.1.11（11-06）</td>
+<td>诊断（<code>CROSSCACHE_TRACE</code>、<code>PHYS_SETUP_FAIL step=</code>）、payload 写盘后 sha256 校验、ksud 按大小动态识别、<code>[5/5]</code> 等 <code>su</code> 真正生效、删掉 loadavg 提示</td>
+</tr>
+<tr>
+<td>v1.1.15（未单独发版）</td>
+<td><code>retire_victims_safe()</code> 排空悬空 timer</td>
+</tr>
+<tr>
+<td>v1.2.0 ~ v1.2.6（11-18）</td>
+<td>换 CVE-2026-98260，payload 改交 <code>late-load</code> 一次做完</td>
+</tr>
+<tr>
+<td>v1.2.9（11-18）</td>
+<td>正式发布，versionCode 41，换 <code>sukisu-prague.ko</code>（646,392 B）</td>
+</tr>
+</tbody></table>
 <h2 id="已知限制"><a href="#已知限制" class="headerlink" title="已知限制"></a>已知限制</h2><ul>
 <li><strong>重启即失效</strong>，没有持久化。</li>
 <li><strong>每次重启要手动启动 Shizuku</strong>。</li>
-<li><strong>开过 root 之后内核里有颗延迟炸弹</strong>：<code>posix_cpu_timer_del</code> 相关的 dangling timer 节点会留在内核里，之后任意进程调 <code>timer_delete</code> 都可能 panic 重启（pstore 里能看到 <code>posix_cpu_timer_del+0x140</code> 的 Oops）。重启一次清除。</li>
+<li><strong>会关掉 KernelSU 的 <code>shell_su_adb_only</code></strong>：这条 feature 只放行 adbd &#x2F; ksu 域派生的进程用 <code>su</code>，而本 App 走的是 Shizuku（<code>ppid=1</code>），不关就必然失败。关掉之后，任何以 shell 身份运行的进程都能用 <code>su</code>，安全性弱于默认值——这是本工具能工作的前提，用之前请知情。</li>
+<li><strong>失败后必须先重启</strong>（尤其 <code>TOUCHED</code>）。</li>
+<li><strong>可能残留悬空 timer 节点</strong>：多轮 <code>ATTEMPT_DEFER</code> 之后 victim 携带的节点会累积，锁屏深度休眠时可能崩溃。<code>v1.1.15</code> 的 <code>retire_victims_safe()</code> 会尽量排空。</li>
 <li><strong>不能用 <code>boot_id</code> 判断是否重启</strong>：<code>stage0</code> 会改写它，跑完会变成 <code>d8f06902-80ff-ffff-80e2-d6dcd6ffffff</code> 这类假值。要用 <code>/proc/uptime</code>。</li>
-<li><strong>只支持一个系统版本</strong>，换版本别试。</li>
+<li><strong>只支持这一版内核</strong>（4.0.0.14 与 4.0.5.0 共用同一个内核二进制），换内核别试。</li>
+<li><strong><code>/proc/loadavg</code> 在本机不可信</strong>：长期 19–21，实际 757% idle。别拿它当判据。</li>
 </ul>
 <h2 id="构建"><a href="#构建" class="headerlink" title="构建"></a>构建</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 需要 JDK 17、Android SDK（compileSdk 36）</span></span><br><span class="line">./gradlew assembleDebug</span><br><span class="line"><span class="comment"># 产物 app/build/outputs/apk/debug/app-debug.apk</span></span><br></pre></td></tr></table></figure>
 
 <p>改了 <code>app/src/main/cpp/ptyrun.c</code> 之后必须重编：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">NDK=<span class="variable">$ANDROID_HOME</span>/ndk/28.2.13676358</span><br><span class="line"><span class="variable">$NDK</span>/toolchains/llvm/prebuilt/*/bin/aarch64-linux-android26-clang \</span><br><span class="line">    -O2 -static -s \</span><br><span class="line">    -o app/src/main/assets/ptyrun \</span><br><span class="line">    app/src/main/cpp/ptyrun.c</span><br></pre></td></tr></table></figure>
 
-<p>依赖版本：AGP 8.13.2 &#x2F; Gradle 9.1.0 &#x2F; Kotlin 2.0.21，compileSdk 36 &#x2F; minSdk 26 &#x2F; targetSdk 34。Shizuku 依赖锁在 <code>dev.rikka.shizuku:api:12.2.0</code>——13.x 的 <code>Shizuku.newProcess()</code> 是 private，外部调不了。</p>
+<p><code>app/src/main/assets/pk64560</code> 是上游 <code>prague-CVE-2026-98260-OS4.0</code> 的 <code>payload/libexploit.so</code> 原样拷贝（2,296,288 B）。要改它就得回上游改 C 源码重编，本仓库不含那份源码。</p>
+<p>依赖版本：AGP 8.13.2 &#x2F; Gradle 9.1.0 &#x2F; Kotlin 2.0.21，compileSdk 36 &#x2F; minSdk 26 &#x2F; targetSdk 34。Shizuku 依赖锁在 <code>dev.rikka.shizuku:api:12.2.0</code>——13.x 的 <code>Shizuku.newProcess()</code> 是 private，外部调不了。<code>gradle-wrapper.properties</code> 里的 <code>distributionUrl</code> 指向腾讯云镜像，在海外可以换回官方。</p>
 <p><strong>安装</strong>：MIUI 会拦 <code>adb install</code>（<code>INSTALL_FAILED_USER_RESTRICTED</code>）。有 root 时用 <code>su -c &quot;pm install -r app-debug.apk&quot;</code>，否则在开发者选项里打开「USB 安装」。</p>
 <p>仓库里还附了一份 <code>AI-GUIDE.md</code>，把流程拆成可执行命令、每个检查点的判据，以及明确的禁止操作边界。如果你的 AI 工具能读仓库内文档（Claude Code、Cursor、Codex 之类），直接把仓库喂给它就能照着跑。</p>
 <h2 id="许可与致谢"><a href="#许可与致谢" class="headerlink" title="许可与致谢"></a>许可与致谢</h2><p>本项目 Apache-2.0。</p>
 <ul>
-<li>漏洞利用代码来自 <a target="_blank" rel="noopener" href="https://github.com/ChaYeWuu/prague-CVE-2026-64560-OS4.0">ChaYeWuu&#x2F;prague-CVE-2026-64560-OS4.0</a>（Apache-2.0）。<strong>没有那份技术文档，这个 App 不可能存在</strong>——整条链、偏移和失败模式都是原作者写清楚的。</li>
-<li>KernelSU 用户态与内核模块来自 <a target="_blank" rel="noopener" href="https://github.com/tiann/KernelSU">tiann&#x2F;KernelSU</a>（GPL-3.0），运行期从用户已装的 APK 中提取，不随本仓库分发。</li>
+<li>漏洞利用代码来自 <a target="_blank" rel="noopener" href="https://github.com/ChaYeWuu/prague-CVE-2026-98260-OS4.0">ChaYeWuu&#x2F;prague-CVE-2026-98260-OS4.0</a>（Apache-2.0）——这一版的核心。</li>
+<li>上一代利用代码 <a target="_blank" rel="noopener" href="https://github.com/ChaYeWuu/prague-CVE-2026-64560-OS4.0">ChaYeWuu&#x2F;prague-CVE-2026-64560-OS4.0</a>（Apache-2.0）——<code>v1.0.x</code> &#x2F; <code>v1.1.x</code> 的基础，那份技术文档把整条链、偏移和失败模式都写清楚了。<strong>没有那两份文档，这个 App 不可能存在。</strong></li>
+<li>KernelSU 用户态与内核模块来自 <a target="_blank" rel="noopener" href="https://github.com/tiann/KernelSU">tiann&#x2F;KernelSU</a>（GPL-3.0），SukiSU 分支来自 <a target="_blank" rel="noopener" href="https://github.com/SukiSU-Ultra/SukiSU-Ultra">SukiSU-Ultra&#x2F;SukiSU-Ultra</a>（GPL-3.0），<strong>两者都在运行期从用户已装的 APK 中提取，不随本仓库分发</strong>。</li>
 <li>Shizuku 来自 <a target="_blank" rel="noopener" href="https://github.com/RikkaApps/Shizuku">RikkaApps&#x2F;Shizuku</a>（Apache-2.0）。</li>
+<li>漏洞公告：<a target="_blank" rel="noopener" href="https://nvd.nist.gov/vuln/detail/CVE-2026-98260">CVE-2026-98260</a>。</li>
 </ul>
 <h2 id="免责声明"><a href="#免责声明" class="headerlink" title="免责声明"></a>免责声明</h2><p><strong>仅供安全研究与自有设备调试使用。</strong></p>
 <p>用它会接受这些后果：设备可能内核 panic、意外重启、丢失未保存数据；系统稳定性可能下降；保修可能失效；当地法律法规的风险由你自己承担。</p>
@@ -775,7 +935,7 @@
               <strong>GitHub Releases（APK）</strong>
               <div class="pan-item-tags">
                 
-                <span>当前版本 v1.0.3，含 CHANGELOG</span>
+                <span>当前版本 v1.2.9，含 CHANGELOG 与 sha256</span>
                 
               </div>
             </div>
@@ -829,6 +989,8 @@
             <a class="tag-chip" href="/tags/Android/">Android</a>
           
             <a class="tag-chip" href="/tags/privilege-escalation/">提权</a>
+          
+            <a class="tag-chip" href="/tags/SukiSU/">SukiSU</a>
           
         </div>
       
@@ -958,7 +1120,7 @@
       <li>
         <span class="stat-label"><svg class="icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.6 13.4 13.4 20.6a2 2 0 0 1-2.8 0l-7.2-7.2A2 2 0 0 1 3 12V4a1 1 0 0 1 1-1h8a2 2 0 0 1 1.4.6l7.2 7.2a2 2 0 0 1 0 2.6z"/><path d="M7.5 7.5h.01"/></svg> 标签</span>
         <span class="stat-value ">
-          57
+          58
         </span>
       </li>
     
@@ -966,7 +1128,7 @@
       <li>
         <span class="stat-label"><svg class="icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m3 17 6-6 4 4 8-8"/><path d="M21 7v6h-6"/></svg> 总字数</span>
         <span class="stat-value is-accent">
-          38,347
+          39,840
         </span>
       </li>
     
@@ -974,7 +1136,7 @@
       <li>
         <span class="stat-label"><svg class="icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2 2M9 2h6"/></svg> 运行时长</span>
         <span class="stat-value ">
-          49<em class="stat-unit">天</em>
+          51<em class="stat-unit">天</em>
         </span>
       </li>
     
@@ -982,7 +1144,7 @@
       <li>
         <span class="stat-label"><svg class="icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12h4l2-6 3 12 2-6h7"/></svg> 最后活动</span>
         <span class="stat-value ">
-          2026-11-19
+          2026-11-21
         </span>
       </li>
     
@@ -997,7 +1159,7 @@
     <h3 class="rail-title"><svg class="icon" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></svg> 目录</h3>
   </div>
   <nav class="toc-body" aria-label="文章目录">
-    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B5%B7%E7%82%B9%EF%BC%9A%E4%B8%80%E6%9D%A1%E5%8F%AA%E6%9C%89%E7%94%B5%E8%84%91%E8%83%BD%E8%B5%B0%E7%9A%84%E6%8F%90%E6%9D%83%E9%93%BE"><span class="toc-text">起点：一条只有电脑能走的提权链</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B0%81%E8%A3%85%E4%B9%8B%E5%90%8E%EF%BC%8C%E4%B8%80%E6%9D%A1%E5%91%BD%E4%BB%A4%E5%8F%98%E6%88%90%E4%B8%80%E4%B8%AA%E6%8C%89%E9%92%AE"><span class="toc-text">封装之后，一条命令变成一个按钮</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%83%E4%B8%8D%E6%98%AF%E4%BB%80%E4%B9%88"><span class="toc-text">它不是什么</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E7%BD%AE%E6%9D%A1%E4%BB%B6%EF%BC%9A%E4%B8%89%E4%BB%B6%E4%B8%9C%E8%A5%BF"><span class="toc-text">前置条件：三件东西</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%94%A8%E8%B5%B7%E6%9D%A5%E6%98%AF%E4%BB%80%E4%B9%88%E6%A0%B7"><span class="toc-text">用起来是什么样</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%AF%8F%E6%AC%A1%E9%87%8D%E5%90%AF%E5%90%8E%E9%83%BD%E5%BE%97%E6%89%8B%E5%8A%A8%E5%90%AF%E5%8A%A8-Shizuku"><span class="toc-text">每次重启后都得手动启动 Shizuku</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8D%A2-Shizuku-%E5%AE%9E%E7%8E%B0%EF%BC%9F%E5%85%88%E7%9C%8B%E6%9D%83%E9%99%90%E5%90%8D"><span class="toc-text">换 Shizuku 实现？先看权限名</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A4%B1%E8%B4%A5%E6%98%AF%E5%B8%B8%E6%80%81%EF%BC%8C%E4%B8%8D%E6%98%AF-bug"><span class="toc-text">失败是常态，不是 bug</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B9%B2%E5%87%80%E5%A4%B1%E8%B4%A5%E6%AF%94-panic-%E6%9B%B4%E9%98%B4%EF%BC%9A%E4%B8%8D%E9%87%8D%E5%90%AF%E5%B0%B1%E5%86%8D%E8%B7%91%E5%BF%85%E5%B4%A9"><span class="toc-text">干净失败比 panic 更阴：不重启就再跑必崩</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%88%90%E5%8A%9F%E7%8E%87%E8%B7%9F%E7%B3%BB%E7%BB%9F%E8%B4%9F%E8%BD%BD%E5%BC%BA%E7%9B%B8%E5%85%B3"><span class="toc-text">成功率跟系统负载强相关</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8E%9F%E7%90%86%EF%BC%88%E7%AE%80%E8%BF%B0%EF%BC%89"><span class="toc-text">原理（简述）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E6%B5%8B%E8%AE%B0%E5%BD%95"><span class="toc-text">实测记录</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B7%B2%E7%9F%A5%E9%99%90%E5%88%B6"><span class="toc-text">已知限制</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9E%84%E5%BB%BA"><span class="toc-text">构建</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AE%B8%E5%8F%AF%E4%B8%8E%E8%87%B4%E8%B0%A2"><span class="toc-text">许可与致谢</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%8D%E8%B4%A3%E5%A3%B0%E6%98%8E"><span class="toc-text">免责声明</span></a></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%99%E4%B8%80%E4%BB%A3%E6%8D%A2%E4%BA%86%E4%BB%80%E4%B9%88"><span class="toc-text">这一代换了什么</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B5%B7%E7%82%B9%EF%BC%9A%E4%B8%80%E6%9D%A1%E5%8F%AA%E6%9C%89%E7%94%B5%E8%84%91%E8%83%BD%E8%B5%B0%E7%9A%84%E9%93%BE"><span class="toc-text">起点：一条只有电脑能走的链</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B0%81%E8%A3%85%E4%B9%8B%E5%90%8E%EF%BC%8C%E4%B8%80%E6%9D%A1%E5%91%BD%E4%BB%A4%E5%8F%98%E6%88%90%E4%B8%80%E4%B8%AA%E6%8C%89%E9%92%AE"><span class="toc-text">封装之后，一条命令变成一个按钮</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%83%E4%B8%8D%E6%98%AF%E4%BB%80%E4%B9%88"><span class="toc-text">它不是什么</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88-4-0-5-0-%E4%B9%9F%E8%83%BD%E7%94%A8"><span class="toc-text">为什么 4.0.5.0 也能用</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E7%BD%AE%E6%9D%A1%E4%BB%B6%EF%BC%9A%E4%B8%89%E4%BB%B6%E4%B8%9C%E8%A5%BF"><span class="toc-text">前置条件：三件东西</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%94%A8%E8%B5%B7%E6%9D%A5%E6%98%AF%E4%BB%80%E4%B9%88%E6%A0%B7"><span class="toc-text">用起来是什么样</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%AF%8F%E6%AC%A1%E9%87%8D%E5%90%AF%E5%90%8E%E9%83%BD%E5%BE%97%E6%89%8B%E5%8A%A8%E5%90%AF%E5%8A%A8-Shizuku"><span class="toc-text">每次重启后都得手动启动 Shizuku</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8D%A2-Shizuku-%E5%AE%9E%E7%8E%B0%EF%BC%9F%E5%85%88%E7%9C%8B%E6%9D%83%E9%99%90%E5%90%8D"><span class="toc-text">换 Shizuku 实现？先看权限名</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A4%B1%E8%B4%A5%E6%98%AF%E5%B8%B8%E6%80%81%EF%BC%8C%E4%BD%86%E5%88%A4%E6%8D%AE%E5%8F%98%E7%BB%86%E4%BA%86"><span class="toc-text">失败是常态，但判据变细了</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%A6%E4%B8%80%E4%B8%AA%E6%AE%8B%E7%95%99%EF%BC%9A%E6%82%AC%E7%A9%BA%E7%9A%84-victim-timer"><span class="toc-text">另一个残留：悬空的 victim timer</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%AB%E5%86%8D%E6%8B%BF-loadavg-%E5%88%A4%E6%96%AD%E8%83%BD%E4%B8%8D%E8%83%BD%E5%BC%80"><span class="toc-text">别再拿 loadavg 判断能不能开</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8E%9F%E7%90%86%EF%BC%88%E7%AE%80%E8%BF%B0%EF%BC%89"><span class="toc-text">原理（简述）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E6%B5%8B%E8%AE%B0%E5%BD%95"><span class="toc-text">实测记录</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%89%88%E6%9C%AC%E6%BC%94%E8%BF%9B"><span class="toc-text">版本演进</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B7%B2%E7%9F%A5%E9%99%90%E5%88%B6"><span class="toc-text">已知限制</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9E%84%E5%BB%BA"><span class="toc-text">构建</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AE%B8%E5%8F%AF%E4%B8%8E%E8%87%B4%E8%B0%A2"><span class="toc-text">许可与致谢</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%8D%E8%B4%A3%E5%A3%B0%E6%98%8E"><span class="toc-text">免责声明</span></a></li></ol>
   </nav>
 </section>
 
